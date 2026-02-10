@@ -1,0 +1,29 @@
+{
+  "name": "public-good-design-system-plus-svelte",
+  "version": "0.1.0",
+  "description": "public-good-design-system-plus-svelte",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run"
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joelparkerhenderson/public-good-design-system-plus-svelte.git"
+  },
+  "keywords": [
+    "public",
+    "good",
+    "design",
+    "system",
+    "plus",
+    "svelte"
+  ],
+  "author": "joel@joelparkerhenderson.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joelparkerhenderson/public-good-design-system-plus-svelte/issues"
+  },
+  "homepage": "https://github.com/joelparkerhenderson/public-good-design-system-plus-svelte#readme"
+}
