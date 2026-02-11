@@ -255,6 +255,7 @@ We prefer using Vitest for unit testing and @testing-library/svelte for componen
 
 ```sh
 npm install --save-dev @sveltejs/vite-plugin-svelte
+npm install --save-dev @sveltejs/adapter-auto
 npm install --save-dev svelte
 npm install --save-dev @vitest/ui
 npm install --save-dev vitest

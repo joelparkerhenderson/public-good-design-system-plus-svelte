@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/joelparkerhenderson/public-good-design-system-plus-svelte#readme",
   "devDependencies": {
+    "@sveltejs/adapter-auto": "^7.0.0",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
     "@testing-library/svelte": "^5.3.1",
     "@testing-library/user-event": "^14.6.1",

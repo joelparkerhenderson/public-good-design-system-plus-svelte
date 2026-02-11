@@ -17,13 +17,22 @@
 - No images
 - No icons
 - No fonts
-- No stylesheets
-- No visual styling
-- No Tailwind
 - No DaisyUI
 - No Paraglide
 - No svelte-i18n
 - No @testing-library/jest-dom
+
+## Headless design principles
+
+- Semantic HTML structure
+- ARIA attributes for accessibility
+- Props and events for behavior
+- Consumers provide all CSS
+- No visual styling
+- No stylesheets
+- No CSS classes beyond semantic ones
+- No Tailwind
+- No built-in styles
 
 ## Component directory success checklist
 
@@ -36,11 +45,13 @@ Each component directory has these files:
 
 ## Component success checklist
 
-- Keyboard navigation tested
-- Screen reader tested
-- WCAG 2.2 AAA tested
-- ARIA attributes all present tested
-- TypeScript types exported tested
+- **Keyboard navigatiom**: tested Tab, Enter, Space, Arrow keys, Escape as appropriate.
+- **Screen reader**: tested aria-label, aria-describedby, aria-live, etc.
+- **WCAG 2.2 AAA**: tested compliance
+- **ARIA attributes**: tested roles, states, properties, etc.
+- **Focus management**: visible focus indicators via consumer CSS, proper tab order
+- **TypeScript**: types exported tested
+- **Component CLAUDE.md file**: updated with any improvements
 
 ## Component granularity
 
@@ -93,12 +104,22 @@ Prohibit `@testing-library/jest-dom`. All tests use vitest built-in matchers onl
 
 ## Internationalization
 
-- String Externalization: Never hardcode user-facing strings. Use variable attributes.
-- Contextual Awareness: Text is retrieved by translation, not written directly into code.
+- Never hardcode user-facing strings
+- All text content comes through props
+- Labels, placeholders, error messages are all configurable
 
 ## Setup
 
-`npm install --save-dev @sveltejs/vite-plugin-svelte svelte @vitest/ui vitest @testing-library/svelte @testing-library/user-event jsdom`
+```sh
+npm install --save-dev @sveltejs/vite-plugin-svelte
+npm install --save-dev @sveltejs/adapter-auto
+npm install --save-dev svelte
+npm install --save-dev @vitest/ui
+npm install --save-dev vitest
+npm install --save-dev @testing-library/svelte
+npm install --save-dev @testing-library/user-event
+npm install --save-dev jsdom
+```
 
 ## Implementation plan
 
