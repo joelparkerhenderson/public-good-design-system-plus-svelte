@@ -9,3 +9,8 @@ productivity by breaking down complex workflows into manageable steps, offering
 clear progress tracking. Effective task list design includes features like task
 prioritization, due dates, and visual indicators (such as checkboxes or progress
 bars) to enhance user clarity and motivation.
+
+This component renders as an unordered list (<ul>) with role="list" and an
+accessible label. The explicit role="list" ensures screen readers announce the
+list semantics even when CSS removes default list styling. The consumer provides
+task items as <li> children through the children snippet.

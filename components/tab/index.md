@@ -9,3 +9,8 @@ similar information in a compact and accessible way, allowing users to switch
 between views without reloading or navigating away from the page. They enhance
 usability by providing an intuitive, quick way to explore different content or
 options within the same context.
+
+This component renders an individual tab button with proper ARIA attributes
+including role="tab", aria-selected for the active state, and aria-controls to
+associate the tab with its corresponding tabpanel. It follows the roving
+tabindex pattern where only the selected tab participates in the tab order.

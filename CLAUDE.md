@@ -59,6 +59,20 @@ Each component directory has these files:
 - The directory must be changed to have separate component directories
 - The directory must not have sub-components within the same directory.
 
+## Compound components
+
+- menu-bar menu-bar-item
+- task-bar task-bar-item
+- tool-bar tool-bar-item
+- accordion-area accordion-area-item
+- breadcrumb-list breadcrumb-list-item
+- contents-list contents-list-item
+- context-menu context-menu-item
+- menu menu-item
+- pagination-list pagination-list-item
+- calendar-board calendar-board-item
+- kanban-board kanban-board-item
+
 ### Headless component scope
 
 - Semantic HTML

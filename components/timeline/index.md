@@ -9,3 +9,8 @@ clarity. This component aids comprehension by making complex sequences more
 intuitive and scannable. Effective timeline design emphasizes readability,
 logical flow, and visual hierarchy, allowing users to quickly grasp the order,
 timing, and significance of events or stages.
+
+This component renders as a semantic ordered list (<ol>) with an accessible
+label, conveying the chronological nature of the content to both sighted users
+and screen reader users. The consumer provides individual timeline entries as
+<li> children through the children snippet.

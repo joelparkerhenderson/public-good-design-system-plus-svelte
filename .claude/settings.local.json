@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(find:*)",
-      "Bash(npx vitest run:*)"
+      "Bash(npx vitest run:*)",
+      "Bash(ls:*)",
+      "Bash(for:*)",
+      "Bash(do ls $d*.svelte)",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(do ls $d*.svelte.test.ts)"
     ]
   }
 }
