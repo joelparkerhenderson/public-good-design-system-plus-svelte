@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "mcp__svelte__*",
       "Bash(find:*)",
       "Bash(npx vitest run:*)",
       "Bash(ls:*)",
