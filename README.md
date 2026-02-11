@@ -264,6 +264,21 @@ npm install --save-dev @testing-library/user-event
 npm install --save-dev jsdom
 ```
 
+Create file `.claude/settings.local.json`:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "mcp__svelte__*"
+      "Bash(find:*)",
+      "Bash(npx vitest run:*)",
+      "Bash(ls:*)",
+      "Bash(echo:*)",
+  }
+}
+```
+
 Create files:
 
 - [svelte.config.js](svelte.config.js)
@@ -285,7 +300,7 @@ Add scripts to file `package.json`:
 
 ## Tracking
 
-- Package: assertables-rust-crate
+- Package: public-good-design-system-plus-svelte
 - Version: 0.1.0
 - Created: 2021-03-30T15:47:49Z
 - Updated: 2026-01-14T21:43:14Z

@@ -1,0 +1,16 @@
+# Details
+
+A details UI/UX component is used to reveal or hide additional information on
+demand, allowing interfaces to remain clean and uncluttered while still offering
+in-depth content when needed. Commonly implemented as collapsible sections or
+expandable panels, the details component lets users control the visibility of
+secondary content such as explanations, specifications, FAQs, or advanced
+options. It enhances usability by supporting progressive disclosure—showing only
+what’s necessary upfront and letting users access more as desired. Effective
+details components are clearly labeled, easy to toggle, and designed to maintain
+context, ensuring a smooth and intuitive user experience.
+# Details
+
+- Native `<details>`/`<summary>` for built-in a11y
+- `$bindable()` open prop
+- Similar to Collapsible with generic API
