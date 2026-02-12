@@ -1,4 +1,4 @@
-# RoygbStatusInput
+# RedOrangeYellowGreenBlueStatusInput
 
 A ROYGB (Red/Orange/Yellow/Green/Blue) status input is a UI/UX component that
 allows users to select a five-level color-coded status value from a dropdown.
@@ -37,25 +37,25 @@ Basic ROYGB status selection:
 
 ```svelte
 <script lang="ts">
-  import RoygbStatusInput from './RoygbStatusInput.svelte';
+  import RedOrangeYellowGreenBlueStatusInput from './RedOrangeYellowGreenBlueStatusInput.svelte';
 
   let level = $state("");
 </script>
 
-<RoygbStatusInput label="Risk level" bind:value={level} />
+<RedOrangeYellowGreenBlueStatusInput label="Risk level" bind:value={level} />
 <p>Current level: {level}</p>
 ```
 
 Pre-selected value:
 
 ```svelte
-<RoygbStatusInput label="Alert status" value="green" />
+<RedOrangeYellowGreenBlueStatusInput label="Alert status" value="green" />
 ```
 
 With additional HTML attributes:
 
 ```svelte
-<RoygbStatusInput
+<RedOrangeYellowGreenBlueStatusInput
   label="Project health"
   bind:value={level}
   data-dashboard="main"

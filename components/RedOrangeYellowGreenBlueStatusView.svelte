@@ -1,13 +1,13 @@
 <script lang="ts">
-    // Component: RoygbStatusView
+    // RedOrangeYellowGreenBlueStatusView component
     //
     // A headless ROYGB (Red/Orange/Yellow/Green/Blue) status view component
     // that displays a five-level color-coded status value as read-only text.
     // Used to present ROYGB status information in dashboards and reports.
     //
     // Usage:
-    //   <RoygbStatusView label="Risk level" value="yellow" />
-    //   <RoygbStatusView label="Alert status" value={level} />
+    //   <RedOrangeYellowGreenBlueStatusView label="Risk level" value="yellow" />
+    //   <RedOrangeYellowGreenBlueStatusView label="Alert status" value={level} />
     //
     // Props:
     //   - label: Accessible label for screen readers (required)
@@ -36,5 +36,8 @@
     } = $props();
 </script>
 
-<!-- RoygbStatusView: displays a ROYGB status value as text -->
-<span aria-label={label} {...restProps}>{value}</span>
+<!-- RedOrangeYellowGreenBlueStatusView: displays a ROYGB status value as text -->
+<span
+    aria-label={label}
+    {...restProps}>{value}</span
+>

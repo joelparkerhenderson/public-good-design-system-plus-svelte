@@ -1,14 +1,13 @@
 <script lang="ts">
-    // Component: RoygbStatusInput
+    // RedAmberGreenStatusInput component
     //
-    // A headless ROYGB (Red/Orange/Yellow/Green/Blue) status input component
-    // that renders a select element with five color-coded status options.
-    // Extends the traditional RAG model with additional orange and blue levels
-    // for more granular status reporting.
+    // A headless RAG (Red/Amber/Green) status input component that renders
+    // a select element with three options for traffic-light status selection.
+    // RAG status is widely used in project management and dashboards.
     //
     // Usage:
-    //   <RoygbStatusInput label="Risk level" bind:value={level} />
-    //   <RoygbStatusInput label="Alert status" value="green" />
+    //   <RedAmberGreenStatusInput label="Project status" bind:value={status} />
+    //   <RedAmberGreenStatusInput label="Health check" value="green" />
     //
     // Props:
     //   - label: Accessible label for the select element (required)
@@ -16,11 +15,9 @@
     //   - ...restProps: Any additional HTML attributes spread onto the select
     //
     // Options:
-    //   - "red": Critical problem
-    //   - "orange": Hazard or significant risk
-    //   - "yellow": Caution or minor issues
-    //   - "green": Normal, on track
-    //   - "blue": Paused or informational
+    //   - "red": Critical problem, needs immediate attention
+    //   - "amber": Caution, minor issues or at risk
+    //   - "green": On track, everything is fine
     //
     // Accessibility:
     //   - ARIA: aria-label on the select for screen reader context
@@ -38,17 +35,19 @@
     }: {
         /** Accessible label for the select element */
         label: string;
-        /** Currently selected ROYGB status value, bindable */
+        /** Currently selected RAG status value, bindable */
         value?: string;
         [key: string]: unknown;
     } = $props();
 </script>
 
-<!-- RoygbStatusInput: a select with Red/Orange/Yellow/Green/Blue status options -->
-<select aria-label={label} bind:value {...restProps}>
+<!-- RedAmberGreenStatusInput: a select with Red/Amber/Green status options -->
+<select
+    aria-label={label}
+    bind:value
+    {...restProps}
+>
     <option value="red">Red</option>
-    <option value="orange">Orange</option>
-    <option value="yellow">Yellow</option>
+    <option value="amber">Amber</option>
     <option value="green">Green</option>
-    <option value="blue">Blue</option>
 </select>

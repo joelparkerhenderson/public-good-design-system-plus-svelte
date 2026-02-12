@@ -1,4 +1,4 @@
-# RoygbStatusView
+# RedOrangeYellowGreenBlueStatusView
 
 A ROYGB (Red/Orange/Yellow/Green/Blue) status view is a component that displays a five-level color-coded status value as read-only text. It is used to present previously captured ROYGB status data in dashboards, reports, or detail views. Red indicates a critical problem, orange signals a hazard, yellow means caution, green indicates normal status, and blue represents a paused or informational state.
 
@@ -23,11 +23,11 @@ The component renders as a `<span>` element with an accessible label, making the
 ## Usage
 
 ```svelte
-<RoygbStatusView label="Risk level" value="yellow" />
+<RedOrangeYellowGreenBlueStatusView label="Risk level" value="yellow" />
 ```
 
 ```svelte
-<RoygbStatusView label="Alert status" value={level} />
+<RedOrangeYellowGreenBlueStatusView label="Alert status" value={level} />
 ```
 
 ## Keyboard Interactions
