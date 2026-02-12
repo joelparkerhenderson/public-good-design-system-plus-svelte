@@ -1,5 +1,5 @@
 <script lang="ts">
-    // Component: Tour
+    // TourGuide component
     //
     // A headless guided tour overlay. Shows one step at a time with
     // navigation controls. Consumer provides step content.
@@ -26,7 +26,7 @@
         label: string;
         /** Whether the tour is active. Bindable. */
         active?: boolean;
-        /** Tour step content. */
+        /** TourGuide step content. */
         children: Snippet;
         [key: string]: unknown;
     } = $props();
@@ -39,8 +39,16 @@
     }
 </script>
 
+<!-- TourGuide component: TODO -->
 {#if active}
-    <div role="dialog" aria-label={label} aria-modal="true" tabindex="-1" {onkeydown} {...restProps}>
+    <div
+        role="dialog"
+        aria-label={label}
+        aria-modal="true"
+        tabindex="-1"
+        {onkeydown}
+        {...restProps}
+    >
         {@render children()}
     </div>
 {/if}
