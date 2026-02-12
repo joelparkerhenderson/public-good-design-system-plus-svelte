@@ -1,10 +1,10 @@
 <script lang="ts">
-    // Component: PhoneNumberView
+    // TelLink component
     //
     // Displays a phone number as a clickable tel: link.
     //
     // Usage:
-    //   <PhoneNumberView phone="+1-555-0100" />
+    //   <TelLink phone="+1-555-0100" />
 
     let {
         phone,
@@ -17,4 +17,8 @@
     } = $props();
 </script>
 
-<a href="tel:{phone}" aria-label={label} {...restProps}>{phone}</a>
+<a
+    href="tel:{phone}"
+    aria-label={label}
+    {...restProps}>{phone}</a
+>

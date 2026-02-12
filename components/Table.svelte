@@ -1,5 +1,5 @@
 <script lang="ts">
-    // Component: Table
+    // Table component
     //
     // A headless table component that renders a semantic <table> element with
     // an accessible label. The consumer provides all table content (thead, tbody,
@@ -44,6 +44,9 @@
 </script>
 
 <!-- Table: a semantic table element with accessible labeling -->
-<table aria-label={label} {...restProps}>
+<table
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
 </table>

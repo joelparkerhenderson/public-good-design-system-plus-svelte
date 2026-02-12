@@ -1,6 +1,6 @@
-# PhoneNumberView
+# TelLink
 
-A phone number view displays a phone number as a clickable `tel:` link, allowing users on mobile devices to initiate a phone call directly by tapping or clicking the number. This is part of the Input/View pattern where PhoneNumberView is the read-only display counterpart.
+A phone number view displays a phone number as a clickable `tel:` link, allowing users on mobile devices to initiate a phone call directly by tapping or clicking the number. This is part of the Input/View pattern where TelLink is the read-only display counterpart.
 
 The component is useful for contact pages, business listings, user profiles, customer support sections, and any context where a phone number should be displayed as an actionable link rather than plain text.
 
@@ -21,11 +21,11 @@ The component is useful for contact pages, business listings, user profiles, cus
 ## Usage
 
 ```svelte
-<PhoneNumberView phone="+1-555-0100" />
+<TelLink phone="+1-555-0100" />
 ```
 
 ```svelte
-<PhoneNumberView phone="+1-555-0100" label="Call customer support" />
+<TelLink phone="+1-555-0100" label="Call customer support" />
 ```
 
 ## Keyboard Interactions
