@@ -1,5 +1,5 @@
 <script lang="ts">
-    // Component: MedicalHighlightBox
+    // MedicalHighlightBox component
     //
     // A headless container for highlighting important medical information.
     // Uses <aside role="note"> to semantically mark the content as a
@@ -40,6 +40,10 @@
     } = $props();
 </script>
 
-<aside role="note" aria-label={label} {...restProps}>
+<aside
+    role="note"
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
 </aside>
