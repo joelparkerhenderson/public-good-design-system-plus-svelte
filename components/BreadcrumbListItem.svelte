@@ -1,5 +1,5 @@
 <script lang="ts">
-    // Component: BreadcrumbListItem
+    // BreadcrumbListItem component
     //
     // A single breadcrumb list item. Renders as <li> with optional aria-current.
     //
@@ -26,6 +26,10 @@
     } = $props();
 </script>
 
-<li aria-current={current ? "page" : undefined} {...restProps}>
+<!-- BreadcrumbListItem component: TODO -->
+<li
+    aria-current={current ? "page" : undefined}
+    {...restProps}
+>
     {@render children()}
 </li>
