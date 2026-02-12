@@ -1,7 +1,8 @@
 <script lang="ts">
-    // Component: SegmentGroup
+    // SegmentGroup component
     //
     // A headless segmented control group using role="radiogroup".
+    //
     // Consumer provides segment buttons as children.
     //
     // Props:
@@ -29,6 +30,11 @@
     } = $props();
 </script>
 
-<div role="radiogroup" aria-label={label} {...restProps}>
+<!-- SegmentGroup component: TODO -->
+<div
+    role="radiogroup"
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
 </div>
