@@ -1,30 +1,50 @@
 <script lang="ts">
-    // Component: ButtonInput
+    // ButtonInput component
     //
-    // A headless component wrapping the native HTML <input type="button">.
-    // Unlike the Button component which uses <button> with children,
-    // this uses <input type="button"> where the label is the value attribute.
-    //
-    // Usage:
-    //   <ButtonInput value="Click me" onclick={handleClick} />
-    //   <ButtonInput value="Submit" disabled />
+    // A headless component wrapping the native HTML <input type="button"> element.
+    // Unlike the Button component which uses <button> and can contain rich content
+    // via children snippets, this component displays its label as the value attribute
+    // (plain text only). Useful in form contexts where native input semantics are preferred.
     //
     // Props:
-    //   - value: The button label text displayed on the input (required)
-    //   - disabled: Whether the input is disabled (default: false)
-    //   - name: Form field name (optional)
-    //   - label: Accessible label override for screen readers (optional)
-    //   - onclick: Click event handler
-    //   - ...restProps: Any additional HTML attributes
+    //   value — string, required. The button label text displayed on the input.
+    //   disabled — boolean, default false. Whether the input is disabled.
+    //   name — string, optional. Form field name for form submission.
+    //   label — string, optional. Accessible label override via aria-label for screen readers.
+    //   onclick — (event: MouseEvent) => void, optional. Click event handler.
+    //   ...restProps — additional HTML attributes spread onto the <input>.
+    //
+    // Syntax:
+    //   <ButtonInput value="Click me" onclick={handleClick} />
+    //
+    // Examples:
+    //   <!-- Disabled button input -->
+    //   <ButtonInput value="Submit" disabled />
+    //
+    //   <!-- Named button with accessible label override -->
+    //   <ButtonInput value="Save" name="action" label="Save changes" />
+    //
+    // Keyboard:
+    //   - Tab: Focus the button input
+    //   - Enter: Activate the button (native behavior)
+    //   - Space: Activate the button (native behavior)
     //
     // Accessibility:
-    //   - Role: button (implicit from input[type="button"])
-    //   - Keyboard: Enter and Space activate the button
-    //   - ARIA: aria-label for screen reader text override
+    //   - Implicit button role from <input type="button">
+    //   - aria-label provides optional screen reader text override
+    //   - Native disabled attribute prevents clicks and signals aria-disabled
     //
     // Internationalization:
-    //   - Button label comes through the value prop
+    //   - Button label comes through the value prop; no hardcoded strings
     //   - Label override comes through label prop
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Plain text only — use Button component for rich content (icons, formatted text)
+    //
+    // References:
+    //   - MDN input type="button": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button
+    //   - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/button/
 
     let {
         value,
@@ -48,7 +68,7 @@
     } = $props();
 </script>
 
-<!-- ButtonInput: a native input[type="button"] element -->
+<!-- ButtonInput component: a native input[type="button"] element -->
 <input
     type="button"
     {value}

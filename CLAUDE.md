@@ -8,7 +8,7 @@
 - TypeScript conventions
 - Headless design
 - Comprehensive comments with syntax, usage, examples, explanations, etc.
-- Input/View pattern for paired -input/-view components
+- Input/View pattern for paired -Input/-View components
 - All tasks reference plan.md for implementation details
 
 ## NO
@@ -34,14 +34,13 @@
 - No Tailwind
 - No built-in styles
 
-## Component directory success checklist
+## Component success checklist
 
-Each component directory has these files:
+Each component has these files:
 
-- CLAUDE.md (Claude notes; always update this file with new information, new help, new learning)
-- index.md (markdown text that explains the component purpose, syntax, usage, examples, documentation)
+- {ComponentTitlePascalCase}.md (markdown documentation of the component purpose, syntax, examples, help, claude rules, etc.)
 - {ComponentTitlePascalCase}.svelte (Svelte TypeScript component headless, with plenty of help comments)
-- {ComponentTitlePascalCase}.svelte.test.ts (testing-library svelte-testing-library component test)
+- {ComponentTitlePascalCase}.test.ts (testing-library svelte-testing-library component test)
 
 ## Component success checklist
 
@@ -61,17 +60,31 @@ Each component directory has these files:
 
 ## Compound components
 
-- menu-bar menu-bar-item
-- task-bar task-bar-item
-- tool-bar tool-bar-item
-- accordion-area accordion-area-item
-- breadcrumb-list breadcrumb-list-item
-- contents-list contents-list-item
-- context-menu context-menu-item
-- menu menu-item
-- pagination-list pagination-list-item
-- calendar-board calendar-board-item
-- kanban-board kanban-board-item
+- *Area *AreaItem
+  - AccordionArea AccordionAreaItem
+- *Bar *BarItem
+  - MenuBar MenuBarItem
+  - TaskBar TaskBarItem
+  - ToolBar ToolBarItem
+- *Board *BoardItem
+  - CalendarBoard CalendarBoardItem
+  - KanbanBoard KanbanBoardItem
+- *Contents *ContentsItem
+  - TableOfContents TableOfContentsItem
+- *Group *GroupItem
+  - RatingGroup RatingGroupItem
+  - SegmentGroup SegmentGroupItem
+- *Guide *GuideItem
+  - TourGuide TourGuideStep
+- *List *ListItem
+  - BreadcrumbList BreadcrumbListItem
+  - ContentsList ContentsListItem
+  - PaginationList PaginationListItem
+  - StepList StepListItem
+  - SummaryList SummaryListItem
+- *Menu *MenuItem
+  - ContextMenu ContextMenuItem
+  - Menu MenuItem
 
 ### Headless component scope
 
@@ -135,11 +148,40 @@ npm install --save-dev @testing-library/user-event
 npm install --save-dev jsdom
 ```
 
+## Tempalte
+
+```svelte
+<script lang="ts">
+    // {ComponentPascalTitle} component
+    //
+    // {comprehensive description}
+    //
+    // Props:
+    //     …
+    //
+    // Usage:
+    //     …
+
+    …
+
+</script>
+
+<!-- {ComponentPascalTitle} component: …  -->
+<div
+    class="{ComponentPascalTitle}"
+    role="region"
+    aria-label={label}
+    {...restProps}
+>
+    …
+</div>
+```
+
 ## Implementation plan
 
 - Infrastructure prerequisites: Missing svelte dependency, vitest-setup.js, test pipeline verification
 - Verify Test Pipeline: run `npm test` to confirm testing works end-to-end before writing component tests.
-- Templates: .svelte, .test.ts, index.md, and CLAUDE.md templates
+- Templates: .svelte, .test.ts, .md
 - Implementation priority: start with infrastructure tasks first, then proceed alphabetically
 - Batch size: Implement as many components as possible per session, until out of tokens
 

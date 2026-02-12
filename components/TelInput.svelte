@@ -1,29 +1,44 @@
 <script lang="ts">
-    // Component: TelInput
+    // TelInput component
     //
-    // A headless telephone input using <input type="tel">.
-    // Provides accessible labelling via aria-label and
-    // browser autofill support via autocomplete="tel".
-    //
-    // Usage:
-    //   <TelInput label="Phone number" bind:value />
-    //   <TelInput label="Mobile" bind:value required />
+    // A headless telephone input using the native HTML <input type="tel"> element.
+    // Provides accessible labeling via aria-label and browser autofill support via
+    // autocomplete="tel". Commonly used in contact forms, registration flows, and
+    // profile editors. Supports two-way data binding through a bindable value prop.
     //
     // Props:
-    //   - label: Accessible name for the input (required)
-    //   - value: Bindable telephone string (default: "")
-    //   - required: Whether the field is required (default: false)
-    //   - disabled: Whether the field is disabled (default: false)
-    //   - ...restProps: Any additional HTML attributes
+    //   label — string, required. Accessible name for the input via aria-label.
+    //   value — string, default "". Bindable telephone number value.
+    //   required — boolean, default false. Whether the field is required for form submission.
+    //   disabled — boolean, default false. Whether the field is disabled.
+    //   ...restProps — additional HTML attributes spread onto the <input>.
+    //
+    // Syntax:
+    //   <TelInput label="Phone number" bind:value />
+    //
+    // Examples:
+    //   <!-- Required phone input -->
+    //   <TelInput label="Mobile" bind:value required />
+    //
+    // Keyboard:
+    //   - Native <input type="tel"> keyboard behavior (Tab to focus, type to enter digits)
     //
     // Accessibility:
-    //   - aria-label provides the accessible name
-    //   - autocomplete="tel" enables browser autofill
-    //   - Supports required and disabled states
+    //   - aria-label provides the accessible name for the input
+    //   - autocomplete="tel" enables browser and password manager autofill
+    //   - required and disabled states are conveyed to assistive technology
     //
     // Internationalization:
     //   - The label prop accepts any translated string
     //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles -- consumer provides all styling
+    //   - Uses $bindable() for two-way data binding on value
+    //   - Consumer can add placeholder, pattern, maxlength via restProps
+    //
+    // References:
+    //   - HTML tel input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel
 
     let {
         label,
@@ -44,4 +59,13 @@
     } = $props();
 </script>
 
-<input type="tel" aria-label={label} bind:value autocomplete="tel" {required} {disabled} {...restProps} />
+<!-- TelInput component: a tel-type input for entering telephone numbers with autocomplete -->
+<input
+    type="tel"
+    aria-label={label}
+    bind:value
+    autocomplete="tel"
+    {required}
+    {disabled}
+    {...restProps}
+/>

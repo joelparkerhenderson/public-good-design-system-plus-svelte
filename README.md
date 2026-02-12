@@ -45,10 +45,10 @@ Country-specific data display and input:
 
 Status indicators:
 
-- rag-status-input
-- rag-status-view
-- roygb-status-input
-- roygb-status-view
+- red-amber-green-status-input
+- red-amber-green-status-view
+- red-orange-yellow-green-blue-status-input
+- red-orange-yellow-green-blue-status-view
 
 Input:
 
@@ -264,23 +264,10 @@ npm install --save-dev @testing-library/user-event
 npm install --save-dev jsdom
 ```
 
-Create file `.claude/settings.local.json`:
-
-```json
-{
-  "permissions": {
-    "allow": [
-      "mcp__svelte__*"
-      "Bash(find:*)",
-      "Bash(npx vitest run:*)",
-      "Bash(ls:*)",
-      "Bash(echo:*)",
-  }
-}
-```
-
 Create files:
 
+- [.claude/settings.local.json](.claude/settings.local.json)
+- [.prettierrc](.prettierrc)
 - [svelte.config.js](svelte.config.js)
 - [vite.config.js](vite.config.js)
 - [MyComponent.svelte](help/testing-library/svelte-testing-library/examples/MyComponent.svelte)

@@ -1,13 +1,21 @@
 <script lang="ts">
-    // Component: ContentsListItem
+    // ContentsListItem component
     //
-    // A headless list item component for use within a contents list or table of
-    // contents. Renders a semantic <li> element that wraps consumer-provided
-    // content through the children snippet.
+    // A headless list item for use within a table of contents or navigation list.
+    // Renders a semantic <li> element that wraps consumer-provided content, typically
+    // an anchor link to a page section. Supports nesting for hierarchical document
+    // structures by placing a <ul> inside. Used as a child of ContentsList or any
+    // ordered/unordered list in a navigation context.
     //
-    // Usage:
-    //   <ContentsListItem><a href="#section-1">Introduction</a></ContentsListItem>
-    //   <ContentsListItem><a href="#section-2">Methods</a></ContentsListItem>
+    // Props:
+    //   children — Snippet, required. List item content (typically a link or nested list).
+    //   ...restProps — additional HTML attributes spread onto the <li>.
+    //
+    // Syntax:
+    //   <ContentsListItem><a href="#section">Section</a></ContentsListItem>
+    //
+    // Examples:
+    //   <!-- Nested contents list items for subsections -->
     //   <ContentsListItem>
     //     <a href="#section-3">Results</a>
     //     <ul>
@@ -16,20 +24,23 @@
     //     </ul>
     //   </ContentsListItem>
     //
-    // Props:
-    //   - children: Snippet for the list item content (typically a link or nested list)
-    //   - ...restProps: Any additional HTML attributes spread onto the li
+    // Keyboard:
+    //   - None — keyboard interaction is handled by contained links or the parent list
     //
     // Accessibility:
-    //   - Semantic <li> element provides proper list item semantics
-    //   - Should be used within a <ul> or <ol> parent for valid HTML structure
-    //   - Consumers should provide meaningful link text for links within items
-    //   - Supports aria-current="page" or aria-current="true" on the li for
-    //     indicating the current page in a navigation context
+    //   - Semantic <li> provides implicit listitem role
+    //   - Should be placed within a <ul> or <ol> parent for valid HTML structure
+    //   - Supports aria-current="page" or aria-current="true" on the <li> for current page indication
     //
     // Internationalization:
-    //   - All content is provided through the children snippet
-    //   - No hardcoded strings in the component
+    //   - All content is provided through the children snippet; no hardcoded strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Compound component: used as a child within ContentsList
+    //
+    // References:
+    //   - WAI-ARIA Menu Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/menu/
 
     import type { Snippet } from "svelte";
 

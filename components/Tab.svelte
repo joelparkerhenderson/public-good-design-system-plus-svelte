@@ -1,37 +1,53 @@
 <script lang="ts">
-    // Component: Tab
+    // Tab component
     //
-    // A headless tab button component for use within a tabbed interface. Renders
-    // a <button> with role="tab" and appropriate ARIA attributes for tab selection
-    // and panel association.
-    //
-    // Usage:
-    //   <Tab selected={true} controls="panel-1">Dashboard</Tab>
-    //   <Tab selected={false} controls="panel-2">Settings</Tab>
-    //   <Tab selected={activeTab === "reports"} controls="reports-panel">Reports</Tab>
+    // A headless tab button for use within a tabbed interface. Renders a <button>
+    // with role="tab" and appropriate ARIA attributes for tab selection and panel
+    // association. It follows the roving tabindex pattern where only the selected
+    // tab participates in the tab order. Commonly used inside a TabGroup or a
+    // container with role="tablist".
     //
     // Props:
-    //   - selected: Whether this tab is currently active (default: false)
-    //   - controls: The id of the associated tabpanel element (required)
-    //   - children: Snippet for tab label content
-    //   - ...restProps: Any additional HTML attributes spread onto the button
+    //   selected — boolean, default false. Whether this tab is currently active.
+    //   controls — string, required. The id of the associated tabpanel element.
+    //   children — Snippet, required. Tab label content.
+    //   ...restProps — additional HTML attributes spread onto the <button>.
     //
-    // Behavior:
-    //   - aria-selected reflects the active/inactive state of the tab
-    //   - aria-controls associates the tab with its corresponding tabpanel
-    //   - tabindex is set to 0 when selected, -1 when not selected, following
-    //     the roving tabindex pattern for tab navigation
+    // Syntax:
+    //   <Tab selected={true} controls="panel-1">Label</Tab>
+    //
+    // Examples:
+    //   <!-- Tab within a tablist container -->
+    //   <div role="tablist" aria-label="Settings">
+    //     <Tab selected={activeTab === "general"} controls="panel-general"
+    //       onclick={() => activeTab = "general"}>General</Tab>
+    //     <Tab selected={activeTab === "advanced"} controls="panel-advanced"
+    //       onclick={() => activeTab = "advanced"}>Advanced</Tab>
+    //   </div>
+    //
+    // Keyboard:
+    //   - Tab: moves focus to the selected tab in the tablist
+    //   - ArrowLeft/ArrowRight: moves between tabs (handled by parent tablist)
+    //   - Enter/Space: activates the tab (native button behavior)
     //
     // Accessibility:
     //   - role="tab" identifies this element as a tab in a tabbed interface
     //   - aria-selected communicates the selection state to screen readers
     //   - aria-controls links the tab to its panel for assistive technology
-    //   - Roving tabindex ensures only the active tab is in the tab order
+    //   - Roving tabindex: selected tab has tabindex=0, others have tabindex=-1
     //   - Consumers should wrap tabs in a role="tablist" container
     //
     // Internationalization:
     //   - All visible text is provided through the children snippet
     //   - No hardcoded strings in the component
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles -- consumer provides all styling
+    //   - Consumers manage selection state and panel visibility
+    //
+    // References:
+    //   - WAI-ARIA Tabs Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/tabs/
+    //   - WAI-ARIA Tab Role: https://www.w3.org/TR/wai-aria-1.2/#tab
 
     import type { Snippet } from "svelte";
 
@@ -52,7 +68,7 @@
     } = $props();
 </script>
 
-<!-- Tab: a button element representing a tab in a tabbed interface -->
+<!-- Tab component: a button element representing a tab in a tabbed interface -->
 <button
     role="tab"
     aria-selected={selected}

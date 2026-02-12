@@ -1,28 +1,46 @@
 <script lang="ts">
-    // Component: MeasurementInstanceInput
+    // MeasurementInstanceInput component
     //
-    // A headless text input for entering a measurement instance value.
-    // A measurement instance is a specific measured value, such as "72 kg"
-    // or "98.6 F" or "120/80 mmHg".
-    //
-    // Usage:
-    //   <MeasurementInstanceInput label="Weight" bind:value />
-    //   <MeasurementInstanceInput label="Temperature" bind:value required />
+    // A headless text input for entering a specific measurement instance value,
+    // such as "72 kg", "98.6 F", or "120/80 mmHg". A measurement instance is an
+    // individual recorded measurement combining a numeric value with its unit.
+    // The component renders an <input type="text"> with aria-label for accessible
+    // naming and a bindable value for reactive form integration.
     //
     // Props:
-    //   - label: Accessible name for the input (required)
-    //   - value: Bindable measurement instance string (default: "")
-    //   - required: Whether the field is required (default: false)
-    //   - disabled: Whether the field is disabled (default: false)
-    //   - ...restProps: Any additional HTML attributes
+    //   label — string, required. Accessible name for the input via aria-label.
+    //   value — string, default "". Bindable measurement instance value via $bindable().
+    //   required — boolean, default false. Whether the field is required.
+    //   disabled — boolean, default false. Whether the field is disabled.
+    //   ...restProps — additional HTML attributes spread onto the <input>.
+    //
+    // Syntax:
+    //   <MeasurementInstanceInput label="Weight" bind:value />
+    //
+    // Examples:
+    //   <!-- Basic measurement input -->
+    //   <MeasurementInstanceInput label="Weight" bind:value />
+    //
+    //   <!-- Required temperature input -->
+    //   <MeasurementInstanceInput label="Temperature" bind:value required />
+    //
+    // Keyboard:
+    //   - Native <input type="text"> keyboard behavior (typing, selection, clipboard).
     //
     // Accessibility:
-    //   - aria-label provides the accessible name
-    //   - Supports required and disabled states
+    //   - aria-label provides the accessible name from the label prop
+    //   - Supports required and disabled HTML states
     //
     // Internationalization:
     //   - The label prop accepts any translated string
     //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Part of the Input/View pattern; pairs with MeasurementInstanceView
+    //
+    // References:
+    //   - HTML input element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
 
     let {
         label,
@@ -43,4 +61,12 @@
     } = $props();
 </script>
 
-<input type="text" aria-label={label} bind:value {required} {disabled} {...restProps} />
+<!-- MeasurementInstanceInput component: a text input for entering a measurement value with unit -->
+<input
+    type="text"
+    aria-label={label}
+    bind:value
+    {required}
+    {disabled}
+    {...restProps}
+/>

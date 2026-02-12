@@ -1,27 +1,46 @@
 <script lang="ts">
-    // Component: NetPromotorScoreRatingView
+    // NetPromotorScoreRatingView component
     //
-    // A headless Net Promoter Score (NPS) rating view component that displays
-    // an NPS score value as text within a span element. This is a read-only
-    // display component, not an input.
-    //
-    // Usage:
-    //   <NetPromotorScoreRatingView label="NPS Score" value="8" />
-    //   <NetPromotorScoreRatingView label="Customer rating" value={score} />
+    // A headless Net Promoter Score (NPS) rating view that displays an NPS score
+    // value as read-only text within a <span> element. Used to show previously
+    // captured NPS data in dashboards, reports, or detail views. NPS scores range
+    // from 0 to 10, with respondents classified as Detractors (0-6), Passives (7-8),
+    // or Promoters (9-10).
     //
     // Props:
-    //   - label: Accessible label for screen readers (required)
-    //   - value: The NPS score to display (default: "")
-    //   - ...restProps: Any additional HTML attributes spread onto the span
+    //   label — string, required. Accessible label for screen readers via aria-label.
+    //   value — string, default "". The NPS score value to display.
+    //   ...restProps — additional HTML attributes spread onto the <span>.
+    //
+    // Syntax:
+    //   <NetPromotorScoreRatingView label="NPS Score" value="8" />
+    //
+    // Examples:
+    //   <!-- Display a static NPS score -->
+    //   <NetPromotorScoreRatingView label="NPS Score" value="8" />
+    //
+    //   <!-- Display a dynamic score with reactive binding -->
+    //   <NetPromotorScoreRatingView label="Customer rating" value={score} />
+    //
+    // Keyboard:
+    //   - None — this is a passive informational display, not interactive.
     //
     // Accessibility:
-    //   - ARIA: aria-label on the span for screen reader context
-    //   - Screen readers announce the label and displayed value
-    //   - WCAG 2.2 AAA: Properly labeled for assistive technology
+    //   - aria-label provides the accessible name so screen readers announce context
+    //   - Screen readers announce both the label and the displayed value
     //
     // Internationalization:
-    //   - The label prop externalizes the accessible label string
+    //   - The label prop accepts any translated string
     //   - The value is displayed as-is, allowing localized formatting
+    //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - No score validation or classification logic; consumer handles categorization
+    //   - Part of the Input/View pattern; pairs with NetPromotorScoreRatingInput
+    //
+    // References:
+    //   - Net Promoter Score: https://en.wikipedia.org/wiki/Net_promoter_score
 
     let {
         label,
@@ -37,4 +56,7 @@
 </script>
 
 <!-- NetPromotorScoreRatingView: displays an NPS score as text -->
-<span aria-label={label} {...restProps}>{value}</span>
+<span
+    aria-label={label}
+    {...restProps}>{value}</span
+>

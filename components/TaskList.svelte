@@ -1,34 +1,54 @@
 <script lang="ts">
-    // Component: TaskList
+    // TaskList component
     //
-    // A headless task list component that renders a semantic unordered list (<ul>)
-    // with role="list" and an accessible label. Used to display a series of tasks,
-    // to-dos, or action items. The consumer provides all task items through the
-    // children snippet.
+    // A headless task list that renders a semantic unordered list (<ul>) with
+    // role="list" and an accessible label. Used to display a series of tasks,
+    // to-dos, or action items in project management tools, to-do apps, or
+    // onboarding processes. The explicit role="list" ensures screen readers
+    // announce list semantics even when CSS removes default list styling.
     //
-    // Usage:
+    // Props:
+    //   label — string, required. Accessible label for the task list via aria-label.
+    //   children — Snippet, required. Task items (should be <li> elements).
+    //   ...restProps — additional HTML attributes spread onto the <ul>.
+    //
+    // Syntax:
+    //   <TaskList label="Today's tasks">...</TaskList>
+    //
+    // Examples:
+    //   <!-- Simple task list -->
     //   <TaskList label="Today's tasks">
     //     <li>Review pull requests</li>
     //     <li>Update documentation</li>
     //     <li>Deploy to staging</li>
     //   </TaskList>
     //
-    // Props:
-    //   - label: Accessible label for the task list (required)
-    //   - children: Snippet for task items (should be <li> elements)
-    //   - ...restProps: Any additional HTML attributes spread onto the ul
+    //   <!-- Task list with checkboxes -->
+    //   <TaskList label="Onboarding checklist">
+    //     <li><label><input type="checkbox" /> Create account</label></li>
+    //     <li><label><input type="checkbox" /> Complete tutorial</label></li>
+    //   </TaskList>
+    //
+    // Keyboard:
+    //   - None directly -- standard list navigation by screen readers
+    //   - Tab moves focus between interactive elements within task items
     //
     // Accessibility:
-    //   - role="list" explicitly marks this as a list (some screen readers may
-    //     strip implicit list semantics when CSS removes list styling)
+    //   - role="list" explicitly marks this as a list for screen readers
     //   - aria-label provides the accessible name for the list
     //   - Screen readers announce the list with its label and item count
-    //   - Consumers can use checkboxes within <li> for completable tasks
     //
     // Internationalization:
     //   - The label prop externalizes user-facing text for translation
     //   - All task content is provided through the children snippet
     //   - No hardcoded strings in the component
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles -- consumer provides all styling
+    //   - Consumers can use checkboxes within <li> for completable tasks
+    //
+    // References:
+    //   - WAI-ARIA list role: https://www.w3.org/TR/wai-aria-1.2/#list
 
     import type { Snippet } from "svelte";
 
@@ -47,6 +67,10 @@
 </script>
 
 <!-- TaskList: an unordered list of tasks or action items -->
-<ul role="list" aria-label={label} {...restProps}>
+<ul
+    role="list"
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
 </ul>

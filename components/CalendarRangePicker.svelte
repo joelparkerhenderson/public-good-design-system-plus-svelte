@@ -1,16 +1,49 @@
 <script lang="ts">
-    // Component: CalendarRangePicker
+    // CalendarRangePicker component
     //
-    // A headless calendar-based date range picker using a grid.
+    // A headless container for calendar-based date range selection. Renders a <div>
+    // with role="application" to support rich keyboard interactions beyond standard
+    // navigation. Used in booking systems, travel planners, analytics dashboards,
+    // and reporting tools where users define start and end dates.
     //
     // Props:
-    //   label — accessible name via aria-label
-    //   children — snippet for calendar grid content
+    //   label — string, required. Accessible name describing the picker purpose.
+    //   children — Snippet, required. Calendar grid content including date cells and navigation controls.
+    //   ...restProps — additional HTML attributes spread onto the <div>.
     //
-    // Usage:
+    // Syntax:
     //   <CalendarRangePicker label="Select dates">
-    //     ...calendar grid...
+    //     <!-- calendar grid -->
     //   </CalendarRangePicker>
+    //
+    // Examples:
+    //   <!-- Travel date range picker -->
+    //   <CalendarRangePicker label="Select travel dates">
+    //     <CalendarBoard label="January 2025">
+    //       <!-- date cells with range highlighting -->
+    //     </CalendarBoard>
+    //   </CalendarRangePicker>
+    //
+    // Keyboard:
+    //   None built-in — the consumer should implement date cell navigation (arrow keys),
+    //   selection (Enter/Space), and range extension (Shift+click) as appropriate.
+    //
+    // Accessibility:
+    //   - role="application" indicates the widget manages its own keyboard interactions
+    //   - aria-label provides an accessible name for the calendar range picker
+    //
+    // Internationalization:
+    //   - Label text comes through the label prop; no hardcoded strings
+    //   - All date content and navigation is provided by the consumer
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Consumer provides all selection logic, range highlighting, and navigation
+    //   - role="application" overrides standard screen reader navigation
+    //
+    // References:
+    //   - WAI-ARIA Application Role: https://www.w3.org/TR/wai-aria-1.2/#application
+    //   - WAI-ARIA Grid Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/grid/
 
     import type { Snippet } from "svelte";
 
@@ -25,6 +58,10 @@
     } = $props();
 </script>
 
-<div role="application" aria-label={label} {...restProps}>
+<div
+    role="application"
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
 </div>

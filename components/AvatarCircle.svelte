@@ -1,27 +1,57 @@
 <script lang="ts">
-    // Component: AvatarCircle
+    // AvatarCircle component
     //
-    // A headless avatar component that displays a user's identity via an image
-    // or fallback initials within a circular frame.
+    // A headless avatar that displays a user's identity via an image or
+    // fallback initials. Renders as a <span role="img"> container with
+    // aria-label. When an image src is provided, it renders an <img>;
+    // if the image fails to load or no src is given, it falls back to
+    // displaying initials text. Commonly used in user profiles, comment
+    // threads, contact lists, and messaging interfaces.
     //
-    // Usage:
+    // Props:
+    //   src      — string, optional. URL of the avatar image.
+    //   alt      — string, required. Accessible description of the person.
+    //   initials — string, optional. Fallback text when image is unavailable
+    //              (e.g., "JD" for Jane Doe).
+    //   ...restProps — additional HTML attributes spread onto the outer <span>.
+    //
+    // Syntax:
     //   <AvatarCircle src="/photo.jpg" alt="Jane Doe" />
     //   <AvatarCircle initials="JD" alt="Jane Doe" />
     //
-    // Props:
-    //   - src: URL of the avatar image (optional)
-    //   - alt: Accessible alt text describing the person (required)
-    //   - initials: Fallback text when no image is provided or image fails to load
-    //   - ...restProps: Any additional HTML attributes
+    // Examples:
+    //   <!-- Image avatar -->
+    //   <AvatarCircle src="/photos/jane.jpg" alt="Jane Doe" />
+    //
+    //   <!-- Initials fallback -->
+    //   <AvatarCircle initials="JD" alt="Jane Doe" />
+    //
+    //   <!-- Image with initials fallback on error -->
+    //   <AvatarCircle src="/photos/jane.jpg" initials="JD" alt="Jane Doe" />
+    //
+    //   <!-- With custom attributes -->
+    //   <AvatarCircle initials="AB" alt="Alice Brown" data-size="lg" />
+    //
+    // Keyboard: None — this is a display-only element, not interactive.
     //
     // Accessibility:
-    //   - Role: img (implicit from <img>, or explicit on fallback <span>)
-    //   - ARIA: aria-label on the container for screen readers
-    //   - Alt text on the <img> element for image avatars
+    //   - role="img" on the outer <span> for assistive technologies
+    //   - aria-label provides the accessible name (the person's name)
+    //   - <img> has alt text for image avatars
+    //   - Initials <span> has aria-hidden="true" (redundant with aria-label)
     //
     // Internationalization:
     //   - alt and initials come through props
     //   - No hardcoded strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Consumer provides border-radius: 50% for the circular shape
+    //   - Image error state is tracked internally; falls back to initials
+    //   - Do not add loading spinners or placeholder animations
+    //
+    // References:
+    //   - WAI-ARIA img role: https://www.w3.org/TR/wai-aria-1.2/#img
 
     let {
         src = undefined,
@@ -49,7 +79,7 @@
     let showImage = $derived(src != null && !imageError);
 </script>
 
-<!-- AvatarCircle: a circular avatar showing an image or fallback initials -->
+<!-- AvatarCircle component: a circular avatar showing an image or fallback initials -->
 <span
     role="img"
     aria-label={alt}
@@ -57,8 +87,8 @@
 >
     {#if showImage}
         <img
-            src={src}
-            alt={alt}
+            {src}
+            {alt}
             onerror={onimgerror}
         />
     {:else if initials}

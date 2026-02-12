@@ -1,30 +1,64 @@
 <script lang="ts">
-    // Component: Banner
+    // Banner component
     //
-    // A headless banner component for displaying prominent messages at the
-    // top or bottom of an interface. Uses the ARIA banner landmark role.
+    // A headless banner for displaying prominent messages at the top or bottom
+    // of an interface. Renders as a <div role="region"> with aria-live="polite"
+    // and data-type for consumer styling. Supports optional dismiss functionality
+    // with a close button. Commonly used for site announcements, cookie notices,
+    // session warnings, and maintenance alerts.
     //
-    // Usage:
+    // Props:
+    //   type        — "info" | "success" | "warning" | "error", default "info".
+    //                 Semantic variant exposed as data-type.
+    //   dismissible — boolean, default false. Whether the banner can be dismissed.
+    //   onclose     — () => void, optional. Callback when the banner is dismissed.
+    //   closeLabel  — string, optional. Accessible label for the dismiss button
+    //                 (e.g., "Close banner" or "Dismiss").
+    //   children    — Snippet, required. The banner content.
+    //   ...restProps — additional HTML attributes spread onto the <div>.
+    //
+    // Syntax:
+    //   <Banner>Message</Banner>
+    //   <Banner dismissible closeLabel="Close" onclose={handler}>Message</Banner>
+    //
+    // Examples:
+    //   <!-- Simple info banner -->
     //   <Banner>Important announcement here.</Banner>
-    //   <Banner type="warning" dismissible onclose={handleDismiss}>
+    //
+    //   <!-- Dismissible warning banner -->
+    //   <Banner type="warning" dismissible closeLabel="Dismiss"
+    //     onclose={handleDismiss}>
     //     Your session will expire soon.
     //   </Banner>
     //
-    // Props:
-    //   - type: Banner variant — "info" | "success" | "warning" | "error" (default: "info")
-    //   - dismissible: Whether the banner can be dismissed (default: false)
-    //   - onclose: Callback when the banner is dismissed
-    //   - closeLabel: Accessible label for the close/dismiss button (default: undefined)
-    //   - ...restProps: Any additional HTML attributes
+    //   <!-- Error banner with custom attributes -->
+    //   <Banner type="error" data-testid="error-banner">
+    //     Service unavailable. Please try again later.
+    //   </Banner>
+    //
+    // Keyboard:
+    //   - Tab: Focus the dismiss button (when dismissible)
+    //   - Enter / Space: Activate the dismiss button
     //
     // Accessibility:
-    //   - Role: region with aria-label, or banner for site-wide banners
-    //   - ARIA: aria-live for dynamic banner content
-    //   - Keyboard: Dismiss button focusable and activatable via Enter/Space
+    //   - role="region" for landmark identification
+    //   - aria-live="polite" for announcing content changes
+    //   - Dismiss button has aria-label from closeLabel prop
+    //   - data-type exposes variant for consumer styling
     //
     // Internationalization:
     //   - All text comes through children snippet and closeLabel prop
-    //   - No hardcoded strings
+    //   - No hardcoded strings; consumer provides dismiss button label
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Internal visible state tracks dismissal; removed from DOM when dismissed
+    //   - onclose callback fires after visibility is set to false
+    //   - Consumer provides close button content/icon via closeLabel
+    //   - data-type is for styling hooks, not semantics
+    //
+    // References:
+    //   - WAI-ARIA region role: https://www.w3.org/TR/wai-aria-1.2/#region
 
     import type { Snippet } from "svelte";
 
@@ -57,7 +91,7 @@
     }
 </script>
 
-<!-- Banner: a prominent message region -->
+<!-- Banner component: a prominent message region -->
 {#if visible}
     <div
         role="region"

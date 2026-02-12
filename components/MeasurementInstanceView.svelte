@@ -1,26 +1,43 @@
 <script lang="ts">
-    // Component: MeasurementInstanceView
+    // MeasurementInstanceView component
     //
-    // A headless display component that shows a measurement instance value
-    // in a <span> element. A measurement instance is a specific measured
-    // value, such as "72 kg" or "98.6 F" or "120/80 mmHg".
-    //
-    // Usage:
-    //   <MeasurementInstanceView value="72 kg" />
-    //   <MeasurementInstanceView value="98.6 F" label="Body temperature" />
+    // A headless display component that shows a specific measurement instance
+    // value in a <span> element. A measurement instance is a concrete data point
+    // such as "72 kg", "98.6 F", or "120/80 mmHg". This is a read-only display
+    // component, part of the Input/View pattern for measurement data.
     //
     // Props:
-    //   - value: The measurement instance value to display (required)
-    //   - label: Optional accessible name via aria-label
-    //   - ...restProps: Any additional HTML attributes
+    //   value — string, required. The measurement instance value to display.
+    //   label — string, optional. Accessible name via aria-label for additional context.
+    //   ...restProps — additional HTML attributes spread onto the <span>.
+    //
+    // Syntax:
+    //   <MeasurementInstanceView value="72 kg" />
+    //
+    // Examples:
+    //   <!-- Simple measurement display -->
+    //   <MeasurementInstanceView value="72 kg" />
+    //
+    //   <!-- With accessible label for screen reader context -->
+    //   <MeasurementInstanceView value="98.6 F" label="Body temperature" />
+    //
+    // Keyboard:
+    //   - None — this is a display-only component with no interactive behavior.
     //
     // Accessibility:
-    //   - Optional aria-label for additional context
-    //   - Text content is inherently accessible
+    //   - aria-label optionally provides additional context beyond the displayed value
+    //   - Text content is inherently accessible to screen readers
     //
     // Internationalization:
     //   - All text comes through the value and label props
     //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Part of the Input/View pattern; pairs with MeasurementInstanceInput
+    //
+    // References:
+    //   - HTML span element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
 
     let {
         value,
@@ -35,4 +52,8 @@
     } = $props();
 </script>
 
-<span aria-label={label} {...restProps}>{value}</span>
+<!-- MeasurementInstanceView component: a span displaying a read-only measurement value -->
+<span
+    aria-label={label}
+    {...restProps}>{value}</span
+>

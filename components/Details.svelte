@@ -1,23 +1,52 @@
 <script lang="ts">
-    // Component: Details
+    // Details component
     //
-    // A headless disclosure widget using native <details>/<summary>.
-    // Similar to Collapsible but with a more generic API. Supports
-    // bindable open state and custom summary content via snippet.
+    // A disclosure widget that reveals or hides additional content on demand.
+    // Built on the native HTML <details> and <summary> elements, it provides
+    // progressive disclosure with built-in browser accessibility. Common use
+    // cases include FAQs, collapsible sections, and supplementary explanations.
     //
     // Props:
-    //   summary  — text for the summary toggle
-    //   open     — bindable boolean for expanded/collapsed state
-    //   children — content revealed when expanded
+    //   summary — string, required. Text displayed in the clickable summary toggle.
+    //   open — boolean, default false. Whether the details section is expanded; bindable.
+    //   children — Snippet, required. Content revealed when expanded.
+    //   ...restProps — additional HTML attributes spread onto the <details> element.
     //
-    // Usage:
+    // Syntax:
+    //   <Details summary="More info">Content here</Details>
+    //
+    // Examples:
+    //   <!-- Basic disclosure -->
     //   <Details summary="More information">
     //     <p>Additional details shown when expanded.</p>
     //   </Details>
     //
+    //   <!-- Two-way binding with parent state -->
+    //   <Details summary="Advanced options" bind:open={showAdvanced}>
+    //     <p>Configure advanced settings here.</p>
+    //   </Details>
+    //
+    // Keyboard:
+    //   - Enter: toggles the disclosure open/closed when <summary> is focused
+    //   - Space: toggles the disclosure open/closed when <summary> is focused
+    //
     // Accessibility:
-    //   - Native <details>/<summary> provide built-in ARIA support
-    //   - Screen readers announce expanded/collapsed state
+    //   - Native <details>/<summary> provide built-in ARIA semantics
+    //   - Browser automatically exposes expanded/collapsed state to assistive technology
+    //   - No additional ARIA attributes needed
+    //
+    // Internationalization:
+    //   - The summary prop accepts any string; consumers provide localized text
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Uses $bindable() on open for two-way state synchronization
+    //   - Similar to Collapsible but uses a standards-based API
+    //
+    // References:
+    //   - MDN details element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
+    //   - MDN summary element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary
+    //   - WAI-ARIA Disclosure Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/disclosure/
 
     import type { Snippet } from "svelte";
 
@@ -37,7 +66,10 @@
     } = $props();
 </script>
 
-<details bind:open={open} {...restProps}>
+<details
+    bind:open
+    {...restProps}
+>
     <summary>{summary}</summary>
     {@render children()}
 </details>

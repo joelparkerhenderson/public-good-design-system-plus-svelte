@@ -1,41 +1,59 @@
 <script lang="ts">
-    // Component: PinInput
+    // PinInput component
     //
-    // A headless PIN input component that renders a group of single-character
-    // numeric inputs for entering PINs, verification codes, or one-time passwords.
-    // Each digit gets its own input field, and focus automatically advances to the
-    // next field upon entry.
-    //
-    // Usage:
-    //   <PinInput label="Enter PIN" />
-    //   <PinInput label="Verification Code" length={6} />
-    //   <PinInput label="OTP" bind:value={otpValue} />
-    //   <PinInput label="PIN" disabled />
+    // A headless PIN input that renders a group of single-character numeric inputs
+    // for entering PINs, verification codes, or one-time passwords (OTPs). Each
+    // digit occupies its own input field, creating a segmented entry experience that
+    // communicates the expected code length. Focus auto-advances on digit entry and
+    // retreats on Backspace. Commonly used in two-factor authentication, SMS
+    // verification, and secure PIN entry interfaces.
     //
     // Props:
-    //   - label: Accessible label for the group of inputs (required)
-    //   - length: Number of digit inputs to render (default: 4)
-    //   - value: Bindable combined string of all digits (default: "")
-    //   - disabled: Whether all inputs are disabled (default: false)
-    //   - ...restProps: Any additional HTML attributes spread onto the group div
+    //   label — string, required. Accessible label for the group of inputs via aria-label.
+    //   length — number, default 4. Number of digit inputs to render.
+    //   value — string, default "". Bindable combined string of all entered digits.
+    //   disabled — boolean, default false. Whether all inputs are disabled.
+    //   ...restProps — additional HTML attributes spread onto the group <div>.
     //
-    // Behavior:
-    //   - Each input accepts exactly one numeric character (maxlength="1")
-    //   - On entering a digit, focus automatically moves to the next input
-    //   - On pressing Backspace in an empty input, focus moves to the previous input
-    //   - The combined value string is updated reactively from the internal digit array
-    //   - ArrowLeft and ArrowRight navigate between digit inputs
+    // Syntax:
+    //   <PinInput label="Enter PIN" bind:value />
+    //
+    // Examples:
+    //   <!-- 4-digit PIN input -->
+    //   <PinInput label="Enter PIN" bind:value={pin} />
+    //
+    //   <!-- 6-digit verification code -->
+    //   <PinInput label="Verification Code" length={6} bind:value={code} />
+    //
+    //   <!-- Disabled PIN input -->
+    //   <PinInput label="Locked PIN" disabled />
+    //
+    // Keyboard:
+    //   - Digit entry: enters value and auto-focuses next input
+    //   - Backspace: clears current digit or moves to previous input if empty
+    //   - ArrowLeft: focuses previous input
+    //   - ArrowRight: focuses next input
+    //   - Tab: standard tab navigation in/out of the group
     //
     // Accessibility:
-    //   - The outer div has role="group" with aria-label for the group name
-    //   - Each input has an individual aria-label like "Digit 1 of 4"
+    //   - role="group" with aria-label on the container identifies the PIN group
+    //   - Each input has aria-label="Digit X of Y" for positional context
     //   - inputmode="numeric" ensures numeric keyboard on mobile devices
-    //   - Keyboard navigation supports Arrow keys, Backspace, and Tab
+    //   - maxlength="1" restricts each input to a single character
     //
     // Internationalization:
-    //   - The label prop and individual digit labels are externalizable
-    //   - The "Digit X of Y" pattern uses the digitLabel prop for customization
+    //   - The label prop is consumer-provided for the group name
+    //   - Individual "Digit X of Y" labels are currently hardcoded in English
     //   - No other hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Only accepts numeric characters (0-9); non-numeric input is rejected
+    //   - The length prop is captured at initialization; do not change dynamically
+    //   - Uses internal $state for digits array and $derived for combined value
+    //
+    // References:
+    //   - WAI-ARIA Group Role: https://www.w3.org/TR/wai-aria-1.2/#group
 
     let {
         label,
@@ -115,8 +133,12 @@
     }
 </script>
 
-<!-- PIN Input: a group of single-digit numeric inputs -->
-<div role="group" aria-label={label} {...restProps}>
+<!-- PinInput component: a group of single-digit numeric inputs -->
+<div
+    role="group"
+    aria-label={label}
+    {...restProps}
+>
     {#each Array.from({ length }, (_, i) => i) as index}
         <input
             bind:this={inputRefs[index]}

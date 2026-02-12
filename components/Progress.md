@@ -1,4 +1,4 @@
-# ProgressBar
+# Progress
 
 A progress bar visually indicates the completion status of a task or process using the native HTML `<progress>` element. It is commonly used for file uploads, form submissions, loading sequences, installation wizards, and any process where users benefit from knowing how much of a task has been completed.
 
@@ -22,15 +22,15 @@ The component supports both determinate progress (with a known value and maximum
 ## Usage
 
 ```svelte
-<ProgressBar label="Upload progress" value={50} max={100} />
+<Progress label="Upload progress" value={50} max={100} />
 ```
 
 ```svelte
-<ProgressBar label="Loading" />
+<Progress label="Loading" />
 ```
 
 ```svelte
-<ProgressBar label="Installation" value={3} max={5} />
+<Progress label="Installation" value={3} max={5} />
 ```
 
 ## Keyboard Interactions
@@ -40,9 +40,9 @@ None -- this component is a passive display element that does not accept user in
 ## ARIA
 
 - `aria-label={label}` -- provides an accessible name describing what process the progress bar represents
-- The `<progress>` element implicitly has `role="progressbar"` with `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` attributes managed by the browser
+- The `<progress>` element implicitly has `role="Progress"` with `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` attributes managed by the browser
 
 ## References
 
 - MDN progress element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
-- WAI-ARIA progressbar role: https://www.w3.org/WAI/ARIA/apd/patterns/meter/
+- WAI-ARIA Progress role: https://www.w3.org/WAI/ARIA/apd/patterns/meter/

@@ -1,18 +1,50 @@
 <script lang="ts">
-    // Component: Editable
+    // Editable component
     //
-    // A headless inline-editable text component. Displays value as text,
-    // switches to input on activation. Enter confirms, Escape cancels.
+    // An inline-editable text component that toggles between a read-only display
+    // and an input field for editing. In display mode it renders a <span> with
+    // role="button"; in edit mode it renders an <input type="text">. Pressing
+    // Enter confirms the edit and Escape cancels it, reverting to the original value.
     //
     // Props:
-    //   value    — bindable current text value
-    //   label    — accessible name for the edit control
-    //   editing  — bindable boolean for edit mode
-    //   disabled — whether editing is disabled
+    //   value — string, default "". Current text value; bindable.
+    //   label — string, required. Accessible name for the editable control.
+    //   editing — boolean, default false. Whether the component is in edit mode; bindable.
+    //   disabled — boolean, default false. Whether editing is disabled.
+    //   ...restProps — additional HTML attributes spread onto the <span> or <input>.
     //
-    // Usage:
+    // Syntax:
     //   <Editable label="Name" bind:value />
+    //
+    // Examples:
+    //   <!-- Basic inline edit -->
+    //   <Editable label="Name" bind:value />
+    //
+    //   <!-- With external editing state control -->
     //   <Editable label="Title" bind:value bind:editing />
+    //
+    // Keyboard:
+    //   - Enter (display mode): activate edit mode
+    //   - Space (display mode): activate edit mode
+    //   - Enter (edit mode): confirm the edit and return to display mode
+    //   - Escape (edit mode): cancel the edit and return to display mode
+    //
+    // Accessibility:
+    //   - role="button" on the display span indicates it is activatable
+    //   - aria-label provides the accessible name in both modes
+    //   - aria-disabled on the span when disabled
+    //   - tabindex="0" when enabled, tabindex="-1" when disabled
+    //
+    // Internationalization:
+    //   - The label prop accepts any string; consumers provide localized text
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Uses internal draft state to allow cancel without losing original value
+    //   - Both value and editing support $bindable() two-way binding
+    //
+    // References:
+    //   - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/button/
 
     let {
         value = $bindable(""),
@@ -76,7 +108,12 @@
         aria-label={label}
         aria-disabled={disabled || undefined}
         onclick={startEditing}
-        onkeydown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); startEditing(); } }}
+        onkeydown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                startEditing();
+            }
+        }}
         {...restProps}
     >
         {value}

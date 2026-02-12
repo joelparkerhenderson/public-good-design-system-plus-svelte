@@ -1,18 +1,51 @@
 <script lang="ts">
-    // Component: FiveFaceRatingInput
+    // FiveFaceRatingInput component
     //
-    // A headless 5-face rating input using radio buttons. Each face has
-    // a text label for screen readers.
+    // A five-face rating input that lets users select a satisfaction level from 1 to 5
+    // using labeled radio buttons representing faces from "Very bad" to "Very good".
+    // Commonly used in satisfaction surveys, feedback forms, and experience ratings
+    // where face-based labels are more intuitive than numeric scales.
     //
     // Props:
-    //   label    — accessible name for the group
-    //   value    — bindable rating (1-5)
-    //   name     — radio group name
-    //   labels   — array of 5 accessible labels for each face
-    //   disabled — whether disabled
+    //   label — string, required. Accessible name for the rating group via aria-label.
+    //   value — number, default 0. Current rating (1-5, 0 = none); bindable via bind:value.
+    //   name — string, default "face-rating". Radio group name for form submission.
+    //   labels — string[], default ["Very bad", "Bad", "Okay", "Good", "Very good"]. Accessible labels for each face.
+    //   disabled — boolean, default false. Whether the entire group is disabled.
+    //   ...restProps — additional HTML attributes spread onto the fieldset.
     //
-    // Usage:
+    // Syntax:
     //   <FiveFaceRatingInput label="How was your experience?" bind:value />
+    //
+    // Examples:
+    //   <!-- Basic face rating with two-way binding -->
+    //   <FiveFaceRatingInput label="How was your experience?" bind:value={rating} />
+    //
+    //   <!-- Custom face labels -->
+    //   <FiveFaceRatingInput label="Rate service" bind:value labels={["Terrible", "Poor", "Fair", "Great", "Excellent"]} />
+    //
+    // Keyboard:
+    //   - Tab: Focus the selected radio (or first if none selected)
+    //   - ArrowDown / ArrowRight: Move to next radio button
+    //   - ArrowUp / ArrowLeft: Move to previous radio button
+    //   - Space: Select the focused radio button
+    //
+    // Accessibility:
+    //   - role="radiogroup" on the fieldset identifies the group as a set of radio buttons
+    //   - aria-label provides an accessible name for the entire rating group
+    //   - Each radio button has a visible text label for screen reader announcement
+    //
+    // Internationalization:
+    //   - All text content comes through the labels prop; no hardcoded user-facing strings
+    //   - The label prop allows localized accessible names
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Uses native radio buttons for built-in keyboard and accessibility behavior
+    //   - Value 0 means no selection; valid ratings are 1-5
+    //
+    // References:
+    //   - WAI-ARIA Radio Group Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/radiobutton/
 
     let {
         label,
@@ -38,7 +71,13 @@
     const faces = [1, 2, 3, 4, 5];
 </script>
 
-<fieldset role="radiogroup" aria-label={label} {disabled} {...restProps}>
+<!-- FiveFaceRatingInput component: a radiogroup fieldset for selecting one of five face ratings -->
+<fieldset
+    role="radiogroup"
+    aria-label={label}
+    {disabled}
+    {...restProps}
+>
     {#each faces as face, i}
         <label>
             <input
@@ -46,7 +85,7 @@
                 {name}
                 value={face}
                 checked={value === face}
-                onchange={() => value = face}
+                onchange={() => (value = face)}
             />
             {labels[i]}
         </label>

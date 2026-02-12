@@ -1,83 +1,8 @@
 # Plan: Public Good Design System Plus Svelte
 
-## 1. Project Overview & Current State
-
-### What Exists
-
-- **201 component directories** under `components/`, all scaffolded
-- **67 index.md** documentation files (33% of components)
-- **201 empty CLAUDE.md** files (placeholders)
-- **0 .svelte** component implementations
-- **0 .svelte.test.ts** test files
-- Vite + Vitest testing infrastructure configured
-- Help examples for testing patterns
-- bin/list-components utility
-
-### What's Missing
-
-- All .svelte component implementations (201 needed)
-- All .svelte.test.ts test files (201 needed)
-- 134 index.md documentation files
-- ~~vitest-setup.js~~ (DONE - already existed)
-- ~~`svelte` package in package.json~~ (DONE - added ^5.50.1)
-- ~~`@testing-library/user-event`~~ (DONE - installed)
-- Component-specific CLAUDE.md notes (all currently empty)
-
-### Testing Constraint
-
-CLAUDE.md prohibits `@testing-library/jest-dom`. All tests use vitest built-in matchers only:
-- `expect(el).toBeTruthy()` instead of `expect(el).toBeInTheDocument()`
-- `expect(el).toBeNull()` instead of `expect(el).not.toBeInTheDocument()`
-- `expect(el.getAttribute('role')).toBe('button')` instead of `expect(el).toHaveAttribute('role', 'button')`
-- `expect(el.textContent).toContain('text')` instead of `expect(el).toHaveTextContent('text')`
-
-### Compound Component Rule
-
-Per CLAUDE.md: If a directory represents a compound pattern (e.g. accordion, tabs, data-table),
-stop and ask for help. The directory must be changed to have separate component directories.
-Sub-components must NOT be in the same directory.
-
----
-
-## 2. Infrastructure Prerequisites
-
-Before implementing any components, these infrastructure items must be completed:
-
-### 2a. Add Missing Dependencies
-
-package.json needs `svelte` added to devDependencies:
-
-```bash
-npm install --save-dev svelte
-```
-
-### 2b. Create vitest-setup.js
-
-vite.config.js references `./vitest-setup.js` which doesn't exist. Create it with:
-
-```js
-import "@testing-library/svelte/vitest";
-```
-
-This imports the @testing-library/svelte vitest matchers (like `toBeInTheDocument()`).
-
-### 2c. Verify Test Pipeline
-
-Run `npm test` to confirm the testing infrastructure works end-to-end before writing component tests.
-
 ---
 
 ## 3. Component Architecture
-
-### 3a. Headless Design Principles
-
-Every component is **headless** — meaning:
-
-- Semantic HTML structure
-- ARIA attributes for accessibility
-- Props and events for behavior
-- **No visual styling** — consumers provide all CSS
-- No Tailwind, no built-in styles, no CSS classes beyond semantic ones
 
 ### 3b. Svelte 5 Runes Pattern
 
@@ -116,22 +41,6 @@ All components use Svelte 5 runes syntax:
 - **Bindable state**: Use `$bindable()` for two-way binding props (e.g., `value`, `open`, `checked`)
 - **Event callbacks**: Use callback props (e.g., `onchange`, `onclick`) rather than Svelte event directives
 - **String externalization**: Never hardcode user-facing strings; use prop attributes
-
-### 3e. Accessibility Requirements
-
-Every component must meet:
-
-- **WCAG 2.2 AAA** compliance
-- **ARIA** attributes (roles, states, properties)
-- **Keyboard navigation** (Tab, Enter, Space, Arrow keys, Escape as appropriate)
-- **Screen reader** support (aria-label, aria-describedby, aria-live, etc.)
-- **Focus management** (visible focus indicators via consumer CSS, proper tab order)
-
-### 3f. Internationalization
-
-- Never hardcode user-facing strings
-- All text content comes through props
-- Labels, placeholders, error messages are all configurable
 
 ---
 
@@ -180,31 +89,31 @@ import { expect, test, describe } from "vitest";
 import Subject from "./{ComponentName}.svelte";
 
 describe("{ComponentName}", () => {
-    test("renders with default props", () => {
-        render(Subject);
-        // Assert semantic HTML structure
-    });
+  test("renders with default props", () => {
+    render(Subject);
+    // Assert semantic HTML structure
+  });
 
-    test("accepts and applies props", () => {
-        render(Subject, { propName: "value" });
-        // Assert props are applied
-    });
+  test("accepts and applies props", () => {
+    render(Subject, { propName: "value" });
+    // Assert props are applied
+  });
 
-    test("keyboard navigation", async () => {
-        const user: UserEvent = userEvent.setup();
-        render(Subject);
-        // Test Tab, Enter, Space, Arrow keys, Escape
-    });
+  test("keyboard navigation", async () => {
+    const user: UserEvent = userEvent.setup();
+    render(Subject);
+    // Test Tab, Enter, Space, Arrow keys, Escape
+  });
 
-    test("ARIA attributes", () => {
-        render(Subject);
-        // Assert all required ARIA attributes
-    });
+  test("ARIA attributes", () => {
+    render(Subject);
+    // Assert all required ARIA attributes
+  });
 
-    test("screen reader accessibility", () => {
-        render(Subject);
-        // Assert aria-label, aria-describedby, etc.
-    });
+  test("screen reader accessibility", () => {
+    render(Subject);
+    // Assert aria-label, aria-describedby, etc.
+  });
 });
 ```
 
@@ -222,8 +131,8 @@ describe("{ComponentName}", () => {
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| ... | ... | ... | ... |
+| ---- | ---- | ------- | ----------- |
+| ...  | ...  | ...     | ...         |
 
 ## Accessibility
 
@@ -306,7 +215,7 @@ Richer form components beyond native inputs:
 
 ### 5j. Status/Indicator Components
 
-- rag-status-input, rag-status-view, red-amber-green-status, red-orange-yellow-green-blue-indicator-status, roygb-status-input, roygb-status-view
+- red-amber-green-status-input, red-amber-green-status-view, red-amber-green-status, red-orange-yellow-green-blue-indicator-status, red-orange-yellow-green-blue-status-input, red-orange-yellow-green-blue-status-view
 
 ### 5k. Structured Data Components
 
@@ -343,6 +252,7 @@ Compound components keep sub-components in the same directory:
 ### Naming Convention for Sub-components
 
 Sub-components are named as `{ParentName}{SubPart}.svelte`:
+
 - AccordionItem.svelte
 - TabPanel.svelte
 - DataTableRow.svelte
@@ -355,27 +265,27 @@ Tests cover the compound component as a whole, not individual sub-components.
 
 Key WAI-ARIA Authoring Practices patterns used:
 
-| Component | ARIA Pattern |
-|-----------|-------------|
-| accordion | Accordion Pattern |
-| alert | Alert Pattern |
-| alert-dialog | Alert Dialog Pattern |
-| breadcrumbs | Breadcrumb Pattern |
-| button | Button Pattern |
-| carousel | Carousel Pattern |
-| checkbox | Checkbox Pattern |
-| combobox | Combobox Pattern |
-| dialog | Dialog (Modal) Pattern |
-| disclosure | Disclosure (Show/Hide) Pattern |
-| listbox | Listbox Pattern |
-| menu / menubar | Menu / Menu Bar Pattern |
-| meter | Meter Pattern |
-| radio-group | Radio Group Pattern |
-| slider | Slider Pattern |
-| switch | Switch Pattern |
-| tab-group | Tabs Pattern |
-| tooltip | Tooltip Pattern |
-| tree-view | Tree View Pattern |
+| Component      | ARIA Pattern                   |
+| -------------- | ------------------------------ |
+| accordion      | Accordion Pattern              |
+| alert          | Alert Pattern                  |
+| alert-dialog   | Alert Dialog Pattern           |
+| breadcrumbs    | Breadcrumb Pattern             |
+| button         | Button Pattern                 |
+| carousel       | Carousel Pattern               |
+| checkbox       | Checkbox Pattern               |
+| combobox       | Combobox Pattern               |
+| dialog         | Dialog (Modal) Pattern         |
+| disclosure     | Disclosure (Show/Hide) Pattern |
+| listbox        | Listbox Pattern                |
+| menu / menubar | Menu / Menu Bar Pattern        |
+| meter          | Meter Pattern                  |
+| radio-group    | Radio Group Pattern            |
+| slider         | Slider Pattern                 |
+| switch         | Switch Pattern                 |
+| tab-group      | Tabs Pattern                   |
+| tooltip        | Tooltip Pattern                |
+| tree-view      | Tree View Pattern              |
 
 ---
 
@@ -428,9 +338,10 @@ Many components come in paired `-input` / `-view` variants:
 - **-view**: Read-only display component for showing data
 
 Examples:
+
 - `email-address-input` (editable email field) / `email-address-view` (displays formatted email)
 - `phone-number-input` (editable phone field) / `phone-number-view` (displays formatted phone)
-- `rag-status-input` (select RAG status) / `rag-status-view` (display RAG status)
+- `red-amber-green-status-input` (select RAG status) / `red-amber-green-status-view` (display RAG status)
 
 ### Input Pattern
 

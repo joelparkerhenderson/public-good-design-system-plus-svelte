@@ -1,10 +1,10 @@
 # ProgressCircle
 
-A progress circle indicates completion status using a `<div>` with ARIA progressbar semantics. Unlike a linear progress bar, the progress circle is intended to convey progress in a radial layout, commonly used for loading indicators, completion percentages, and dashboard widgets. The component is headless, so consumers provide their own CSS to create the circular visual representation using the ARIA value attributes.
+A progress circle indicates completion status using a `<div>` with ARIA Progress semantics. Unlike a linear progress bar, the progress circle is intended to convey progress in a radial layout, commonly used for loading indicators, completion percentages, and dashboard widgets. The component is headless, so consumers provide their own CSS to create the circular visual representation using the ARIA value attributes.
 
 ## Implementation Notes
 
-- Renders a `<div>` with `role="progressbar"` and full ARIA value attributes
+- Renders a `<div>` with `role="Progress"` and full ARIA value attributes
 - Provides `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` to communicate progress to screen readers
 - Accepts an optional `children` Snippet for content inside the circle (e.g., percentage text)
 - Uses `aria-label` for accessible naming
@@ -33,7 +33,7 @@ None -- this component is a passive, read-only display.
 
 ## ARIA
 
-- `role="progressbar"` -- identifies the element as a progress indicator
+- `role="Progress"` -- identifies the element as a progress indicator
 - `aria-label="..."` -- provides an accessible name for the progress indicator
 - `aria-valuenow` -- the current progress value
 - `aria-valuemin` -- the minimum value of the progress range
@@ -42,4 +42,4 @@ None -- this component is a passive, read-only display.
 ## References
 
 - WAI-ARIA Meter Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/meter/
-- MDN `role="progressbar"`: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
+- MDN `role="Progress"`: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Progress_role

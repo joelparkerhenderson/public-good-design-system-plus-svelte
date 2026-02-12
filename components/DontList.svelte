@@ -1,18 +1,50 @@
 <script lang="ts">
-    // Component: DontList
+    // DontList component
     //
-    // A headless list of discouraged actions. Renders as a <ul> with
-    // accessible label. Each child should be an <li>.
+    // A list of discouraged actions or practices to avoid. Renders as a <ul> with
+    // role="list" and an accessible label. Used in design system documentation,
+    // guidelines, and instructional content to communicate what users should not do.
+    // Paired with DoList to create do/don't guidance patterns.
     //
     // Props:
-    //   label    — accessible name (default: "Don't")
-    //   children — list items
+    //   label — string, default "Don't". Accessible name for the list.
+    //   children — Snippet, required. List items, each should be an <li> element.
+    //   ...restProps — additional HTML attributes spread onto the <ul> element.
     //
-    // Usage:
-    //   <DontList label="Don't">
+    // Syntax:
+    //   <DontList><li>Avoid this</li></DontList>
+    //
+    // Examples:
+    //   <!-- Basic don't list -->
+    //   <DontList>
     //     <li>Skip alt text</li>
     //     <li>Use only color for meaning</li>
     //   </DontList>
+    //
+    //   <!-- Custom label for internationalization -->
+    //   <DontList label="Avoid">
+    //     <li>Hard-code user-facing strings</li>
+    //     <li>Rely on placeholder text as labels</li>
+    //   </DontList>
+    //
+    // Keyboard:
+    //   - None — passive container for list items
+    //
+    // Accessibility:
+    //   - role="list" preserves list semantics even when CSS removes default styling
+    //   - aria-label provides an accessible name (defaults to "Don't")
+    //
+    // Internationalization:
+    //   - The label prop defaults to "Don't" but can be overridden for any locale
+    //   - All list item text comes through consumer-provided children
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Companion to DoList; typically used together
+    //
+    // References:
+    //   - MDN ul element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul
+    //   - WAI list role: https://www.w3.org/WAI/ARIA/apd/roles/list/
 
     import type { Snippet } from "svelte";
 
@@ -29,6 +61,10 @@
     } = $props();
 </script>
 
-<ul role="list" aria-label={label} {...restProps}>
+<ul
+    role="list"
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
 </ul>

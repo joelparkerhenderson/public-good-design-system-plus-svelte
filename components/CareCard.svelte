@@ -1,18 +1,53 @@
 <script lang="ts">
-    // Component: CareCard
+    // CareCard component
     //
-    // A headless care card component for displaying healthcare-related guidance.
-    // Inspired by NHS England care card patterns: urgent, non-urgent, immediate.
+    // A headless healthcare guidance component inspired by NHS England care card
+    // patterns. Renders a <section> landmark with a heading and body content,
+    // supporting three urgency tiers: non-urgent (speak to a GP), urgent (visit
+    // A&E or call 111), and immediate (call 999). The data-type attribute enables
+    // consumer CSS styling based on urgency level.
     //
-    // Usage:
-    //   <CareCard type="non-urgent" heading="Speak to a GP if:">
-    //     <ul><li>you have symptoms</li></ul>
+    // Props:
+    //   type — "non-urgent" | "urgent" | "immediate", default "non-urgent". Urgency level.
+    //   heading — string, required. Heading text describing the care action.
+    //   label — string, optional. aria-label override; defaults to heading text.
+    //   children — Snippet, required. The care card body content.
+    //   ...restProps — additional HTML attributes spread onto the <section>.
+    //
+    // Syntax:
+    //   <CareCard heading="See a GP if:">
+    //     <p>You have persistent symptoms.</p>
     //   </CareCard>
     //
+    // Examples:
+    //   <!-- Non-urgent care card -->
+    //   <CareCard type="non-urgent" heading="Speak to a GP if:">
+    //     <ul><li>you have symptoms for more than 3 days</li></ul>
+    //   </CareCard>
+    //
+    //   <!-- Immediate care card -->
+    //   <CareCard type="immediate" heading="Call 999 if:">
+    //     <ul><li>you have difficulty breathing</li></ul>
+    //   </CareCard>
+    //
+    // Keyboard:
+    //   None — this component is a passive content container.
+    //
     // Accessibility:
-    //   - Role: region with aria-label
-    //   - Heading provides structure
-    //   - data-type for consumer styling based on urgency
+    //   - role="region" identifies the card as a named landmark
+    //   - aria-label set from label prop or heading prop for screen reader identification
+    //   - <h2> heading provides document structure
+    //   - data-type exposes urgency level for consumer styling hooks
+    //
+    // Internationalization:
+    //   - All text comes through heading, label, and children props; no hardcoded strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Consumer uses data-type attribute to apply urgency-appropriate visual styles
+    //
+    // References:
+    //   - NHS England Care Cards: https://service-manual.nhs.uk/design-system/components/care-cards
 
     import type { Snippet } from "svelte";
 
@@ -31,6 +66,7 @@
     } = $props();
 </script>
 
+<!-- CareCard component: a section region with heading for healthcare guidance at varying urgency levels -->
 <section
     role="region"
     aria-label={label ?? heading}

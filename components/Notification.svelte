@@ -1,17 +1,55 @@
 <script lang="ts">
-    // Component: Notification
+    // Notification component
     //
-    // A headless notification/toast message with role="status" or
-    // role="alert" for screen reader announcements.
+    // A headless notification/toast message that delivers timely messages to users
+    // about events, updates, or actions. It renders a <div> with ARIA live region
+    // semantics, using role="status" with aria-live="polite" by default, or
+    // role="alert" with aria-live="assertive" when urgent. Commonly used for
+    // success confirmations, error alerts, and informational updates.
     //
     // Props:
-    //   label    — accessible name
-    //   urgent   — whether to use alert role (default: false, uses status)
-    //   children — notification content
+    //   label — string, optional. Accessible name for the notification region via aria-label.
+    //   urgent — boolean, default false. When true, uses role="alert" and aria-live="assertive".
+    //   children — Snippet, required. The notification message content.
+    //   ...restProps — additional HTML attributes spread onto the <div>.
     //
-    // Usage:
+    // Syntax:
+    //   <Notification label="Success">Message here.</Notification>
+    //
+    // Examples:
+    //   <!-- Non-urgent notification with polite announcement -->
     //   <Notification label="Success">Your changes have been saved.</Notification>
-    //   <Notification label="Error" urgent>Something went wrong.</Notification>
+    //
+    //   <!-- Urgent notification that interrupts immediately -->
+    //   <Notification label="Error" urgent>Something went wrong. Please try again.</Notification>
+    //
+    //   <!-- Notification without explicit label -->
+    //   <Notification>3 new messages</Notification>
+    //
+    // Keyboard:
+    //   None — this is a passive announcement container; screen readers announce
+    //   content automatically via ARIA live regions without user interaction.
+    //
+    // Accessibility:
+    //   - role="status" (default) for polite, non-urgent announcements
+    //   - role="alert" (when urgent) for assertive, immediate announcements
+    //   - aria-label provides an accessible name for the notification region
+    //   - aria-live="polite" (default) waits for user idle before announcing
+    //   - aria-live="assertive" (when urgent) interrupts the user immediately
+    //
+    // Internationalization:
+    //   - All text content comes through the children snippet and label prop
+    //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - The urgent prop switches both the role and aria-live simultaneously
+    //   - Do not add close/dismiss logic — consumer manages notification lifecycle
+    //
+    // References:
+    //   - WAI-ARIA alert role: https://www.w3.org/TR/wai-aria-1.2/#alert
+    //   - WAI-ARIA status role: https://www.w3.org/TR/wai-aria-1.2/#status
+    //   - WAI-ARIA Live Regions: https://www.w3.org/WAI/ARIA/apd/practices/live-regions/
 
     import type { Snippet } from "svelte";
 
@@ -28,6 +66,7 @@
     } = $props();
 </script>
 
+<!-- Notification component: a live region with status or alert role for polite or urgent announcements -->
 <div
     role={urgent ? "alert" : "status"}
     aria-label={label}

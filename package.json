@@ -37,6 +37,7 @@
     "vitest": "^4.0.18"
   },
   "dependencies": {
-    "@anthropic-ai/claude-code": "^2.1.39"
+    "@anthropic-ai/claude-code": "^2.1.39",
+    "aria-query": "^5.3.1"
   }
 }

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/svelte";
 import { describe, expect, test } from "vitest";
 
-import Subject from "./MedicalRecordRedBox.md.svelte";
+import Subject from "./MedicalRecordRedBox.svelte";
 
 // Helper to create a Svelte 5 snippet for children content.
 function textSnippet(text: string) {
@@ -11,7 +11,7 @@ function textSnippet(text: string) {
   }) as any;
 }
 
-describe("MedicalRecordRedBox.md", () => {
+describe("MedicalRecordRedBox", () => {
   test("renders with alert role", () => {
     render(Subject, {
       props: { label: "Danger", children: textSnippet("Critical") },

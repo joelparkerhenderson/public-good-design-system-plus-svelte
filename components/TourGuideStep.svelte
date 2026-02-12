@@ -2,40 +2,59 @@
     // TourGuideStep component
     //
     // A single step within a TourGuide guided tour. Each step represents one
-    // screen or instruction in the tour. The step conditionally renders based
-    // on whether its index matches the current step of the tour.
+    // screen or instruction in the tour sequence. The step conditionally shows
+    // or hides based on the current prop, using the hidden attribute and
+    // aria-hidden for proper accessibility. When stepNumber and totalSteps are
+    // provided, progress info ("Step N of M") is appended to the accessible label.
     //
     // Props:
-    //   label — accessible name for the step via aria-label
-    //   current — whether this step is the currently visible step
-    //   stepNumber — 1-based step number for aria-roledescription
-    //   totalSteps — total number of steps for progress info
-    //   children — step content snippet
+    //   label — string, required. Accessible name for this step via aria-label.
+    //   current — boolean, default false. Whether this step is the currently visible step.
+    //   stepNumber — number, optional. 1-based step number (e.g. 1, 2, 3).
+    //   totalSteps — number, optional. Total number of steps in the tour.
+    //   children — Snippet, required. Step content.
+    //   ...restProps — additional HTML attributes spread onto the <div>.
     //
-    // Usage:
+    // Syntax:
+    //   <TourGuideStep label="Welcome" current={step === 0} stepNumber={1} totalSteps={3}>...</TourGuideStep>
+    //
+    // Examples:
+    //   <!-- Multi-step tour with navigation -->
     //   <TourGuide label="Getting started" bind:active>
     //     <TourGuideStep label="Welcome" current={step === 0} stepNumber={1} totalSteps={3}>
     //       <p>Welcome to the app!</p>
+    //       <button onclick={() => step++}>Next</button>
     //     </TourGuideStep>
     //     <TourGuideStep label="Features" current={step === 1} stepNumber={2} totalSteps={3}>
     //       <p>Here are the features.</p>
-    //     </TourGuideStep>
-    //     <TourGuideStep label="Finish" current={step === 2} stepNumber={3} totalSteps={3}>
-    //       <p>You're all set!</p>
+    //       <button onclick={() => step--}>Back</button>
+    //       <button onclick={() => step++}>Next</button>
     //     </TourGuideStep>
     //   </TourGuide>
     //
+    // Keyboard:
+    //   - None directly -- keyboard behavior comes from child interactive elements
+    //
     // Accessibility:
-    //   - Uses role="group" to group step content semantically
-    //   - aria-label provides the accessible name for the step
-    //   - aria-roledescription="step" tells screen readers this is a step
-    //   - aria-current="step" indicates the active step
-    //   - aria-hidden="true" hides inactive steps from assistive technology
-    //   - Step progress communicated via "Step N of M" aria-label suffix
+    //   - role="group" groups the step content semantically
+    //   - aria-roledescription="step" identifies the element as a tour step
+    //   - aria-label includes step label and optional "Step N of M" progress
+    //   - aria-current="step" indicates the currently active step
+    //   - aria-hidden="true" and hidden attribute hide inactive steps
     //
     // Internationalization:
     //   - All user-facing text comes through props
     //   - No hardcoded strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles -- consumer provides all styling
+    //   - Must be placed inside a TourGuide container
+    //   - Uses $derived() for computed fullLabel with step progress
+    //
+    // References:
+    //   - WAI-ARIA Group Role: https://www.w3.org/TR/wai-aria-1.2/#group
+    //   - WAI-ARIA aria-roledescription: https://www.w3.org/TR/wai-aria-1.2/#aria-roledescription
+    //   - WAI-ARIA aria-current: https://www.w3.org/TR/wai-aria-1.2/#aria-current
 
     import type { Snippet } from "svelte";
 

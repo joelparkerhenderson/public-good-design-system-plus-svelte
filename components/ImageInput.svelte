@@ -1,7 +1,0 @@
-<script lang="ts">
-    // Component: ImageInput — file input accepting images only.
-    let {
-        label, accept = "image/*", required = false, disabled = false, ...restProps
-    }: { label: string; accept?: string; required?: boolean; disabled?: boolean; [key: string]: unknown; } = $props();
-</script>
-<input type="file" aria-label={label} {accept} {required} {disabled} {...restProps} />

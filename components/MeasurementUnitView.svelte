@@ -1,26 +1,44 @@
 <script lang="ts">
-    // Component: MeasurementUnitView
+    // MeasurementUnitView component
     //
-    // A headless display component that shows a measurement unit
-    // in a <span> element. A measurement unit is a standard quantity
-    // used to express a measurement, such as "kg", "lb", "cm", or "inch".
-    //
-    // Usage:
-    //   <MeasurementUnitView value="kg" />
-    //   <MeasurementUnitView value="lb" label="Pounds" />
+    // A headless display component that shows a measurement unit in a <span>
+    // element. A measurement unit is a standard quantity used to express a
+    // physical measurement, such as "kg", "lb", "cm", or "inch". This is a
+    // read-only display component, part of the Input/View pattern for measurement
+    // data.
     //
     // Props:
-    //   - value: The measurement unit to display (required)
-    //   - label: Optional accessible name via aria-label
-    //   - ...restProps: Any additional HTML attributes
+    //   value — string, required. The measurement unit to display.
+    //   label — string, optional. Accessible name via aria-label for additional context.
+    //   ...restProps — additional HTML attributes spread onto the <span>.
+    //
+    // Syntax:
+    //   <MeasurementUnitView value="kg" />
+    //
+    // Examples:
+    //   <!-- Simple unit abbreviation display -->
+    //   <MeasurementUnitView value="kg" />
+    //
+    //   <!-- With accessible label for abbreviated unit -->
+    //   <MeasurementUnitView value="lb" label="Pounds" />
+    //
+    // Keyboard:
+    //   - None — this is a display-only component with no interactive behavior.
     //
     // Accessibility:
-    //   - Optional aria-label for additional context
-    //   - Text content is inherently accessible
+    //   - aria-label optionally provides additional context beyond the displayed unit
+    //   - Text content is inherently accessible to screen readers
     //
     // Internationalization:
     //   - All text comes through the value and label props
     //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Part of the Input/View pattern; pairs with MeasurementUnitInput
+    //
+    // References:
+    //   - HTML span element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
 
     let {
         value,
@@ -35,4 +53,8 @@
     } = $props();
 </script>
 
-<span aria-label={label} {...restProps}>{value}</span>
+<!-- MeasurementUnitView component: a span displaying a measurement unit value -->
+<span
+    aria-label={label}
+    {...restProps}>{value}</span
+>

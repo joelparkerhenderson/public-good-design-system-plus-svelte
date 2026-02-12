@@ -1,36 +1,67 @@
 <script lang="ts">
-    // Component: AlertDialog
+    // AlertDialog component
     //
-    // A headless alert dialog component for critical interactions that require
-    // user acknowledgment. Uses the native HTML <dialog> element with the
-    // ARIA alertdialog role.
+    // A headless modal alert dialog for critical interactions that require user
+    // acknowledgment before continuing. Uses the native HTML <dialog> element
+    // with the ARIA alertdialog role. Distinguished from regular Dialog by the
+    // alertdialog role, which signals to assistive technologies that the content
+    // requires immediate attention.
     //
-    // Alert dialogs are modal by nature — they interrupt the user's workflow
-    // to deliver a critical message and require a response before the user
-    // can continue. Examples: confirm deletion, unsaved changes warning.
-    //
-    // Usage:
-    //   <AlertDialog open={showDialog} title="Confirm" description="Are you sure?">
-    //     <button onclick={handleConfirm}>Yes</button>
-    //     <button onclick={handleCancel}>No</button>
-    //   </AlertDialog>
+    // Common uses: confirming irreversible actions ("Delete this item?"),
+    // warning about unsaved changes, or displaying critical error messages.
     //
     // Props:
-    //   - open: Whether the dialog is visible (default: false, bindable)
-    //   - title: The dialog title for screen readers (required for accessibility)
-    //   - description: The dialog description/message
-    //   - ...restProps: Any additional HTML attributes
+    //   open        — boolean, default false, bindable. Whether the dialog is visible.
+    //   title       — string, required. Dialog heading, referenced by aria-labelledby.
+    //   description — string, optional. Dialog message, referenced by aria-describedby.
+    //   children    — Snippet, required. Action buttons and additional content.
+    //   ...restProps — additional HTML attributes spread onto <dialog>.
+    //
+    // Syntax:
+    //   <AlertDialog bind:open title="Confirm" description="Are you sure?">
+    //     <button>Yes</button>
+    //     <button>No</button>
+    //   </AlertDialog>
+    //
+    // Examples:
+    //   <!-- Confirmation dialog with description -->
+    //   <AlertDialog bind:open={showDialog} title="Confirm Deletion"
+    //     description="This action cannot be undone.">
+    //     <button onclick={handleConfirm}>Yes, delete</button>
+    //     <button onclick={handleCancel}>Cancel</button>
+    //   </AlertDialog>
+    //
+    //   <!-- Simple acknowledgment dialog -->
+    //   <AlertDialog bind:open={showAlert} title="Session Expired">
+    //     <button onclick={() => showAlert = false}>OK</button>
+    //   </AlertDialog>
+    //
+    // Keyboard:
+    //   - Escape: Consumer must implement via onkeydown to close the dialog
+    //   - Tab: Consumer should implement focus trapping within the dialog
     //
     // Accessibility:
-    //   - Role: alertdialog
-    //   - Keyboard: Escape closes the dialog (managed by consumer)
-    //   - ARIA: aria-labelledby references the title, aria-describedby references the description
-    //   - aria-modal="true" signals modal behavior to assistive technologies
-    //   - Consumers are responsible for focus trapping (headless component)
+    //   - role="alertdialog" signals critical content requiring acknowledgment
+    //   - aria-modal="true" indicates modal behavior to assistive technologies
+    //   - aria-labelledby references the title element
+    //   - aria-describedby references the description element (when present)
+    //   - Conditionally rendered with {#if open} to remove from DOM when closed
     //
     // Internationalization:
     //   - Title and description come through props
     //   - Action buttons come through children snippet
+    //   - No hardcoded strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Consumer is responsible for focus trapping and Escape key handling
+    //   - The open prop must use $bindable() for two-way binding
+    //   - Do not use heading elements; use <p><strong> for the title
+    //   - Distinct from Dialog: use AlertDialog only for critical messages
+    //
+    // References:
+    //   - WAI-ARIA alertdialog role: https://www.w3.org/TR/wai-aria-1.2/#alertdialog
+    //   - WAI-ARIA Alert and Message Dialogs Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/alertdialog/
 
     import type { Snippet } from "svelte";
 
@@ -57,9 +88,7 @@
     let descriptionId = "alert-dialog-description";
 </script>
 
-<!-- AlertDialog: a modal dialog requiring user acknowledgment.
-     Uses the `open` attribute on <dialog> for visibility.
-     Consumers handle focus management and backdrop styling. -->
+<!-- AlertDialog component: a modal dialog with alertdialog role for critical user acknowledgment -->
 {#if open}
     <dialog
         open

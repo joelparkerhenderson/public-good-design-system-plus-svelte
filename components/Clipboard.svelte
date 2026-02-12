@@ -1,17 +1,49 @@
 <script lang="ts">
-    // Component: Clipboard
+    // Clipboard component
     //
-    // A headless clipboard component that provides copy-to-clipboard functionality.
-    // Wraps a button that copies specified text to the system clipboard.
+    // A headless clipboard button that copies specified text to the system clipboard
+    // using the Clipboard API. It tracks a `copied` state that automatically resets
+    // after 2 seconds and exposes it via a `data-copied` attribute for CSS-based
+    // feedback. Commonly used for copy-to-clipboard buttons on code snippets, URLs,
+    // or shareable content.
     //
-    // Usage:
+    // Props:
+    //   text — string, required. The text to copy to the clipboard.
+    //   label — string, required. Accessible label for the copy button via aria-label.
+    //   onsuccess — () => void, default undefined. Callback invoked after a successful copy.
+    //   onerror — (error: unknown) => void, default undefined. Callback invoked if the copy fails.
+    //   children — Snippet, default undefined. Optional custom button content.
+    //   ...restProps — additional HTML attributes spread onto the <button>.
+    //
+    // Syntax:
     //   <Clipboard text="https://example.com" label="Copy link" />
-    //   <Clipboard text={code} label="Copy code" onsuccess={handleCopied} />
+    //
+    // Examples:
+    //   <!-- Copy button with custom content and success callback -->
+    //   <Clipboard text={code} label="Copy code" onsuccess={handleCopied}>
+    //     Copy to clipboard
+    //   </Clipboard>
+    //
+    // Keyboard:
+    //   - Enter: Activate the copy button (native button behavior)
+    //   - Space: Activate the copy button (native button behavior)
     //
     // Accessibility:
-    //   - Role: button (implicit)
-    //   - aria-label describes the copy action
-    //   - aria-live region announces copy success/failure
+    //   - Implicit button role from the <button> element
+    //   - aria-label describes the copy action for screen readers
+    //   - data-copied attribute reflects "true" or "false" for CSS-based visual feedback
+    //
+    // Internationalization:
+    //   - The label prop provides the accessible name; no hardcoded strings
+    //   - Button content is provided through the children snippet
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - The copied state auto-resets after 2 seconds via setTimeout
+    //   - Consumer can use [data-copied="true"] CSS selector for feedback styling
+    //
+    // References:
+    //   - Clipboard API: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText
 
     import type { Snippet } from "svelte";
 
@@ -44,7 +76,9 @@
             copied = true;
             onsuccess?.();
             // Reset after a delay
-            setTimeout(() => { copied = false; }, 2000);
+            setTimeout(() => {
+                copied = false;
+            }, 2000);
         } catch (err) {
             onerror?.(err);
         }

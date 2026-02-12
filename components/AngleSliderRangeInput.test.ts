@@ -2,9 +2,9 @@ import { render, screen } from "@testing-library/svelte";
 import { userEvent, type UserEvent } from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
 
-import Subject from "./AngleSlider.svelte";
+import Subject from "./AngleSliderRangeInput.svelte";
 
-describe("AngleSlider", () => {
+describe("AngleSliderRangeInput", () => {
     test("renders as a slider", () => {
         render(Subject, { props: {
             label: "Rotation",

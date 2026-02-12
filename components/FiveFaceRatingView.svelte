@@ -1,15 +1,45 @@
 <script lang="ts">
-    // Component: FiveFaceRatingView
+    // FiveFaceRatingView component
     //
-    // A read-only face rating display. Shows the face/label for a given value.
+    // A read-only five-face rating display that shows a text label corresponding to a
+    // rating value from 1 to 5. This is the display-only companion to FiveFaceRatingInput,
+    // used for showing previously submitted ratings in summaries, review lists, or
+    // dashboard displays. Renders a span with role="img" and the face label text.
     //
     // Props:
-    //   value  — rating value (1-5)
-    //   label  — accessible description
-    //   labels — array of 5 face labels (default: Very bad..Very good)
+    //   value — number, required. Rating value (1-5) to display.
+    //   label — string, required. Accessible description via aria-label.
+    //   labels — string[], default ["Very bad", "Bad", "Okay", "Good", "Very good"]. Text labels for each face.
+    //   ...restProps — additional HTML attributes spread onto the span.
     //
-    // Usage:
+    // Syntax:
     //   <FiveFaceRatingView value={4} label="Good rating" />
+    //
+    // Examples:
+    //   <!-- Display a submitted face rating -->
+    //   <FiveFaceRatingView value={3} label="Okay rating" />
+    //
+    //   <!-- Custom face labels -->
+    //   <FiveFaceRatingView value={5} label="Excellent" labels={["Terrible", "Poor", "Fair", "Great", "Excellent"]} />
+    //
+    // Keyboard:
+    //   - None — this is a passive, read-only display element
+    //
+    // Accessibility:
+    //   - role="img" indicates the span represents a visual/graphic element (the face rating)
+    //   - aria-label provides the full rating description for screen readers
+    //   - data-value attribute exposes the numeric value for consumer CSS or testing
+    //
+    // Internationalization:
+    //   - All text content comes through the labels and label props; no hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Uses $derived() to look up the face label from the labels array based on value
+    //   - Companion to FiveFaceRatingInput for the Input/View pattern
+    //
+    // References:
+    //   - WAI-ARIA img role: https://www.w3.org/WAI/ARIA/apd/roles/img/
 
     let {
         value,
@@ -29,6 +59,12 @@
     let faceLabel = $derived(labels[value - 1] ?? "");
 </script>
 
-<span role="img" aria-label={label} data-value={value} {...restProps}>
+<!-- FiveFaceRatingView component: a span with img role displaying a face label for the current rating -->
+<span
+    role="img"
+    aria-label={label}
+    data-value={value}
+    {...restProps}
+>
     {faceLabel}
 </span>

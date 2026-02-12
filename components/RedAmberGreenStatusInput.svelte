@@ -1,32 +1,47 @@
 <script lang="ts">
     // RedAmberGreenStatusInput component
     //
-    // A headless RAG (Red/Amber/Green) status input component that renders
-    // a select element with three options for traffic-light status selection.
-    // RAG status is widely used in project management and dashboards.
-    //
-    // Usage:
-    //   <RedAmberGreenStatusInput label="Project status" bind:value={status} />
-    //   <RedAmberGreenStatusInput label="Health check" value="green" />
+    // A headless RAG (Red/Amber/Green) status input that renders a native
+    // <select> element with three traffic-light options: red, amber, and green.
+    // RAG status is widely used in project management dashboards, risk registers,
+    // and reporting tools to communicate health at a glance.
     //
     // Props:
-    //   - label: Accessible label for the select element (required)
-    //   - value: The currently selected status value, bindable (default: "")
-    //   - ...restProps: Any additional HTML attributes spread onto the select
+    //   label — string, required. Accessible label for the select element.
+    //   value — string, default "". Currently selected status value; bindable.
+    //   ...restProps — additional HTML attributes spread onto the <select>.
     //
-    // Options:
-    //   - "red": Critical problem, needs immediate attention
-    //   - "amber": Caution, minor issues or at risk
-    //   - "green": On track, everything is fine
+    // Syntax:
+    //   <RedAmberGreenStatusInput label="Project status" bind:value={status} />
+    //
+    // Examples:
+    //   <!-- Pre-selected value -->
+    //   <RedAmberGreenStatusInput label="Health check" value="green" />
+    //
+    //   <!-- Two-way binding with state -->
+    //   <RedAmberGreenStatusInput label="Sprint status" bind:value={status} data-project="alpha" />
+    //
+    // Keyboard:
+    //   - Arrow Up/Down: navigate options (native select behavior)
+    //   - Enter/Space: open the dropdown (native select behavior)
+    //   - Escape: close the dropdown (native select behavior)
     //
     // Accessibility:
-    //   - ARIA: aria-label on the select for screen reader context
-    //   - Keyboard: Native select keyboard navigation (arrow keys, enter, space)
-    //   - WCAG 2.2 AAA: Properly labeled for assistive technology
+    //   - aria-label on the <select> for screen reader context
+    //   - Native <select> provides implicit combobox/listbox role
+    //   - WCAG 2.2 AAA: properly labeled for assistive technology
     //
     // Internationalization:
     //   - The label prop externalizes the accessible label string
-    //   - Option display text can be customized by consumers via CSS or wrapping
+    //   - Option display text ("Red", "Amber", "Green") is hardcoded; wrap or fork to localize
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Value uses $bindable() for two-way binding with bind:value
+    //   - Options are fixed to the three RAG values: red, amber, green
+    //
+    // References:
+    //   - Traffic Light Rating System: https://en.wikipedia.org/wiki/Traffic_light_rating_system
 
     let {
         label,

@@ -1,31 +1,55 @@
 <script lang="ts">
-    // Component: Button
+    // Button component
     //
-    // A headless button component for triggering actions. Uses the native
-    // HTML <button> element for inherent accessibility and keyboard support.
-    //
-    // Usage:
-    //   <Button onclick={handleClick}>Click me</Button>
-    //   <Button type="submit" disabled={isSubmitting}>Submit</Button>
-    //   <Button pressed={isToggled} onclick={toggle}>Toggle</Button>
+    // A headless button for triggering actions, built on the native HTML <button>
+    // element for inherent accessibility and keyboard support. Supports action
+    // buttons, submit/reset buttons, and toggle buttons via the pressed prop.
+    // Commonly used for form submissions, dialogs, menus, and toolbar actions.
     //
     // Props:
-    //   - type: HTML button type — "button" | "submit" | "reset" (default: "button")
-    //   - disabled: Whether the button is disabled (default: false)
-    //   - pressed: For toggle buttons, the current pressed state (default: undefined)
-    //   - label: Accessible label override for screen readers (optional)
-    //   - onclick: Click event handler
-    //   - ...restProps: Any additional HTML attributes
+    //   type — "button" | "submit" | "reset", default "button". HTML button type.
+    //   disabled — boolean, default false. Whether the button is disabled.
+    //   pressed — boolean | undefined, default undefined. Toggle button state; when provided, aria-pressed is rendered.
+    //   label — string, optional. Accessible label override via aria-label.
+    //   onclick — (event: MouseEvent) => void, optional. Click event handler.
+    //   children — Snippet, required. The button content.
+    //   ...restProps — additional HTML attributes spread onto the <button>.
+    //
+    // Syntax:
+    //   <Button onclick={handleClick}>Click me</Button>
+    //
+    // Examples:
+    //   <!-- Submit button in a form -->
+    //   <Button type="submit" disabled={isSubmitting}>Submit</Button>
+    //
+    //   <!-- Toggle button with pressed state -->
+    //   <Button pressed={isBold} onclick={() => isBold = !isBold}>Bold</Button>
+    //
+    //   <!-- Button with accessible label override -->
+    //   <Button label="Close dialog" onclick={handleClose}>X</Button>
+    //
+    // Keyboard:
+    //   - Tab: Focus the button
+    //   - Enter: Activate the button
+    //   - Space: Activate the button
     //
     // Accessibility:
-    //   - Role: button (implicit from <button>)
-    //   - Keyboard: Enter and Space activate the button
-    //   - ARIA: aria-pressed for toggle buttons, aria-disabled for disabled state
-    //   - ARIA: aria-label for screen reader text override
+    //   - Implicit button role from <button> element
+    //   - aria-pressed for toggle button state (only when pressed prop is provided)
+    //   - aria-label for screen reader text override
+    //   - Native disabled attribute prevents clicks and signals aria-disabled
     //
     // Internationalization:
-    //   - Button text comes through children snippet
+    //   - Button text comes through children snippet; no hardcoded strings
     //   - Label override comes through label prop
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Defaults to type="button" to prevent accidental form submissions
+    //   - aria-pressed is only rendered when pressed prop is explicitly provided
+    //
+    // References:
+    //   - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/button/
 
     import type { Snippet } from "svelte";
 
@@ -54,7 +78,7 @@
     } = $props();
 </script>
 
-<!-- Button: a semantic button element for triggering actions -->
+<!-- Button component: a semantic button element for triggering actions -->
 <button
     {type}
     {disabled}

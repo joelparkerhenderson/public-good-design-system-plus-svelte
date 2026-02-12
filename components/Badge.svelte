@@ -1,28 +1,55 @@
 <script lang="ts">
-    // Component: Badge
+    // Badge component
     //
-    // A headless badge component for displaying status indicators, counts,
-    // or short labels. Renders as an inline element with appropriate ARIA
-    // attributes for screen reader announcements.
-    //
-    // Usage:
-    //   <Badge>New</Badge>
-    //   <Badge label="3 unread messages">3</Badge>
-    //   <Badge type="warning">Alert</Badge>
+    // A headless inline badge for displaying status indicators, counts, or
+    // short labels. Renders as a <span role="status"> with aria-label and
+    // data-type for consumer styling. Commonly used for notification counts,
+    // "New" labels, status pills, and category tags.
     //
     // Props:
-    //   - type: Badge variant — "default" | "info" | "success" | "warning" | "error" (default: "default")
-    //   - label: Accessible label for screen readers when badge text alone is insufficient
-    //   - ...restProps: Any additional HTML attributes
+    //   type     — "default" | "info" | "success" | "warning" | "error",
+    //              default "default". Semantic variant exposed as data-type.
+    //   label    — string, optional. Accessible label for screen readers
+    //              when badge text alone is insufficient (e.g., "3 unread messages").
+    //   children — Snippet, required. The badge content (text, number, etc.).
+    //   ...restProps — additional HTML attributes spread onto <span>.
+    //
+    // Syntax:
+    //   <Badge>New</Badge>
+    //   <Badge label="3 unread messages">3</Badge>
+    //
+    // Examples:
+    //   <!-- Simple text badge -->
+    //   <Badge>New</Badge>
+    //
+    //   <!-- Count badge with accessible context -->
+    //   <Badge label="3 unread messages">3</Badge>
+    //
+    //   <!-- Warning badge -->
+    //   <Badge type="warning">Alert</Badge>
+    //
+    //   <!-- Error badge with custom attributes -->
+    //   <Badge type="error" data-testid="error-badge">Failed</Badge>
+    //
+    // Keyboard: None — badges are display-only, not interactive.
     //
     // Accessibility:
-    //   - Role: status (for dynamic badges) or none (for static labels)
-    //   - ARIA: aria-label for additional context beyond the visible text
-    //   - Screen readers announce the badge content or label
+    //   - role="status" for live region semantics (screen readers announce changes)
+    //   - aria-label provides additional context beyond the visible text
+    //   - data-type exposes variant for consumer styling (not for assistive tech)
     //
     // Internationalization:
-    //   - All text content comes through children snippet and label prop
+    //   - All text comes through children snippet and label prop
     //   - No hardcoded strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Use role="status" for dynamic badges; consumer can override role if static
+    //   - data-type is for styling hooks, not semantics
+    //   - Do not add icons or colors; consumer provides visual treatment
+    //
+    // References:
+    //   - WAI-ARIA status role: https://www.w3.org/TR/wai-aria-1.2/#status
 
     import type { Snippet } from "svelte";
 
@@ -42,7 +69,7 @@
     } = $props();
 </script>
 
-<!-- Badge: an inline status indicator or label -->
+<!-- Badge component: an inline status indicator or label -->
 <span
     role="status"
     aria-label={label}

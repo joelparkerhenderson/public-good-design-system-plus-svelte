@@ -1,26 +1,55 @@
 <script lang="ts">
-    // Component: Dial
+    // Dial component
     //
-    // A headless circular dial/knob control. Adjusts a value from min to max
-    // using keyboard navigation. Renders as a slider role for accessibility.
-    //
-    // Keyboard:
-    //   ArrowRight/ArrowUp   — increase by step
-    //   ArrowLeft/ArrowDown  — decrease by step
-    //   Shift+Arrow          — increase/decrease by step * 10
-    //   Home                 — set to min
-    //   End                  — set to max
+    // A circular dial or knob control for adjusting a numeric value within a
+    // defined range. Renders as a div with role="slider" and full keyboard
+    // navigation. Common use cases include volume controls, thermostats, and
+    // audio equipment settings in control panels and configuration interfaces.
     //
     // Props:
-    //   value    — bindable numeric value
-    //   min      — minimum value (default 0)
-    //   max      — maximum value (default 100)
-    //   step     — increment per key press (default 1)
-    //   label    — accessible name
-    //   disabled — whether the dial is disabled
+    //   value — number, default 0. Current dial value; bindable.
+    //   min — number, default 0. Minimum allowed value.
+    //   max — number, default 100. Maximum allowed value.
+    //   step — number, default 1. Increment per key press.
+    //   label — string, required. Accessible name for the dial.
+    //   disabled — boolean, default false. Whether the dial is disabled.
+    //   ...restProps — additional HTML attributes spread onto the <div>.
     //
-    // Usage:
+    // Syntax:
     //   <Dial label="Volume" bind:value min={0} max={100} />
+    //
+    // Examples:
+    //   <!-- Brightness dial with step of 5 -->
+    //   <Dial label="Brightness" bind:value={brightness} min={0} max={100} step={5} />
+    //
+    //   <!-- Disabled dial -->
+    //   <Dial label="Disabled control" value={30} disabled />
+    //
+    // Keyboard:
+    //   - ArrowRight/ArrowUp: increase value by one step
+    //   - ArrowLeft/ArrowDown: decrease value by one step
+    //   - Shift+Arrow: increase/decrease value by 10 steps
+    //   - Home: set value to minimum
+    //   - End: set value to maximum
+    //
+    // Accessibility:
+    //   - role="slider" indicates a range input control
+    //   - aria-label provides the accessible name
+    //   - aria-valuenow, aria-valuemin, aria-valuemax communicate current range state
+    //   - aria-disabled="true" present only when disabled
+    //   - tabindex="0" when enabled, tabindex="-1" when disabled
+    //
+    // Internationalization:
+    //   - The label prop accepts any string; consumers provide localized text
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Internal clamp() ensures value stays within min/max bounds
+    //   - No native dial element exists; uses div with role="slider"
+    //
+    // References:
+    //   - WAI-ARIA Slider Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/slider/
+    //   - WAI-ARIA slider role: https://www.w3.org/TR/wai-aria-1.2/#slider
 
     let {
         value = $bindable(0),

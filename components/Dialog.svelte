@@ -1,29 +1,56 @@
 <script lang="ts">
-    // Component: Dialog
+    // Dialog component
     //
-    // A headless modal dialog. Uses native <dialog> element rendered conditionally.
-    // Manages focus trap and keyboard dismissal.
+    // A modal or non-modal dialog that overlays the main interface to communicate
+    // information or prompt users for input. Uses the native <dialog> element with
+    // conditional rendering. Common use cases include confirmations, alerts, forms,
+    // settings, and any interaction requiring focused user attention.
     //
     // Props:
-    //   open     — bindable boolean controlling visibility
-    //   label    — accessible name for the dialog (aria-label)
-    //   modal    — whether the dialog is modal (default true)
-    //   children — dialog content
+    //   open — boolean, default false. Whether the dialog is visible; bindable.
+    //   label — string, required. Accessible name for the dialog.
+    //   modal — boolean, default true. Whether the dialog behaves as a modal.
+    //   children — Snippet, required. Dialog body content.
+    //   ...restProps — additional HTML attributes spread onto the <dialog> element.
     //
-    // Keyboard:
-    //   Escape — closes the dialog
+    // Syntax:
+    //   <Dialog label="Confirm" bind:open>Content here</Dialog>
     //
-    // Usage:
-    //   <Dialog label="Confirm" bind:open>
-    //     <p>Are you sure?</p>
-    //     <button onclick={() => open = false}>Close</button>
+    // Examples:
+    //   <!-- Confirmation dialog -->
+    //   <Dialog label="Confirm action" bind:open={showDialog}>
+    //     <p>Are you sure you want to proceed?</p>
+    //     <button onclick={() => showDialog = false}>Cancel</button>
+    //     <button onclick={() => { handleConfirm(); showDialog = false; }}>Confirm</button>
     //   </Dialog>
     //
+    //   <!-- Non-modal dialog -->
+    //   <Dialog label="Notification" bind:open={showNotice} modal={false}>
+    //     <p>Your file has been saved.</p>
+    //   </Dialog>
+    //
+    // Keyboard:
+    //   - Escape: closes the dialog by setting open to false
+    //
     // Accessibility:
-    //   - role="dialog" (native)
-    //   - aria-modal="true" for modal dialogs
-    //   - aria-label for accessible name
-    //   - Escape key closes the dialog
+    //   - role="dialog" provided natively by the <dialog> element
+    //   - aria-label provides the accessible name
+    //   - aria-modal="true" when modal prop is true, indicating focus trap
+    //   - tabindex="-1" allows the dialog to receive focus for keyboard events
+    //
+    // Internationalization:
+    //   - The label prop accepts any string; consumers provide localized text
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Uses $bindable() on open for two-way state binding
+    //   - Dialog is removed from DOM entirely when open is false
+    //   - Uses open HTML attribute directly, not .showModal()
+    //
+    // References:
+    //   - WAI-ARIA Dialog Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/dialog-modal/
+    //   - MDN dialog element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+    //   - WAI-ARIA dialog role: https://www.w3.org/TR/wai-aria-1.2/#dialog
 
     import type { Snippet } from "svelte";
 

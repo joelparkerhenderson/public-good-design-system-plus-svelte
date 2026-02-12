@@ -1,20 +1,50 @@
 <script lang="ts">
-    // Component: DataFilter
+    // DataFilter component
     //
-    // A headless data filter container. Wraps filter controls in a <form>
-    // with role="search" and accessible labelling.
+    // A headless data filter container that wraps filter controls in a semantic <form>
+    // with role="search" and accessible labelling. It prevents default form submission,
+    // allowing the consumer's onsubmit callback to handle filter application
+    // programmatically. Suitable for client-side filtering, AJAX-based search, or any
+    // scenario where a full page reload is undesirable.
     //
     // Props:
-    //   label    — accessible name for the filter region (aria-label)
-    //   onsubmit — callback when filter form is submitted
-    //   onreset  — callback when filter form is reset
-    //   children — Snippet with filter input controls
+    //   label — string, required. Accessible name for the filter region via aria-label.
+    //   onsubmit — (event: SubmitEvent) => void, default undefined. Called when the form is submitted.
+    //   onreset — (event: Event) => void, default undefined. Called when the form is reset.
+    //   children — Snippet, required. Filter controls rendered inside the form.
+    //   ...restProps — additional HTML attributes spread onto the <form>.
     //
-    // Usage:
+    // Syntax:
     //   <DataFilter label="Filter results" onsubmit={applyFilters}>
-    //     <label>Category <select>...</select></label>
     //     <button type="submit">Apply</button>
     //   </DataFilter>
+    //
+    // Examples:
+    //   <!-- Filter with category select, submit, and reset -->
+    //   <DataFilter label="Filter results" onsubmit={applyFilters} onreset={clearFilters}>
+    //     <label>Category <select>...</select></label>
+    //     <button type="submit">Apply</button>
+    //     <button type="reset">Clear</button>
+    //   </DataFilter>
+    //
+    // Keyboard:
+    //   - None — passive container; keyboard behavior is determined by consumer-provided form controls
+    //
+    // Accessibility:
+    //   - role="search" identifies the form as a search landmark for assistive technology
+    //   - aria-label provides an accessible name for the search region
+    //
+    // Internationalization:
+    //   - The label prop provides the accessible name; no hardcoded strings
+    //   - All filter controls and button text are provided by consumers
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Form submission is prevented by default; consumer handles logic in onsubmit
+    //
+    // References:
+    //   - WAI-ARIA Landmark Roles: https://www.w3.org/WAI/ARIA/apd/practices/landmark-regions/
+    //   - ARIA search role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/search_role
 
     import type { Snippet } from "svelte";
 

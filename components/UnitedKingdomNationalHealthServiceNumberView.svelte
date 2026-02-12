@@ -1,27 +1,43 @@
 <script lang="ts">
-    // Component: UnitedKingdomNationalHealthServiceNumberView
+    // UnitedKingdomNationalHealthServiceNumberView component
     //
-    // A headless view component for displaying a United Kingdom National Health
-    // Service (NHS) number. Renders as an inline <span> element with an accessible
-    // label for screen readers.
-    //
-    // Usage:
-    //   <UnitedKingdomNationalHealthServiceNumberView label="NHS Number" value="123 456 7890" />
-    //   <UnitedKingdomNationalHealthServiceNumberView label="Patient NHS Number" value={nhsNumber} />
+    // A headless display component for showing a United Kingdom National Health
+    // Service (NHS) number in a read-only format. Renders the number as an inline
+    // <span> element with an accessible label. Suitable for patient records,
+    // summaries, confirmation screens, or any context where an NHS number needs
+    // to be displayed but not edited. This is the View counterpart to the Input
+    // component in the Input/View pattern.
     //
     // Props:
-    //   - label: Accessible label for screen readers (required)
-    //   - value: The NHS number string to display (default: "")
-    //   - ...restProps: Any additional HTML attributes spread onto the span
+    //   label — string, required. Accessible label for screen readers via aria-label.
+    //   value — string, default "". The NHS number string to display.
+    //   ...restProps — additional HTML attributes spread onto the <span>.
+    //
+    // Syntax:
+    //   <UnitedKingdomNationalHealthServiceNumberView label="NHS Number" value="123 456 7890" />
+    //
+    // Examples:
+    //   <!-- Display patient NHS number -->
+    //   <UnitedKingdomNationalHealthServiceNumberView label="Patient NHS Number" value={nhsNumber} />
+    //
+    // Keyboard:
+    //   - None -- passive display-only component
     //
     // Accessibility:
-    //   - aria-label provides the accessible name for screen readers
-    //   - The value is rendered as text content inside the span
-    //   - Screen readers will announce the label followed by the number value
+    //   - aria-label provides the accessible name so screen readers announce the purpose
+    //   - Screen readers announce the label followed by the text content (the number)
     //
     // Internationalization:
     //   - The label prop externalizes user-facing text for translation
     //   - No hardcoded strings in the component
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles -- consumer provides all styling
+    //   - No formatting or validation; consumer provides the value pre-formatted
+    //   - Read-only display; pairs with Input component for editing
+    //
+    // References:
+    //   - NHS Number: https://www.nhs.uk/using-the-nhs/about-the-nhs/what-is-an-nhs-number/
 
     let {
         label,
@@ -37,5 +53,8 @@
     } = $props();
 </script>
 
-<!-- NHS Number View: displays an NHS number with accessible labeling -->
-<span aria-label={label} {...restProps}>{value}</span>
+<!-- UnitedKingdomNationalHealthServiceNumberView component: view a United Kingdom National Health Service Number -->
+<span
+    aria-label={label}
+    {...restProps}>{value}</span
+>

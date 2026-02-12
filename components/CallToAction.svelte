@@ -1,28 +1,52 @@
 <script lang="ts">
-    // Component: CallToAction
+    // CallToAction component
     //
-    // A headless call-to-action component that renders a prominent
-    // interactive element (link or button) designed to drive user engagement.
-    //
-    // Usage:
-    //   <CallToAction href="/signup">Sign Up Now</CallToAction>
-    //   <CallToAction onclick={handleAction}>Get Started</CallToAction>
+    // A headless call-to-action (CTA) component that prompts users to take a
+    // specific action. Renders as an <a> element when href is provided (for
+    // navigation CTAs like "Sign Up") or a <button> when no href is given (for
+    // action CTAs like "Get Started"). This dual-mode approach ensures correct
+    // semantic HTML for accessibility and SEO.
     //
     // Props:
-    //   - href: If provided, renders as a link; otherwise renders as a button
-    //   - label: Accessible label override for screen readers (optional)
-    //   - disabled: Whether the element is disabled (default: false, button only)
-    //   - onclick: Click event handler (button mode)
-    //   - ...restProps: Any additional HTML attributes
+    //   href — string, optional. If provided, renders as a link; otherwise renders as a button.
+    //   label — string, optional. Accessible label override via aria-label.
+    //   disabled — boolean, default false. Disables the button (button mode only).
+    //   onclick — (event: MouseEvent) => void, optional. Click handler (button mode).
+    //   children — Snippet, required. The CTA content.
+    //   ...restProps — additional HTML attributes spread onto the <a> or <button>.
+    //
+    // Syntax:
+    //   <CallToAction href="/signup">Sign Up Now</CallToAction>
+    //
+    // Examples:
+    //   <!-- Navigation CTA (renders as <a>) -->
+    //   <CallToAction href="/signup">Sign Up Now</CallToAction>
+    //
+    //   <!-- Action CTA (renders as <button>) -->
+    //   <CallToAction onclick={handleAction}>Get Started</CallToAction>
+    //
+    // Keyboard:
+    //   - Tab: Focus the element
+    //   - Enter: Activate the link or button
+    //   - Space: Activate the button (button mode only; links do not respond to Space)
     //
     // Accessibility:
-    //   - Role: link (when href provided) or button (when no href)
-    //   - ARIA: aria-label for screen reader text override
-    //   - Keyboard: Tab to focus, Enter/Space to activate
+    //   - Implicit link role when rendered as <a>
+    //   - Implicit button role when rendered as <button>
+    //   - Optional aria-label for screen reader text override
+    //   - disabled only applies in button mode (links cannot be disabled natively)
     //
     // Internationalization:
-    //   - CTA text comes through children snippet
+    //   - CTA text comes through children snippet; no hardcoded strings
     //   - Label override comes through label prop
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Uses <a> for navigation, <button> for actions — never mix semantics
+    //
+    // References:
+    //   - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/button/
+    //   - WAI-ARIA Link Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/link/
 
     import type { Snippet } from "svelte";
 
@@ -48,12 +72,23 @@
     } = $props();
 </script>
 
+<!-- CallToAction component: an anchor or button element prompting a primary user action -->
 {#if href}
-    <a {href} aria-label={label} {...restProps}>
+    <a
+        {href}
+        aria-label={label}
+        {...restProps}
+    >
         {@render children()}
     </a>
 {:else}
-    <button type="button" {disabled} aria-label={label} {onclick} {...restProps}>
+    <button
+        type="button"
+        {disabled}
+        aria-label={label}
+        {onclick}
+        {...restProps}
+    >
         {@render children()}
     </button>
 {/if}

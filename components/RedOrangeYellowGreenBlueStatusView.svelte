@@ -1,27 +1,46 @@
 <script lang="ts">
     // RedOrangeYellowGreenBlueStatusView component
     //
-    // A headless ROYGB (Red/Orange/Yellow/Green/Blue) status view component
-    // that displays a five-level color-coded status value as read-only text.
-    // Used to present ROYGB status information in dashboards and reports.
-    //
-    // Usage:
-    //   <RedOrangeYellowGreenBlueStatusView label="Risk level" value="yellow" />
-    //   <RedOrangeYellowGreenBlueStatusView label="Alert status" value={level} />
+    // A headless ROYGB (Red/Orange/Yellow/Green/Blue) status view that displays
+    // a five-level color-coded status value as read-only text inside a <span>.
+    // Used to present previously captured ROYGB status data in dashboards, reports,
+    // or detail views where the five-level scale offers more granularity than RAG.
     //
     // Props:
-    //   - label: Accessible label for screen readers (required)
-    //   - value: The ROYGB status value to display (default: "")
-    //   - ...restProps: Any additional HTML attributes spread onto the span
+    //   label — string, required. Accessible label for screen readers via aria-label.
+    //   value — string, default "". The ROYGB status to display (e.g. "red", "orange", "yellow", "green", "blue").
+    //   ...restProps — additional HTML attributes spread onto the <span>.
+    //
+    // Syntax:
+    //   <RedOrangeYellowGreenBlueStatusView label="Risk level" value="yellow" />
+    //
+    // Examples:
+    //   <!-- Display a dynamic status -->
+    //   <RedOrangeYellowGreenBlueStatusView label="Alert status" value={level} />
+    //
+    //   <!-- With extra attributes for testing -->
+    //   <RedOrangeYellowGreenBlueStatusView label="System health" value="blue" data-testid="health" />
+    //
+    // Keyboard:
+    //   - None — this is a passive informational display, not an interactive element.
     //
     // Accessibility:
-    //   - ARIA: aria-label on the span for screen reader context
+    //   - aria-label on the <span> for screen reader context
     //   - Screen readers announce the label and displayed status value
-    //   - WCAG 2.2 AAA: Properly labeled for assistive technology
+    //   - WCAG 2.2 AAA: properly labeled for assistive technology
     //
     // Internationalization:
     //   - The label prop externalizes the accessible label string
     //   - The value is displayed as-is, allowing localized status names
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Read-only display component — not interactive, no $bindable()
+    //   - Consumer can apply color-coded backgrounds or text colors via restProps
+    //
+    // References:
+    //   - WAI-ARIA status role: https://www.w3.org/TR/wai-aria-1.2/#status
+    //   - Traffic Light Rating System: https://en.wikipedia.org/wiki/Traffic_light_rating_system
 
     let {
         label,

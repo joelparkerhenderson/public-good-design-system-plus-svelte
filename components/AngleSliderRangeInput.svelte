@@ -1,32 +1,67 @@
 <script lang="ts">
-    // AngleSliderRangeInput Component
+    // AngleSliderRangeInput component
     //
-    // A headless slider component for selecting an angle value (0–360 degrees).
-    // Built on the native range input with ARIA slider semantics.
-    //
-    // Usage:
-    //   <AngleSliderRangeInput label="Rotation" bind:value={angle} />
-    //   <AngleSliderRangeInput label="Direction" value={90} min={0} max={360} step={15} />
+    // A headless slider for selecting an angle value (0–360 degrees). Built on
+    // the native <input type="range"> with full ARIA slider semantics. Useful
+    // for rotation controls, compass direction pickers, hue angle selectors,
+    // or any circular/angular value input.
     //
     // Props:
-    //   - value: Current angle in degrees (default: 0, bindable)
-    //   - min: Minimum angle (default: 0)
-    //   - max: Maximum angle (default: 360)
-    //   - step: Step increment (default: 1)
-    //   - label: Accessible label for the slider (required)
-    //   - disabled: Whether the slider is disabled (default: false)
-    //   - name: Form field name
-    //   - id: Element ID
-    //   - ...restProps: Any additional HTML attributes
+    //   value           — number, default 0, bindable. Current angle in degrees.
+    //   min             — number, default 0. Minimum angle.
+    //   max             — number, default 360. Maximum angle.
+    //   step            — number, default 1. Step increment.
+    //   label           — string, required. Accessible label for the slider.
+    //   disabled        — boolean, default false. Whether the slider is disabled.
+    //   name            — string, optional. Form field name for submission.
+    //   id              — string, optional. Element ID.
+    //   valueTextSuffix — string, default "°". Suffix for aria-valuetext
+    //                     (e.g., "°" makes "90°" for screen readers).
+    //   ...restProps    — additional HTML attributes spread onto <input>.
+    //
+    // Syntax:
+    //   <AngleSliderRangeInput label="Rotation" bind:value={angle} />
+    //
+    // Examples:
+    //   <!-- Basic angle slider -->
+    //   <AngleSliderRangeInput label="Rotation" bind:value={angle} />
+    //
+    //   <!-- Stepped compass direction -->
+    //   <AngleSliderRangeInput label="Direction" value={90} step={15} />
+    //
+    //   <!-- Custom range with suffix -->
+    //   <AngleSliderRangeInput label="Hue" min={0} max={360}
+    //     valueTextSuffix=" degrees" bind:value={hue} />
+    //
+    //   <!-- Disabled slider -->
+    //   <AngleSliderRangeInput label="Locked angle" value={45} disabled />
+    //
+    // Keyboard:
+    //   - Arrow Right / Arrow Up: Increase value by step
+    //   - Arrow Left / Arrow Down: Decrease value by step
+    //   - Home: Set to min value
+    //   - End: Set to max value
+    //   (All provided by native <input type="range"> behavior.)
     //
     // Accessibility:
-    //   - Role: slider (implicit from input[type="range"])
-    //   - Keyboard: Arrow keys adjust value, Home/End go to min/max
-    //   - ARIA: aria-label, aria-valuemin, aria-valuemax, aria-valuenow, aria-valuetext
+    //   - Implicit slider role from <input type="range">
+    //   - aria-label provides accessible name
+    //   - aria-valuemin, aria-valuemax, aria-valuenow for range semantics
+    //   - aria-valuetext provides human-readable value (e.g., "90°")
     //
     // Internationalization:
     //   - Label text comes through the label prop
-    //   - Value text suffix (e.g., "degrees") comes through the valueTextSuffix prop
+    //   - Value text suffix (e.g., "°" or " degrees") via valueTextSuffix prop
+    //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Use native <input type="range">, not custom slider markup
+    //   - The value prop must use $bindable() for two-way binding
+    //   - aria-valuetext is derived from value + valueTextSuffix
+    //
+    // References:
+    //   - WAI-ARIA Slider Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/
 
     let {
         value = $bindable(0),
@@ -65,7 +100,7 @@
     let valueText = $derived(`${value}${valueTextSuffix}`);
 </script>
 
-<!-- AngleSliderRangeInput: a range input for selecting an angle in degrees -->
+<!-- AngleSliderRangeInput component: a range input for selecting an angle in degrees -->
 <input
     type="range"
     bind:value

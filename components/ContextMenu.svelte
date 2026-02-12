@@ -1,21 +1,54 @@
 <script lang="ts">
-    // Component: ContextMenu
+    // ContextMenu component
     //
-    // A context menu that displays a list of actions. Triggered externally
-    // (e.g. right-click). Uses role="menu" with proper ARIA attributes.
-    // Keyboard: ArrowDown/ArrowUp navigate items, Escape closes, Home/End
-    // jump to first/last item. The menu manages focus on open/close.
+    // A headless context menu that displays a list of actions relevant to the current
+    // context, typically triggered by a right-click or long-press. When opened, focus
+    // moves to the first menu item automatically. Arrow keys navigate between items
+    // with wrapping, and Escape closes the menu. Consumers trigger opening externally
+    // and provide role="menuitem" children. Used with ContextMenuItem children.
     //
     // Props:
-    //   label    — accessible name for the menu (aria-label)
-    //   open     — bindable boolean controlling visibility
-    //   children — Snippet rendered inside the menu (menu items)
+    //   label — string, required. Accessible name for the context menu via aria-label.
+    //   open — boolean, default false. Whether the menu is visible; bindable for two-way control.
+    //   children — Snippet, required. Menu item content (should include role="menuitem" elements).
+    //   ...restProps — additional HTML attributes spread onto the menu <div>.
     //
-    // Usage:
+    // Syntax:
+    //   <ContextMenu label="Actions" bind:open>
+    //     <ContextMenuItem>Cut</ContextMenuItem>
+    //   </ContextMenu>
+    //
+    // Examples:
+    //   <!-- Context menu with multiple actions -->
     //   <ContextMenu label="Actions" bind:open>
     //     <li role="menuitem" tabindex="-1">Cut</li>
     //     <li role="menuitem" tabindex="-1">Copy</li>
+    //     <li role="menuitem" tabindex="-1">Paste</li>
     //   </ContextMenu>
+    //
+    // Keyboard:
+    //   - ArrowDown: Move focus to the next menu item (wraps to first)
+    //   - ArrowUp: Move focus to the previous menu item (wraps to last)
+    //   - Home: Move focus to the first menu item
+    //   - End: Move focus to the last menu item
+    //   - Escape: Close the menu
+    //
+    // Accessibility:
+    //   - role="menu" identifies the container as a menu widget
+    //   - aria-label provides an accessible name for the menu
+    //   - Focus is automatically moved to the first menuitem when opened via $effect
+    //
+    // Internationalization:
+    //   - The label prop provides the accessible name; no hardcoded strings
+    //   - All menu item content is provided by consumers through children
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Compound component: use with ContextMenuItem for individual entries
+    //   - Consumer triggers opening externally (e.g., via contextmenu event handler)
+    //
+    // References:
+    //   - WAI-ARIA Menu Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/menu/
 
     import type { Snippet } from "svelte";
 
@@ -40,7 +73,8 @@
     // When the menu opens, focus the first menuitem.
     $effect(() => {
         if (open && menuRef) {
-            const firstItem = menuRef.querySelector<HTMLElement>("[role='menuitem']");
+            const firstItem =
+                menuRef.querySelector<HTMLElement>("[role='menuitem']");
             firstItem?.focus();
         }
     });
@@ -48,7 +82,9 @@
     // Keyboard navigation within the menu.
     function onkeydown(event: KeyboardEvent) {
         if (!menuRef) return;
-        const items = Array.from(menuRef.querySelectorAll<HTMLElement>("[role='menuitem']"));
+        const items = Array.from(
+            menuRef.querySelectorAll<HTMLElement>("[role='menuitem']"),
+        );
         const current = document.activeElement as HTMLElement;
         const index = items.indexOf(current);
 

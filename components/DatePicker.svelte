@@ -1,14 +1,44 @@
 <script lang="ts">
-    // Component: DatePicker
+    // DatePicker component
     //
-    // A headless date picker wrapping the native date input.
+    // A headless date picker providing a lightweight wrapper around the native
+    // <input type="date"> element with accessible labelling via aria-label. Unlike
+    // DateField, it renders only the bare input without a visible label, description,
+    // or error handling. Supports min and max date constraints to restrict selectable
+    // ranges. Useful in booking systems, scheduling tools, and compact UI contexts.
     //
     // Props:
-    //   label — accessible name via aria-label
-    //   value — bindable date value (YYYY-MM-DD)
+    //   label — string, required. Accessible name applied via aria-label.
+    //   value — string, default "". Current date value in YYYY-MM-DD format; bindable via bind:value.
+    //   required — boolean, default false. Whether the input is required.
+    //   disabled — boolean, default false. Whether the input is disabled.
+    //   min — string, default undefined. Minimum selectable date in YYYY-MM-DD format.
+    //   max — string, default undefined. Maximum selectable date in YYYY-MM-DD format.
+    //   ...restProps — additional HTML attributes spread onto the <input>.
     //
-    // Usage:
+    // Syntax:
     //   <DatePicker label="Start date" bind:value />
+    //
+    // Examples:
+    //   <!-- Date picker with constraints and required state -->
+    //   <DatePicker label="Departure" bind:value min="2025-01-01" max="2025-12-31" required />
+    //
+    // Keyboard:
+    //   - None beyond native <input type="date"> keyboard behavior, which varies by browser
+    //
+    // Accessibility:
+    //   - aria-label provides an accessible name for the date input
+    //
+    // Internationalization:
+    //   - The label prop provides the accessible name; no hardcoded strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Renders a bare <input type="date"> with no wrapper element
+    //   - Uses $bindable() for two-way binding on the value prop
+    //
+    // References:
+    //   - MDN input type="date": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
 
     let {
         label,
@@ -35,4 +65,13 @@
     } = $props();
 </script>
 
-<input type="date" aria-label={label} bind:value {required} {disabled} {min} {max} {...restProps} />
+<input
+    type="date"
+    aria-label={label}
+    bind:value
+    {required}
+    {disabled}
+    {min}
+    {max}
+    {...restProps}
+/>

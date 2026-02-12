@@ -1,38 +1,52 @@
 <script lang="ts">
-    // Component: UnitedKingdomNationalHealthServiceNumberInput
+    // UnitedKingdomNationalHealthServiceNumberInput component
     //
-    // A headless input component for entering a United Kingdom National Health
-    // Service (NHS) number. The NHS number is a 10-digit identifier assigned to
-    // every patient registered with the NHS. The standard display format is
-    // "XXX XXX XXXX" (three groups separated by spaces).
-    //
-    // Usage:
-    //   <UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" />
-    //   <UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" bind:value={nhsNumber} />
-    //   <UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" required />
-    //   <UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" disabled />
+    // A headless input for entering a United Kingdom National Health Service (NHS)
+    // number. The NHS number is a 10-digit identifier assigned to every patient
+    // registered with the NHS in England, Wales, and the Isle of Man. The standard
+    // display format is "XXX XXX XXXX" (three groups separated by spaces). The
+    // component enforces this pattern, uses a numeric keyboard hint for mobile,
+    // and disables autocomplete to protect sensitive health information.
     //
     // Props:
-    //   - label: Accessible label for screen readers (required)
-    //   - value: Bindable string value of the input (default: "")
-    //   - required: Whether the input is required (default: false)
-    //   - disabled: Whether the input is disabled (default: false)
-    //   - ...restProps: Any additional HTML attributes spread onto the input
+    //   label — string, required. Accessible label for screen readers via aria-label.
+    //   value — string, default "". Bindable input value; supports bind:value.
+    //   required — boolean, default false. Whether the input is required for form submission.
+    //   disabled — boolean, default false. Whether the input is disabled.
+    //   ...restProps — additional HTML attributes spread onto the <input>.
     //
-    // Pattern:
-    //   The pattern attribute enforces the format "XXX XXX XXXX" where X is a digit.
-    //   The inputmode="numeric" attribute hints mobile devices to show a numeric keyboard.
-    //   autocomplete="off" prevents browsers from suggesting previously entered values,
-    //   which is appropriate for sensitive health identifiers.
+    // Syntax:
+    //   <UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" bind:value />
+    //
+    // Examples:
+    //   <!-- Required NHS number input -->
+    //   <UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" required />
+    //
+    //   <!-- Disabled NHS number input -->
+    //   <UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" disabled />
+    //
+    // Keyboard:
+    //   - Standard text input keyboard behavior
+    //   - Users type digits and spaces in the format XXX XXX XXXX
     //
     // Accessibility:
     //   - aria-label provides the accessible name for screen readers
-    //   - inputmode="numeric" ensures appropriate keyboard on mobile devices
+    //   - inputmode="numeric" hints mobile devices to show a numeric keyboard
+    //   - pattern enforces XXX XXX XXXX format on form validation
+    //   - autocomplete="off" protects sensitive health identifiers
     //   - required and disabled states are conveyed to assistive technology
     //
     // Internationalization:
     //   - The label prop externalizes user-facing text for translation
     //   - No hardcoded strings in the component
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles -- consumer provides all styling
+    //   - Pattern is defined as a constant to avoid Svelte curly brace parsing
+    //   - Uses $bindable() for two-way data binding on value
+    //
+    // References:
+    //   - NHS Number format: https://www.nhs.uk/nhs-services/online-services/find-nhs-number/
 
     let {
         label,
@@ -58,7 +72,7 @@
     const nhsPattern = "[0-9]{3} [0-9]{3} [0-9]{4}";
 </script>
 
-<!-- NHS Number Input: a specialized numeric text input for UK NHS numbers -->
+<!-- UnitedKingdomNationalHealthServiceNumberInput component: input a United Kingdom National Health Service Number -->
 <input
     type="text"
     aria-label={label}

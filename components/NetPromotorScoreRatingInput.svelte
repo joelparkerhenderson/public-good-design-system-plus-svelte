@@ -1,29 +1,57 @@
 <script lang="ts">
-    // Component: NetPromotorScoreRatingInput
+    // NetPromotorScoreRatingInput component
     //
-    // A headless Net Promoter Score (NPS) rating input component that renders
-    // a fieldset with role="radiogroup" containing 11 radio buttons (0-10).
-    // NPS is a metric used to measure customer loyalty and satisfaction.
-    //
-    // Usage:
-    //   <NetPromotorScoreRatingInput label="How likely are you to recommend us?" bind:value={score} />
+    // A headless Net Promoter Score (NPS) rating input that renders a fieldset
+    // with role="radiogroup" containing 11 radio buttons (0-10). NPS is a widely
+    // used customer loyalty metric where scores are categorized as Detractors (0-6),
+    // Passives (7-8), and Promoters (9-10). The value prop is bindable for reactive
+    // form integration.
     //
     // Props:
-    //   - label: Accessible label for the radiogroup (required)
-    //   - value: The currently selected NPS score (0-10), bindable
-    //   - name: Name attribute for the radio group (default: "nps")
-    //   - ...restProps: Any additional HTML attributes spread onto the fieldset
+    //   label — string, required. Accessible label for the radiogroup via aria-label.
+    //   value — string, default "". Currently selected NPS score ("0"-"10"); bindable via $bindable().
+    //   name — string, default "nps". Name attribute for the radio input group.
+    //   ...restProps — additional HTML attributes spread onto the <fieldset>.
+    //
+    // Syntax:
+    //   <NetPromotorScoreRatingInput label="How likely are you to recommend us?" bind:value={score} />
+    //
+    // Examples:
+    //   <!-- Basic NPS rating input -->
+    //   <NetPromotorScoreRatingInput
+    //     label="How likely are you to recommend us?"
+    //     bind:value={score}
+    //   />
+    //
+    //   <!-- With a custom radio group name -->
+    //   <NetPromotorScoreRatingInput
+    //     label="Rate our service"
+    //     bind:value={score}
+    //     name="service-nps"
+    //   />
+    //
+    // Keyboard:
+    //   - Arrow keys: navigate between radio buttons (native radio group behavior)
+    //   - Space: select the focused radio button
+    //   - Tab: move focus into/out of the radio group
     //
     // Accessibility:
-    //   - Role: radiogroup on the fieldset
-    //   - ARIA: aria-label on the fieldset describes the purpose
+    //   - role="radiogroup" on the fieldset
+    //   - aria-label on the fieldset from the label prop
     //   - Each radio button has aria-label with its numeric value
-    //   - Keyboard: Arrow keys navigate between radio buttons (native behavior)
-    //   - WCAG 2.2 AAA: Fully labeled, keyboard accessible
     //
     // Internationalization:
-    //   - The label prop externalizes the fieldset label string
+    //   - The label prop accepts any translated string
     //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Radio values are strings ("0" through "10")
+    //   - Part of the Input/View pattern; pairs with NetPromotorScoreRatingView
+    //
+    // References:
+    //   - Net Promoter Score: https://en.wikipedia.org/wiki/Net_promoter_score
+    //   - WAI-ARIA Radiogroup Role: https://www.w3.org/TR/wai-aria-1.2/#radiogroup
 
     let {
         label,
@@ -42,7 +70,11 @@
 </script>
 
 <!-- NetPromotorScoreRatingInput: a fieldset radiogroup with 11 radio buttons (0-10) -->
-<fieldset role="radiogroup" aria-label={label} {...restProps}>
+<fieldset
+    role="radiogroup"
+    aria-label={label}
+    {...restProps}
+>
     {#each Array.from({ length: 11 }, (_, i) => i) as score}
         <label>
             <input
@@ -51,7 +83,9 @@
                 value={String(score)}
                 checked={value === String(score)}
                 aria-label={String(score)}
-                onchange={() => { value = String(score); }}
+                onchange={() => {
+                    value = String(score);
+                }}
             />
             {score}
         </label>

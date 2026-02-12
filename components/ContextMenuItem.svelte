@@ -1,36 +1,46 @@
 <script lang="ts">
-    // Component: ContextMenuItem
+    // ContextMenuItem component
     //
-    // A headless context menu item component for use within a context menu or
-    // right-click menu. Renders a <div> with role="menuitem" and tabindex="-1"
-    // for proper menu keyboard navigation.
+    // A headless context menu item representing a single action within a context menu.
+    // Renders a <div> with role="menuitem" and tabindex="-1" for proper menu keyboard
+    // navigation. Focus is managed programmatically by the parent ContextMenu component
+    // using Arrow keys. Should be placed within a role="menu" container. Commonly used
+    // for right-click menu actions like cut, copy, paste, and delete.
     //
-    // Usage:
+    // Props:
+    //   children — Snippet, required. Menu item content (text, shortcut hint, etc.).
+    //   ...restProps — additional HTML attributes spread onto the <div>.
+    //
+    // Syntax:
+    //   <ContextMenuItem>Cut</ContextMenuItem>
+    //
+    // Examples:
+    //   <!-- Multiple menu items within a context menu -->
     //   <ContextMenuItem>Cut</ContextMenuItem>
     //   <ContextMenuItem>Copy</ContextMenuItem>
     //   <ContextMenuItem>Paste</ContextMenuItem>
-    //   <ContextMenuItem disabled>Delete</ContextMenuItem>
+    //   <ContextMenuItem aria-disabled="true">Delete</ContextMenuItem>
     //
-    // Props:
-    //   - children: Snippet for menu item content
-    //   - ...restProps: Any additional HTML attributes spread onto the div
-    //
-    // Behavior:
-    //   - tabindex="-1" removes the item from the normal tab order; focus is
-    //     managed programmatically by the parent menu component using Arrow keys
-    //   - The parent context menu is responsible for showing/hiding the menu and
-    //     managing focus between items with ArrowUp/ArrowDown keys
+    // Keyboard:
+    //   - Focus is managed by the parent menu using ArrowUp/ArrowDown
+    //   - Enter/Space: Activate the menu item (handled by consumer event listeners)
     //
     // Accessibility:
     //   - role="menuitem" identifies this element as an item within a menu
     //   - tabindex="-1" supports roving focus management by the parent menu
-    //   - Consumers can add aria-disabled="true" for disabled items
-    //   - Consumers can add aria-keyshortcuts for keyboard shortcut hints
-    //   - Should be placed within a role="menu" container
+    //   - Consumer can add aria-disabled="true" for disabled items
+    //   - Consumer can add aria-keyshortcuts for keyboard shortcut hints
     //
     // Internationalization:
-    //   - All visible content is provided through the children snippet
-    //   - No hardcoded strings in the component
+    //   - All content is provided through the children snippet; no hardcoded strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Compound component: used as a child within ContextMenu
+    //   - Must be placed inside a role="menu" container
+    //
+    // References:
+    //   - WAI-ARIA Menu Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/menu/
 
     import type { Snippet } from "svelte";
 
@@ -46,6 +56,10 @@
 </script>
 
 <!-- ContextMenuItem: a menu item for use in a context (right-click) menu -->
-<div role="menuitem" tabindex="-1" {...restProps}>
+<div
+    role="menuitem"
+    tabindex="-1"
+    {...restProps}
+>
     {@render children()}
 </div>

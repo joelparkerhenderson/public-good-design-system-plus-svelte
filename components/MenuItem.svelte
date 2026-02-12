@@ -1,37 +1,58 @@
 <script lang="ts">
-    // Component: MenuItem
+    // MenuItem component
     //
-    // A headless menu item component for use within a menu, dropdown menu,
-    // or navigation menu. Renders a <div> with role="menuitem" and tabindex="-1"
-    // for proper menu keyboard navigation.
-    //
-    // Usage:
-    //   <MenuItem>New File</MenuItem>
-    //   <MenuItem>Open File</MenuItem>
-    //   <MenuItem>Save</MenuItem>
-    //   <MenuItem>Exit</MenuItem>
+    // A headless menu item representing a single action or option within a menu,
+    // dropdown menu, or navigation menu. It renders a <div> with role="menuitem"
+    // and tabindex="-1" for proper menu keyboard navigation. The parent menu
+    // component manages focus between items with ArrowUp/ArrowDown keys.
     //
     // Props:
-    //   - children: Snippet for menu item content
-    //   - ...restProps: Any additional HTML attributes spread onto the div
+    //   children — Snippet, required. Menu item content (text, shortcut hint, etc.).
+    //   ...restProps — additional HTML attributes spread onto the <div>.
     //
-    // Behavior:
-    //   - tabindex="-1" removes the item from the normal tab order; focus is
-    //     managed programmatically by the parent menu component using Arrow keys
-    //   - The parent menu is responsible for managing focus between items with
-    //     ArrowUp/ArrowDown keys and handling item activation
+    // Syntax:
+    //   <MenuItem>New File</MenuItem>
+    //
+    // Examples:
+    //   <!-- Basic menu items within a menu -->
+    //   <Menu label="File">
+    //     <MenuItem>New File</MenuItem>
+    //     <MenuItem>Open File</MenuItem>
+    //     <MenuItem>Save</MenuItem>
+    //   </Menu>
+    //
+    //   <!-- Menu item with click handler -->
+    //   <MenuItem onclick={() => handleNew()}>New File</MenuItem>
+    //
+    //   <!-- Disabled menu item -->
+    //   <MenuItem aria-disabled="true">Paste</MenuItem>
+    //
+    //   <!-- Submenu trigger -->
+    //   <MenuItem aria-haspopup="true" aria-expanded={submenuOpen}>Recent Files</MenuItem>
+    //
+    // Keyboard:
+    //   - ArrowUp/ArrowDown: focus movement managed by parent Menu
+    //   - Enter/Space: activate the menu item (consumer-provided handler)
+    //   - Home/End: move to first/last item (handled by parent Menu)
     //
     // Accessibility:
-    //   - role="menuitem" identifies this element as an item within a menu
-    //   - tabindex="-1" supports roving focus management by the parent menu
-    //   - Consumers can add aria-disabled="true" for disabled items
-    //   - Consumers can add aria-haspopup for items that open submenus
-    //   - Consumers can add aria-expanded for submenu trigger items
-    //   - Should be placed within a role="menu" or role="menubar" container
+    //   - role="menuitem" identifies this as a menu item
+    //   - tabindex="-1" for roving focus management by the parent menu
+    //   - Supports aria-disabled for disabled state
+    //   - Supports aria-haspopup and aria-expanded for submenu triggers
+    //   - Must be placed within a role="menu" or role="menubar" container
     //
     // Internationalization:
     //   - All visible content is provided through the children snippet
-    //   - No hardcoded strings in the component
+    //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles — consumer provides all styling
+    //   - Must be placed inside a Menu or MenuBar container
+    //
+    // References:
+    //   - WAI-ARIA Menu Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/menu/
+    //   - WAI-ARIA menuitem role: https://www.w3.org/TR/wai-aria-1.2/#menuitem
 
     import type { Snippet } from "svelte";
 
@@ -47,6 +68,10 @@
 </script>
 
 <!-- MenuItem: a menu item for use in a menu or dropdown -->
-<div role="menuitem" tabindex="-1" {...restProps}>
+<div
+    role="menuitem"
+    tabindex="-1"
+    {...restProps}
+>
     {@render children()}
 </div>

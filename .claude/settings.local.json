@@ -2,14 +2,23 @@
   "permissions": {
     "allow": [
       "mcp__svelte__*",
-      "Bash(find:*)",
-      "Bash(npx vitest run:*)",
-      "Bash(ls:*)",
-      "Bash(for:*)",
+      "mcp__svelte__list_sections",
+      "mcp__svelte__get_documentation",
+      "Read(components/*)",
+      "Read(components/**)",
+      "Bash(do ls $d*.md)",
       "Bash(do ls $d*.svelte)",
-      "Bash(echo:*)",
+      "Bash(do ls $d*.test.ts)",
       "Bash(done)",
-      "Bash(do ls $d*.svelte.test.ts)"
+      "Bash(echo:*)",
+      "Bash(fd:*)",
+      "Bash(find:*)",
+      "Bash(for:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(npx vitest run:*)",
+      "Bash(rg:*)",
+      "Bash(wc:*)"
     ]
   }
 }
