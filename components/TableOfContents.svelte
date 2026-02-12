@@ -1,5 +1,5 @@
 <script lang="ts">
-    // Component: TableOfContents
+    // TableOfContents component
     //
     // A headless table of contents component that renders a semantic <nav>
     // element with an accessible label. Used to provide a navigational overview
@@ -48,6 +48,9 @@
 </script>
 
 <!-- TableOfContents: a navigation landmark for page section links -->
-<nav aria-label={label} {...restProps}>
+<nav
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
 </nav>
