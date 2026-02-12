@@ -1,5 +1,5 @@
 <script lang="ts">
-    // Component: SummaryList
+    // SummaryList component
     //
     // A headless summary list component that renders a <dl> (description list)
     // element for presenting key-value pairs or summary information. The
@@ -43,6 +43,9 @@
 </script>
 
 <!-- SummaryList: a description list for key-value pair presentation -->
-<dl aria-label={label} {...restProps}>
+<dl
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
 </dl>
