@@ -1,4 +1,4 @@
-# Pin Input
+# PinInput
 
 A PIN input is a specialized form component that presents a series of
 single-character input fields for entering Personal Identification Numbers
@@ -13,7 +13,6 @@ available as a single bindable string. This pattern is commonly used in
 two-factor authentication flows, SMS verification, and secure PIN entry
 interfaces. Each individual input field has an accessible label indicating its
 position (e.g., "Digit 1 of 4") to support screen reader users.
-# PinInput
 
 ## Implementation Notes
 
@@ -23,6 +22,8 @@ position (e.g., "Digit 1 of 4") to support screen reader users.
 - Backspace in empty input moves focus to previous input
 - ArrowLeft/ArrowRight navigate between inputs
 - Only accepts numeric characters (0-9)
+- `inputmode="numeric"` ensures numeric keyboard on mobile devices
+- `maxlength="1"` restricts each input to a single character
 
 ## Props
 
@@ -31,6 +32,45 @@ position (e.g., "Digit 1 of 4") to support screen reader users.
 - `value`: string (default: "") -- bindable combined string of all digits
 - `disabled`: boolean (default: false) -- disables all inputs
 - `...restProps`: Any additional HTML attributes on the group div
+
+## Usage
+
+Basic 4-digit PIN input:
+
+```svelte
+<script lang="ts">
+  import PinInput from './PinInput.svelte';
+
+  let pin = $state("");
+</script>
+
+<PinInput label="Enter PIN" bind:value={pin} />
+<p>Entered PIN: {pin}</p>
+```
+
+6-digit verification code:
+
+```svelte
+<script lang="ts">
+  import PinInput from './PinInput.svelte';
+
+  let code = $state("");
+</script>
+
+<PinInput label="Verification Code" length={6} bind:value={code} />
+```
+
+Disabled state:
+
+```svelte
+<PinInput label="Locked PIN" disabled />
+```
+
+With additional HTML attributes:
+
+```svelte
+<PinInput label="OTP" bind:value={otp} data-form="login" />
+```
 
 ## Keyboard Interactions
 
@@ -45,3 +85,7 @@ position (e.g., "Digit 1 of 4") to support screen reader users.
 - `role="group"` with `aria-label` on the container
 - Each input has `aria-label="Digit X of Y"` for positional context
 - `inputmode="numeric"` for numeric keyboard on mobile
+
+## References
+
+- WAI-ARIA Group Role: https://www.w3.org/TR/wai-aria-1.2/#group

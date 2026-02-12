@@ -14,7 +14,6 @@ This component renders an individual tab button with proper ARIA attributes
 including role="tab", aria-selected for the active state, and aria-controls to
 associate the tab with its corresponding tabpanel. It follows the roving
 tabindex pattern where only the selected tab participates in the tab order.
-# Tab
 
 ## Implementation Notes
 
@@ -31,6 +30,52 @@ tabindex pattern where only the selected tab participates in the tab order.
 - `children`: Snippet -- tab label content
 - `...restProps`: Any additional HTML attributes
 
+## Usage
+
+Basic tab within a tablist:
+
+```svelte
+<script lang="ts">
+  import Tab from './Tab.svelte';
+
+  let activeTab = $state("dashboard");
+</script>
+
+<div role="tablist" aria-label="Main navigation">
+  <Tab
+    selected={activeTab === "dashboard"}
+    controls="panel-dashboard"
+    onclick={() => activeTab = "dashboard"}
+  >
+    Dashboard
+  </Tab>
+  <Tab
+    selected={activeTab === "settings"}
+    controls="panel-settings"
+    onclick={() => activeTab = "settings"}
+  >
+    Settings
+  </Tab>
+  <Tab
+    selected={activeTab === "reports"}
+    controls="panel-reports"
+    onclick={() => activeTab = "reports"}
+  >
+    Reports
+  </Tab>
+</div>
+
+<div id="panel-dashboard" role="tabpanel" hidden={activeTab !== "dashboard"}>
+  Dashboard content
+</div>
+<div id="panel-settings" role="tabpanel" hidden={activeTab !== "settings"}>
+  Settings content
+</div>
+<div id="panel-reports" role="tabpanel" hidden={activeTab !== "reports"}>
+  Reports content
+</div>
+```
+
 ## Keyboard Interactions
 
 - Tab: moves focus to the selected tab in the tablist
@@ -43,3 +88,8 @@ tabindex pattern where only the selected tab participates in the tab order.
 - `aria-selected` communicates selection state
 - `aria-controls` links to the corresponding tabpanel
 - Roving `tabindex` (0 for selected, -1 for unselected)
+
+## References
+
+- WAI-ARIA Tabs Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/tabs/
+- WAI-ARIA Tab Role: https://www.w3.org/TR/wai-aria-1.2/#tab

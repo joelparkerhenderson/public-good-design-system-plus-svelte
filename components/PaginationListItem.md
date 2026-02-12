@@ -1,25 +1,31 @@
-# Pagination List Item
-
-A pagination list item is a single list item within a pagination navigation, rendered as an li element containing a page link or button.
 # PaginationListItem
+
+A pagination list item represents a single entry within a pagination navigation list. It renders as a semantic `<li>` element designed to be placed inside a PaginationList component (which provides the parent `<nav>` and `<ul>` structure). The item typically contains a link or button for a specific page number, previous/next controls, or an ellipsis indicator.
+
+Consumers are responsible for adding `aria-current="page"` on the active page link and any additional ARIA attributes needed on the child elements.
 
 ## Implementation Notes
 
-- Renders as a semantic `<li>` element for use inside a PaginationList `<ul>` / `<nav>`
+- Renders as a semantic `<li>` element for use inside a PaginationList `<ul>` / `<nav>` structure
 - Content is provided through the children snippet, typically a link or button for a page number
 - Passes through all additional HTML attributes via `...restProps`
-- Consumer is responsible for adding `aria-current="page"` or `aria-label` as needed on the child link
+- Uses Svelte 5 `Snippet` for children content
 
 ## Props
 
-- `children`: Snippet (required) -- item content, typically a link (e.g., `<a href="/page/2">2</a>`)
-- `...restProps`: Any additional HTML attributes passed to the `<li>` element
+- `children`: Snippet (required) -- item content, typically a link (e.g., `<a href="/page/2">2</a>`) or button
+
+## Usage
+
+```svelte
+<PaginationListItem><a href="/page/1">1</a></PaginationListItem>
+```
 
 ## Keyboard Interactions
 
-- None directly -- keyboard interaction is handled by contained links or buttons
+None directly -- keyboard interaction is handled by the contained links or buttons.
 
 ## ARIA
 
-- Semantic `<li>` provides implicit `listitem` role
+- Implicit `listitem` role from the semantic `<li>` element
 - Consumer should set `aria-current="page"` on the active page link within the item

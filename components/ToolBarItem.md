@@ -1,13 +1,14 @@
-# Tool Bar Item
-
-A tool bar item is a single button within a toolbar, rendered as a native button element for proper keyboard and screen reader support.
 # ToolBarItem
+
+A tool bar item is a single button within a toolbar, rendered as a native `<button>` element for proper keyboard and screen reader support. It is designed to be placed inside a ToolBar container that manages roving focus keyboard navigation.
+
+The component uses `<button type="button">` to avoid unintended form submissions and supports the `disabled` attribute for disabling interaction. Content is provided through the children snippet, allowing full flexibility in button content.
 
 ## Implementation Notes
 
-- A single button item within a ToolBar, rendered as a `<button type="button">`
+- Renders as a `<button type="button">` element for native button semantics
 - Supports a `disabled` prop to disable the button
-- Content is provided through the children snippet
+- Content is provided through the Svelte 5 `children` Snippet
 - Passes through all additional HTML attributes via `...restProps`
 - Designed to be placed inside a ToolBar container that manages keyboard navigation
 
@@ -16,6 +17,12 @@ A tool bar item is a single button within a toolbar, rendered as a native button
 - `disabled`: boolean (default: false) -- whether the button is disabled
 - `children`: Snippet (required) -- button content
 - `...restProps`: Any additional HTML attributes passed to the `<button>` element
+
+## Usage
+
+```svelte
+<ToolBarItem>Bold</ToolBarItem>
+```
 
 ## Keyboard Interactions
 
@@ -26,5 +33,9 @@ A tool bar item is a single button within a toolbar, rendered as a native button
 
 ## ARIA
 
-- Implicit `button` role from `<button>` element
+- Implicit `button` role from the `<button>` element
 - `disabled` attribute communicates disabled state to assistive technology
+
+## References
+
+- WAI-ARIA Toolbar Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/toolbar/

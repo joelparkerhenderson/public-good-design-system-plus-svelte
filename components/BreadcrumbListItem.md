@@ -1,26 +1,38 @@
-# Breadcrumb List Item
-
-A breadcrumb list item represents a single step in a breadcrumb trail, with aria-current="page" support for marking the current location.
 # BreadcrumbListItem
+
+A breadcrumb list item represents a single step in a breadcrumb navigation trail. It renders as a semantic `<li>` element designed to be placed inside a BreadcrumbList component (which provides the parent `<nav>` and `<ol>` structure). The component supports `aria-current="page"` to indicate when the item represents the user's current location in the site hierarchy.
+
+Typically, each breadcrumb list item contains a link for navigable ancestor pages, while the final item (current page) contains plain text and is marked with the `current` prop.
 
 ## Implementation Notes
 
-- Renders as a semantic `<li>` element for use inside a breadcrumb `<nav>` / `<ol>`
-- Supports `aria-current="page"` to indicate the current/active page in the breadcrumb trail
-- Content is provided through the children snippet (typically an `<a>` link or plain text)
+- Renders as a semantic `<li>` element for use inside a breadcrumb `<nav>` / `<ol>` structure
+- Supports `aria-current="page"` via the `current` prop to indicate the active page in the breadcrumb trail
+- Content is provided through the children snippet, typically an `<a>` link or plain text
 - Passes through all additional HTML attributes via `...restProps`
+- Uses Svelte 5 `Snippet` for children content
 
 ## Props
 
-- `current`: boolean (default: false) -- whether this item represents the current page
+- `current`: boolean (default: false) -- whether this item represents the current page in the breadcrumb trail
 - `children`: Snippet (required) -- breadcrumb content, typically a link or text
-- `...restProps`: Any additional HTML attributes passed to the `<li>` element
+
+## Usage
+
+```svelte
+<BreadcrumbListItem><a href="/">Home</a></BreadcrumbListItem>
+<BreadcrumbListItem current>About</BreadcrumbListItem>
+```
 
 ## Keyboard Interactions
 
-- None directly -- keyboard interaction is handled by contained links or the parent list
+None directly -- keyboard interaction is handled by the contained links.
 
 ## ARIA
 
-- Semantic `<li>` provides implicit `listitem` role
-- `aria-current="page"` is set when `current` is true, indicating the current location in the breadcrumb trail
+- Implicit `listitem` role from the semantic `<li>` element
+- `aria-current="page"` -- set when `current` is true, indicating the user's current location in the breadcrumb trail
+
+## References
+
+- WAI-ARIA Breadcrumb Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/breadcrumb/

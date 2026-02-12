@@ -1,4 +1,4 @@
-# Net Promoter Score Rating Input
+# NetPromotorScoreRatingInput
 
 A Net Promoter Score (NPS) rating input is a UI/UX component that allows users
 to select a score from 0 to 10, representing their likelihood to recommend a
@@ -9,7 +9,6 @@ value. Scores are typically categorized as Detractors (0-6), Passives (7-8),
 and Promoters (9-10). This headless component provides the semantic structure
 and accessibility features while allowing consumers to apply their own visual
 styling.
-# NetPromotorScoreRatingInput
 
 ## Implementation Notes
 
@@ -24,6 +23,42 @@ styling.
 - `label`: string (required) -- accessible label for the radiogroup
 - `value`: string (default: "") -- currently selected score, bindable
 - `name`: string (default: "nps") -- name attribute for the radio group
+- `...restProps`: Any additional HTML attributes spread onto the fieldset
+
+## Usage
+
+Basic NPS rating input:
+
+```svelte
+<script lang="ts">
+  import NetPromotorScoreRatingInput from './NetPromotorScoreRatingInput.svelte';
+
+  let score = $state("");
+</script>
+
+<NetPromotorScoreRatingInput label="How likely are you to recommend us?" bind:value={score} />
+<p>Selected score: {score}</p>
+```
+
+With a custom radio group name:
+
+```svelte
+<NetPromotorScoreRatingInput
+  label="Rate our service"
+  bind:value={score}
+  name="service-nps"
+/>
+```
+
+With additional HTML attributes:
+
+```svelte
+<NetPromotorScoreRatingInput
+  label="Customer satisfaction"
+  bind:value={score}
+  data-section="feedback"
+/>
+```
 
 ## Keyboard Interactions
 
@@ -37,7 +72,7 @@ styling.
 - `aria-label` on the fieldset from the label prop
 - Each radio has `aria-label` with its numeric value
 
-## Testing
+## References
 
-- Uses @testing-library/svelte with vitest
-- Tests verify 11 radio buttons, aria-labels, values 0-10, passthrough attributes
+- Net Promoter Score: https://en.wikipedia.org/wiki/Net_promoter_score
+- WAI-ARIA Radiogroup Role: https://www.w3.org/TR/wai-aria-1.2/#radiogroup

@@ -1,4 +1,4 @@
-# ROYGB Status Input
+# RoygbStatusInput
 
 A ROYGB (Red/Orange/Yellow/Green/Blue) status input is a UI/UX component that
 allows users to select a five-level color-coded status value from a dropdown.
@@ -10,7 +10,6 @@ paused or informational state. The component renders as a select element with
 appropriate accessibility attributes, providing native keyboard navigation and
 screen reader support. This headless component provides the semantic structure
 while allowing consumers to apply their own visual styling.
-# RoygbStatusInput
 
 ## Implementation Notes
 
@@ -22,6 +21,7 @@ while allowing consumers to apply their own visual styling.
 
 - `label`: string (required) -- accessible label for the select
 - `value`: string (default: "") -- currently selected status, bindable
+- `...restProps`: Any additional HTML attributes spread onto the select
 
 ## Options
 
@@ -30,6 +30,37 @@ while allowing consumers to apply their own visual styling.
 - `yellow`: Caution or minor issues
 - `green`: Normal, on track
 - `blue`: Paused or informational
+
+## Usage
+
+Basic ROYGB status selection:
+
+```svelte
+<script lang="ts">
+  import RoygbStatusInput from './RoygbStatusInput.svelte';
+
+  let level = $state("");
+</script>
+
+<RoygbStatusInput label="Risk level" bind:value={level} />
+<p>Current level: {level}</p>
+```
+
+Pre-selected value:
+
+```svelte
+<RoygbStatusInput label="Alert status" value="green" />
+```
+
+With additional HTML attributes:
+
+```svelte
+<RoygbStatusInput
+  label="Project health"
+  bind:value={level}
+  data-dashboard="main"
+/>
+```
 
 ## Keyboard Interactions
 
@@ -41,7 +72,6 @@ while allowing consumers to apply their own visual styling.
 
 - `aria-label` on the select from the label prop
 
-## Testing
+## References
 
-- Uses @testing-library/svelte with vitest
-- Tests verify select element, five options, option values, passthrough attributes
+- Traffic Light Rating System: https://en.wikipedia.org/wiki/Traffic_light_rating_system

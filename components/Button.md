@@ -2,14 +2,13 @@
 
 A button is a fundamental UI/UX component that allows users to trigger an action
 or event within an interface, such as submitting a form, navigating to another
-page, or opening a menu. Typically, buttons are rectangular or rounded with text
-or icons that describe their function (e.g., "Submit," "Cancel," or "Next").
-They are often styled to be visually distinct, using colors, shadows, and hover
-effects to signal interactivity. Buttons play a crucial role in user navigation
-and interaction, making them essential for guiding users through tasks,
+page, or opening a menu. Buttons are essential for guiding users through tasks,
 providing clear feedback on actions, and enhancing the overall user experience
 by offering intuitive, actionable controls.
-# Button
+
+This headless component uses the native HTML `<button>` element for inherent
+accessibility and keyboard support. It supports toggle button semantics via the
+`pressed` prop, accessible label overrides, and all standard button types.
 
 ## Implementation Notes
 
@@ -23,10 +22,59 @@ by offering intuitive, actionable controls.
 
 - `type`: "button" | "submit" | "reset" (default: "button")
 - `disabled`: boolean (default: false)
-- `pressed`: boolean | undefined (default: undefined) — toggle button state
-- `label`: string (optional) — accessible label override
-- `onclick`: callback (optional) — click handler
-- `children`: Snippet — button content
+- `pressed`: boolean | undefined (default: undefined) -- toggle button state
+- `label`: string (optional) -- accessible label override
+- `onclick`: callback (optional) -- click handler
+- `children`: Snippet -- button content
+- `...restProps`: Any additional HTML attributes
+
+## Usage
+
+Basic action button:
+
+```svelte
+<script lang="ts">
+  import Button from './Button.svelte';
+
+  function handleClick() {
+    console.log("clicked");
+  }
+</script>
+
+<Button onclick={handleClick}>Click me</Button>
+```
+
+Submit button in a form:
+
+```svelte
+<script lang="ts">
+  import Button from './Button.svelte';
+
+  let isSubmitting = $state(false);
+</script>
+
+<form>
+  <Button type="submit" disabled={isSubmitting}>Submit</Button>
+</form>
+```
+
+Toggle button with pressed state:
+
+```svelte
+<script lang="ts">
+  import Button from './Button.svelte';
+
+  let isBold = $state(false);
+</script>
+
+<Button pressed={isBold} onclick={() => isBold = !isBold}>Bold</Button>
+```
+
+With accessible label override:
+
+```svelte
+<Button label="Close dialog" onclick={handleClose}>X</Button>
+```
 
 ## Keyboard Interactions
 

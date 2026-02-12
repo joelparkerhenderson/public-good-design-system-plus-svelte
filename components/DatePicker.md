@@ -1,11 +1,44 @@
-# Date picker
+# DatePicker
 
-A date picker is a UI/UX component that allows users to easily select a specific
-date (and sometimes time) from a visual calendar interface, rather than typing
-it manually. Often used in forms, booking systems, and scheduling tools, it
-typically appears as a pop-up calendar when a user clicks on a date input field.
-Date pickers enhance usability by minimizing input errors, speeding up data
-entry, and providing a clear, intuitive way to navigate through days, months,
-and years. A well-designed date picker improves user efficiency and accuracy,
-especially when dealing with date-sensitive tasks like reservations, deadlines,
-or event planning.
+A date picker provides a lightweight wrapper around the native `<input type="date">` element with accessible labelling. It is useful in forms, booking systems, and scheduling tools where users need to select a specific date. The component supports minimum and maximum date constraints to restrict selectable ranges.
+
+Unlike the DateField component, DatePicker renders only the bare input element without a visible label, description, or error handling. It uses `aria-label` for accessibility, making it suitable for compact UI contexts where visible labels are provided externally or where space is limited.
+
+## Implementation Notes
+
+- Renders a single `<input type="date">` element
+- Uses `aria-label` for accessible naming (no visible label element)
+- Uses `$bindable()` for two-way binding on the `value` prop
+- Supports `min` and `max` props for date range constraints
+- Spreads `restProps` onto the input for consumer customization
+
+## Props
+
+- `label`: string (required) -- accessible name applied via `aria-label`
+- `value`: string (default: "") -- current date value in YYYY-MM-DD format, bindable via `bind:value`
+- `required`: boolean (default: false) -- whether the input is required
+- `disabled`: boolean (default: false) -- whether the input is disabled
+- `min`: string (default: undefined) -- minimum selectable date in YYYY-MM-DD format
+- `max`: string (default: undefined) -- maximum selectable date in YYYY-MM-DD format
+
+## Usage
+
+```svelte
+<DatePicker label="Start date" bind:value />
+```
+
+```svelte
+<DatePicker label="Departure" bind:value min="2025-01-01" max="2025-12-31" required />
+```
+
+## Keyboard Interactions
+
+None beyond native `<input type="date">` keyboard behavior, which varies by browser.
+
+## ARIA
+
+- `aria-label={label}` -- provides an accessible name for the date input
+
+## References
+
+- MDN input type="date": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date

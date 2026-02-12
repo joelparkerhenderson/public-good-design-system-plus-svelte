@@ -1,36 +1,49 @@
-# Kanban board item
-
-A Kanban board item is a UI/UX component that represents a single work item or
-task card within a Kanban board column. Each item typically displays summary
-information about a task, such as its title, assignee, priority, or due date,
-and serves as the draggable unit that moves between workflow stages. Commonly
-used as a child element within Kanban board columns, the item provides a
-self-contained view of a work unit that users can select, inspect, or
-reposition. Effective Kanban board item design uses a listitem role to convey
-its position within a list of tasks, supports an optional accessible label for
-screen reader identification, and allows consumers to render any content inside
-it while maintaining proper semantic structure within the broader board layout.
 # KanbanBoardKtem
+
+A Kanban board item is a component that represents a single work item or task card within a Kanban board column. Each item typically displays summary information about a task, such as its title, assignee, priority, or due date, and serves as the unit that moves between workflow stages.
+
+This component is designed to be used as a child element within a KanbanBoard column that has `role="list"`. It renders as a `<div>` with `role="listitem"` to convey its semantic position within the list, supports an optional accessible label for screen reader identification, and allows consumers to render any content inside it through the children snippet.
 
 ## Implementation Notes
 
-- A single Kanban board item/card rendered as a `<div>` with `role="listitem"`
-- Designed to be used inside a KanbanBoard column that has `role="list"`
-- Supports an optional `label` prop for an accessible name via `aria-label`
-- Content is provided through the children snippet
-- Passes through all additional HTML attributes via `...restProps`
+- Renders as a `<div>` with `role="listitem"` for proper list semantics within a parent `role="list"` container
+- Designed to be used inside a KanbanBoard column; the parent column provides the `role="list"` context
+- Optional `label` prop sets `aria-label` for screen reader identification of the card
+- All card content is provided through the `children` snippet
+- Uses Svelte 5 `$props()` for prop destructuring with rest props spread
+- No drag-and-drop behavior built in; consumers implement interaction as needed
 
 ## Props
 
 - `label`: string (optional) -- accessible label for the card via `aria-label`
-- `children`: Snippet (required) -- card content
-- `...restProps`: Any additional HTML attributes passed to the `<div>` element
+- `children`: Snippet (required) -- card content (title, assignee, metadata, etc.)
+- `...restProps`: any -- additional HTML attributes spread onto the `<div>` element
+
+## Usage
+
+```svelte
+<KanbanBoardKtem label="Fix login bug">
+    <h3>Fix login bug</h3>
+    <p>Assigned to Alice</p>
+</KanbanBoardKtem>
+```
+
+```svelte
+<KanbanBoardKtem label={task.title}>
+    <span>{task.title}</span>
+    <span>{task.priority}</span>
+</KanbanBoardKtem>
+```
 
 ## Keyboard Interactions
 
-- None directly -- keyboard interaction depends on interactive elements within the card content
+- None directly -- keyboard interaction depends on interactive elements within the card content provided by the consumer
 
 ## ARIA
 
-- `role="listitem"` -- identifies this as an item within a list container
-- `aria-label` -- optional accessible name for the card, set via the `label` prop
+- `role="listitem"` -- identifies this as an item within a list container (the parent KanbanBoard column with `role="list"`)
+- `aria-label` -- optional accessible name for the card, set from the `label` prop, allowing screen readers to identify individual cards
+
+## References
+
+- WAI-ARIA Listitem Role: https://www.w3.org/TR/wai-aria-1.2/#listitem

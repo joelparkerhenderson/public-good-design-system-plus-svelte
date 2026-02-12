@@ -1,34 +1,42 @@
-# Medical Patient Banner Danger Box
+# MedicalPatientBannerDangerBox
 
-A medical patient banner danger box is a container for critical patient
-danger information. Uses `<aside role="alert">` with an aria-label to
-immediately announce urgent content to screen readers, such as
-life-threatening allergies or critical safety warnings.
-# Medical Patient Banner Danger Box
+A medical patient banner danger box is a container for critical patient danger information. It uses `<aside role="alert">` with an aria-label to immediately announce urgent content to screen readers, such as life-threatening allergies or critical safety warnings.
+
+This component is designed for healthcare applications where patient safety information must be communicated with maximum urgency. The `role="alert"` creates an implicit assertive live region, meaning screen readers will interrupt whatever they are currently reading to announce the danger box content as soon as it appears in the DOM.
 
 ## Implementation Notes
 
-- Uses `<aside role="alert">` for immediate screen reader announcements
-- Critical patient safety information such as life-threatening allergies
-- `aria-label` provides the accessible name for the region
-- `role="alert"` creates an implicit assertive live region
-- Uses `children` Snippet for content
-- Spreads `...restProps` on the root `<aside>` element
+- Uses `<aside>` element with `role="alert"` for immediate screen reader announcements
+- Designed for critical patient safety information such as life-threatening allergies
+- `aria-label` provides the accessible name for the alert region
+- `role="alert"` creates an implicit assertive live region (equivalent to `aria-live="assertive"`)
+- Uses Svelte 5 `$props()` rune for prop destructuring
+- Uses `children` Snippet for flexible content rendering
+- Spreads `...restProps` on the root `<aside>` element for consumer extensibility
+- No hardcoded user-facing strings; all text comes through props and children
 
 ## Props
 
-- `label`: string (required) -- accessible name via aria-label
+- `label`: string (required) -- accessible name for the danger box via `aria-label`
 - `children`: Snippet (required) -- the danger box content
+- `...restProps`: any additional HTML attributes spread onto the `<aside>` element
+
+## Usage
+
+```svelte
+<MedicalPatientBannerDangerBox label="Critical allergy">
+    <p>Patient has a life-threatening allergy to latex.</p>
+</MedicalPatientBannerDangerBox>
+```
 
 ## Keyboard Interactions
 
-- None -- alerts are passive announcements, not interactive elements
+None -- alerts are passive announcements, not interactive elements. Content within the danger box (such as links or buttons) retains its own keyboard behavior.
 
 ## ARIA
 
-- `role="alert"` creates an assertive live region
-- `aria-label` set from `label` prop
-- Screen readers immediately announce alert content
+- `role="alert"` -- creates an assertive live region that immediately announces content to screen readers
+- `aria-label={label}` -- provides the accessible name for the alert region, set from the `label` prop
 
 ## References
 
