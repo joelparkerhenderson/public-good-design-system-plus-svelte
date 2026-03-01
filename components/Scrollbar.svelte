@@ -1,5 +1,5 @@
 <script lang="ts">
-    // Scrollbar component
+    // ScrollBar component
     //
     // A headless scrollbar track element that provides the ARIA scrollbar role
     // and value attributes for a custom scrollbar control. Renders a <div> with
@@ -7,26 +7,27 @@
     // visual thumb element as children and implements drag/scroll interaction logic.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   orientation — "vertical" | "horizontal", default "vertical". The scrollbar direction.
     //   label — string, required. Accessible name for the scrollbar via aria-label.
-    //   children — Snippet, required. Scrollbar content, typically the draggable thumb element.
+    //   children — Snippet, required. ScrollBar content, typically the draggable thumb element.
     //   ...restProps — additional HTML attributes spread onto the <div>.
     //
     // Syntax:
-    //   <Scrollbar orientation="vertical" label="Scroll">
+    //   <ScrollBar orientation="vertical" label="Scroll">
     //     <div>thumb</div>
-    //   </Scrollbar>
+    //   </ScrollBar>
     //
     // Examples:
     //   <!-- Horizontal scrollbar for a timeline -->
-    //   <Scrollbar orientation="horizontal" label="Timeline scroll">
+    //   <ScrollBar orientation="horizontal" label="Timeline scroll">
     //     <div class="thumb"></div>
-    //   </Scrollbar>
+    //   </ScrollBar>
     //
     //   <!-- Vertical scrollbar with custom attributes -->
-    //   <Scrollbar orientation="vertical" label="Page scroll" aria-valuenow={scrollPos}>
+    //   <ScrollBar orientation="vertical" label="Page scroll" aria-valuenow={scrollPos}>
     //     <div class="thumb"></div>
-    //   </Scrollbar>
+    //   </ScrollBar>
     //
     // Keyboard:
     //   - Arrow Up/Left: scroll backward (decrease value) — consumer must implement
@@ -55,23 +56,25 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         orientation = "vertical",
         label,
         children,
         ...restProps
     }: {
-        /** Scrollbar orientation. */
+        /** ScrollBar orientation. */
         orientation?: "vertical" | "horizontal";
         /** Accessible label. */
         label: string;
-        /** Scrollbar content. */
+        /** ScrollBar content. */
         children: Snippet;
         [key: string]: unknown;
     } = $props();
 </script>
 
-<!-- Scrollbar component: a div with scrollbar role and orientation for custom scroll track and thumb -->
+<!-- ScrollBar.svelte -->
 <div
+    class={`scroll-bar ${className}`}
     role="scrollbar"
     aria-label={label}
     aria-orientation={orientation}

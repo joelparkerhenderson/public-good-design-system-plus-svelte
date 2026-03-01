@@ -8,6 +8,7 @@
     // data-side attribute for consumer positioning and animation styles.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   open — boolean, default false. Whether the drawer is visible; bindable.
     //   label — string, required. Accessible name for the drawer.
     //   side — "left" | "right" | "top" | "bottom", default "left". Edge the drawer enters from.
@@ -53,6 +54,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         open = $bindable(false),
         label,
         side = "left",
@@ -79,7 +81,9 @@
 </script>
 
 {#if open}
+    <!-- Drawer.svelte -->
     <div
+        class={`drawer ${className}`}
         role="dialog"
         tabindex="-1"
         aria-label={label}

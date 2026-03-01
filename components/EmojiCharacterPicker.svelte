@@ -7,6 +7,7 @@
     // The consumer provides grid content, selection logic, and category navigation.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name describing the picker.
     //   children — Snippet, required. The grid content containing emoji characters.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -48,10 +49,19 @@
     //   - WAI-ARIA Grid Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/grid/
     import type { Snippet } from "svelte";
     let {
+        class: className = "",
         label,
         children,
         ...restProps
     }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<div role="grid" aria-label={label} {...restProps}>{@render children()}</div>
+<!-- EmojiCharacterPicker.svelte -->
+<div
+    class={`emoji-character-picker ${className}`}
+    role="grid"
+    aria-label={label}
+    {...restProps}
+>
+    {@render children()}
+</div>

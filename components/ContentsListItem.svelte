@@ -3,11 +3,12 @@
     //
     // A headless list item for use within a table of contents or navigation list.
     // Renders a semantic <li> element that wraps consumer-provided content, typically
-    // an anchor link to a page section. Supports nesting for hierarchical document
-    // structures by placing a <ul> inside. Used as a child of ContentsList or any
-    // ordered/unordered list in a navigation context.
+    // an anchor link to a page section. Supports nesting for hierarchical
+    // document structures by placing a `<ol>` inside. Used as a child of
+    // ContentsList or any ordered/ordered list in a navigation context.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   children — Snippet, required. List item content (typically a link or nested list).
     //   ...restProps — additional HTML attributes spread onto the <li>.
     //
@@ -45,6 +46,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         children,
         ...restProps
     }: {

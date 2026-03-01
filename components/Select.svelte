@@ -7,6 +7,7 @@
     // for selecting countries, categories, statuses, or other predefined values.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — string, default "". Currently selected value; bindable with bind:value.
     //   required — boolean, default false. Whether the select is required for form submission.
@@ -60,6 +61,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -81,8 +83,9 @@
     } = $props();
 </script>
 
-<!-- Select component: a native select dropdown for choosing one option from a list -->
+<!-- Select.svelte -->
 <select
+    class={`select ${className}`}
     aria-label={label}
     bind:value
     {required}

@@ -7,6 +7,7 @@
     // Enter confirms the edit and Escape cancels it, reverting to the original value.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — string, default "". Current text value; bindable.
     //   label — string, required. Accessible name for the editable control.
     //   editing — boolean, default false. Whether the component is in edit mode; bindable.
@@ -47,6 +48,7 @@
     //   - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/button/
 
     let {
+        class: className = "",
         value = $bindable(""),
         label,
         editing = $bindable(false),
@@ -93,8 +95,10 @@
     }
 </script>
 
+<!-- Editable.svelte -->
 {#if editing}
     <input
+        class={`editable ${className}`}
         type="text"
         aria-label={label}
         bind:value={draft}
@@ -103,6 +107,7 @@
     />
 {:else}
     <span
+        class={`editable ${className}`}
         role="button"
         tabindex={disabled ? -1 : 0}
         aria-label={label}

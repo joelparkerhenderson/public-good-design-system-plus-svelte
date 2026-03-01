@@ -8,6 +8,7 @@
     // command palettes, searchable menus, and action launchers.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the search region and input.
     //   placeholder — string, default undefined. Placeholder text for the search input.
     //   value — string, default "". Current search text; bindable via bind:value.
@@ -53,6 +54,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         placeholder = undefined,
         value = $bindable(""),
@@ -67,7 +69,13 @@
     } = $props();
 </script>
 
-<div role="search" aria-label={label} {...restProps}>
+<!-- Command.svelte -->
+<div
+    class={`command ${className}`}
+    role="search"
+    aria-label={label}
+    {...restProps}
+>
     <input
         type="search"
         bind:value
@@ -75,7 +83,10 @@
         {placeholder}
         autocomplete="off"
     />
-    <div role="listbox" aria-label={label}>
+    <div
+        role="listbox"
+        aria-label={label}
+    >
         {@render children()}
     </div>
 </div>

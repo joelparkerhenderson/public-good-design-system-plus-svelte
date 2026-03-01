@@ -7,6 +7,7 @@
     // the user controls the container size.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the region via aria-label.
     //   direction — "both" | "horizontal" | "vertical", default "both". Which directions resizing is allowed.
     //   children — Snippet, required. Content to render inside the container.
@@ -53,6 +54,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         direction = "both",
         children,
@@ -68,8 +70,9 @@
     } = $props();
 </script>
 
-<!-- Resizable component: a focusable region with a data-resize direction attribute for user-controlled sizing -->
+<!-- Resizable.svelte -->
 <div
+    class={`resizable ${className}`}
     role="region"
     aria-label={label}
     tabindex="0"

@@ -7,6 +7,7 @@
     // for positioning the panel relative to a trigger element using their own CSS.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   open — boolean, default false. Whether the panel is visible.
     //   label — string, required. Accessible name for the panel region via aria-label.
     //   children — Snippet, required. Panel content to render inside.
@@ -47,6 +48,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         open = false,
         label,
         children,
@@ -62,9 +64,10 @@
     } = $props();
 </script>
 
-<!-- FloatingPanel component: a conditionally rendered region for overlay content -->
+<!-- FloatingPanel.svelte -->
 {#if open}
     <div
+        class={`floating-panel ${className}`}
         role="region"
         aria-label={label}
         {...restProps}

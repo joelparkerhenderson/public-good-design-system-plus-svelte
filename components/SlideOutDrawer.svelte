@@ -7,6 +7,7 @@
     // or secondary content in mobile and web applications.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the dialog via aria-label.
     //   open — boolean, default false. Whether the drawer is visible; bindable via bind:open.
     //   children — Snippet, required. The drawer content.
@@ -59,6 +60,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         open = $bindable(false),
         children,
@@ -85,6 +87,7 @@
 <!-- SlideOutDrawer: a modal dialog container, conditionally rendered -->
 {#if open}
     <div
+        class={`slide-out-drawer ${className}`}
         role="dialog"
         aria-label={label}
         aria-modal="true"

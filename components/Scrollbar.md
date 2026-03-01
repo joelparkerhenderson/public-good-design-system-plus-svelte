@@ -1,6 +1,6 @@
-# Scrollbar
+# ScrollBar
 
-A scrollbar is a UI component that allows users to navigate vertically or horizontally through content that extends beyond the visible area of a container. The Scrollbar component provides a headless scrollbar track element with proper ARIA scrollbar semantics, including orientation, value range, and accessible labeling.
+A scrollbar is a UI component that allows users to navigate vertically or horizontally through content that extends beyond the visible area of a container. The ScrollBar component provides a headless scrollbar track element with proper ARIA scrollbar semantics, including orientation, value range, and accessible labeling.
 
 This component renders the structural markup and ARIA attributes for a custom scrollbar. The consumer provides the visual thumb element as children and is responsible for implementing the scroll interaction logic (drag handling, position updates, and syncing with scrollable content). The component sets initial value attributes that the consumer should update dynamically.
 
@@ -25,14 +25,14 @@ This component renders the structural markup and ARIA attributes for a custom sc
 
 ```svelte
 <!-- Vertical scrollbar -->
-<Scrollbar orientation="vertical" label="Page scroll">
+<ScrollBar orientation="vertical" label="Page scroll">
   <div><!-- thumb element --></div>
-</Scrollbar>
+</ScrollBar>
 
 <!-- Horizontal scrollbar -->
-<Scrollbar orientation="horizontal" label="Timeline scroll">
+<ScrollBar orientation="horizontal" label="Timeline scroll">
   <div><!-- thumb element --></div>
-</Scrollbar>
+</ScrollBar>
 ```
 
 ## Keyboard Interactions
@@ -58,4 +58,4 @@ Note: The consumer is responsible for implementing keyboard event handlers that 
 ## References
 
 - WAI-ARIA scrollbar role: https://www.w3.org/TR/wai-aria-1.2/#scrollbar
-- WAI-ARIA Practices - Scrollbar: https://www.w3.org/WAI/ARIA/apd/patterns/scrollbar/
+- WAI-ARIA Practices - ScrollBar: https://www.w3.org/WAI/ARIA/apd/patterns/scrollbar/

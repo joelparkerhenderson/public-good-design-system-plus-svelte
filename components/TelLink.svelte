@@ -8,6 +8,7 @@
     // Input/View pattern alongside TelInput.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   phone — string, required. The phone number to display and link to (should include country code).
     //   label — string, default undefined. Optional accessible name via aria-label for additional context.
     //   ...restProps — additional HTML attributes spread onto the <a>.
@@ -40,6 +41,7 @@
     //   - WAI-ARIA Link Role: https://www.w3.org/TR/wai-aria-1.2/#link
 
     let {
+        class: className = "",
         phone,
         label = undefined,
         ...restProps
@@ -50,7 +52,9 @@
     } = $props();
 </script>
 
+<!-- TelLink.svelte -->
 <a
+    class={`tel-link ${className}`}
     href="tel:{phone}"
     aria-label={label}
     {...restProps}>{phone}</a

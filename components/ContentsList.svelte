@@ -1,57 +1,59 @@
 <script lang="ts">
     // ContentsList component
     //
-    // A headless table-of-contents navigation rendering a semantic <nav> landmark
-    // with an ordered list of section links. It helps users quickly scan and jump to
-    // different parts of a long page. Commonly used at the top of documentation pages,
-    // articles, or forms with multiple sections. Use with ContentsListItem children.
+    // A headless ordered list for a table of contents. Renders a semantic <ol>
+    // element containing ContentsListItem children. Designed to be placed inside
+    // a ContentsNav component. The ordered list conveys the sequential nature of
+    // page sections to assistive technology.
     //
     // Props:
-    //   label — string, required. Accessible name for the navigation landmark (e.g., "Contents").
-    //   children — Snippet, required. List items, typically ContentsListItem components or <li> elements.
-    //   ...restProps — additional HTML attributes spread onto the <nav>.
+    //   className — string, optional. CSS class name.
+    //   children — Snippet, required. ContentsListItem components or <li> elements.
+    //   ...restProps — additional HTML attributes spread onto the <ol>.
     //
     // Syntax:
-    //   <ContentsList label="Contents">
-    //     <li><a href="#section">Section</a></li>
+    //   <ContentsList>
+    //     <ContentsListItem><a href="#section">Section</a></ContentsListItem>
     //   </ContentsList>
     //
     // Examples:
-    //   <!-- Table of contents with multiple sections -->
-    //   <ContentsList label="On this page">
-    //     <li><a href="#introduction">Introduction</a></li>
-    //     <li><a href="#usage">Usage</a></li>
-    //     <li><a href="#examples">Examples</a></li>
-    //   </ContentsList>
+    //   <!-- Contents list inside a navigation landmark -->
+    //   <ContentsNav label="On this page">
+    //     <ContentsList>
+    //       <ContentsListItem><a href="#introduction">Introduction</a></ContentsListItem>
+    //       <ContentsListItem><a href="#usage">Usage</a></ContentsListItem>
+    //     </ContentsList>
+    //   </ContentsNav>
     //
     // Keyboard:
-    //   - None — passive navigation container; keyboard navigation handled by anchor links within items
+    //   - None — passive list container; keyboard navigation handled by links within items
     //
     // Accessibility:
-    //   - aria-label on <nav> provides an accessible name, distinguishing it from other nav regions
-    //   - <ol> conveys the sequential nature of page sections
+    //   - <ol> provides implicit list role conveying sequential section order
     //
     // Internationalization:
-    //   - The label prop provides the accessible name; no hardcoded strings
-    //   - All link text is provided by consumers through children
+    //   - All content is provided by consumers through children; no hardcoded strings
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
-    //   - Compound component: use with ContentsListItem for individual entries
+    //   - Compound component: used inside ContentsNav, contains ContentsListItem children
     //
     // References:
-    //   - WAI-ARIA Navigation Landmark: https://www.w3.org/WAI/ARIA/apd/practices/landmark-regions/
-    //   - MDN nav element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav
+    //   - MDN ol element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol
 
     import type { Snippet } from "svelte";
 
     let {
-        label,
+        class: className = "",
         children,
         ...restProps
-    }: { label: string; children: Snippet; [key: string]: unknown } = $props();
+    }: { children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<nav aria-label={label} {...restProps}>
-    <ol>{@render children()}</ol>
-</nav>
+<!-- ContentsList.svelte -->
+<ol
+    class={`contents-list ${className}`}
+    {...restProps}
+>
+    {@render children()}
+</ol>

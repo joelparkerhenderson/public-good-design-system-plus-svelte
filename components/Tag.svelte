@@ -8,6 +8,7 @@
     // metadata, and filtering interfaces to visually group or classify content.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for screen readers via aria-label.
     //   children — Snippet, required. The tag's visible content (text, etc.).
     //   ...restProps — additional HTML attributes spread onto the <span>.
@@ -44,6 +45,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -57,8 +59,9 @@
     } = $props();
 </script>
 
-<!-- Tag: an inline status indicator or categorical label -->
+<!-- Tag.svelte -->
 <span
+    class={`tag ${className}`}
     role="status"
     aria-label={label}
     {...restProps}

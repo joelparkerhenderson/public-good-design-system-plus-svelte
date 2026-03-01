@@ -30,7 +30,7 @@ The component uses `aria-label` for accessible labeling in a headless context, a
 
 ## Keyboard Interactions
 
-- Native `<input type="text">` keyboard behavior (typing, selection, clipboard)
+- Native `<input type="text">` keyboard behavior (typing, selection, clipboard-copy-button)
 
 ## ARIA
 

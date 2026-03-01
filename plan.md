@@ -12,6 +12,7 @@ All components use Svelte 5 runes syntax:
 <script lang="ts">
     // Props via $props() rune
     let {
+        class: className = '',
         propName = defaultValue,
         ...restProps
     }: {
@@ -58,6 +59,7 @@ All components use Svelte 5 runes syntax:
     //   <{ComponentName} prop={value} />
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   - propName: description (default: value)
     //
     // Accessibility:
@@ -67,6 +69,7 @@ All components use Svelte 5 runes syntax:
 
     /** Props interface */
     let {
+        class: className = '',
         // Required props
         // Optional props with defaults
         ...restProps
@@ -191,11 +194,11 @@ Richer form components beyond native inputs:
 
 ### 5d. Navigation Components
 
-- action-link, back-link, breadcrumb, breadcrumbs, contents-list, hamburger-menu, menu, menubar, navigation-menu, pagination, sidebar, skip-link, steps, tab, tab-group, table-of-contents, tree-menu, tree-view
+- action-link, back-link, breadcrumb, breadcrumbs, contents-list, hamburger-menu, menu, menubar, navigation-menu, pagination, sidebar, skip-link, steps, tab, tab-bar, table-of-contents-list, tree-nav, tree-view
 
 ### 5e. Layout Components
 
-- aspect-ratio, collapsible, drawer, floating-panel, holy-grail-layout, panel, resizable, scroll-area, scrollbar, sheet, slide-out-drawer, splitter
+- aspect-ratio-container, collapsible, drawer, floating-panel, holy-grail-layout, panel, resizable, scroll-area, scrollbar, sheet, slide-out-drawer, splitter
 
 ### 5f. Overlay/Dialog Components
 
@@ -203,23 +206,23 @@ Richer form components beyond native inputs:
 
 ### 5g. Data Display Components
 
-- chart, data-filter, data-table, gannt-chart, gauge, meter, progress-bar, progress-circle, progress-spinner, qr-code, summary-list, table, task-list, timeline, timer
+- chart, data-filter-form, data-table, gannt-chart, gauge, meter, progress-bar, progress-circle, progress-spinner, qr-code, summary-list, table, task-list, timeline, timer
 
 ### 5h. Interactive/Specialized Components
 
-- accordion, angle-slider, avatar-circle, beach-ball, calendar-board, calendar-input, calendar-range-picker, call-to-action, carousel, clipboard, color-picker, color-picker-board, color-picker-swatch, dial, do-dont-list, do-list, dont-list, editable, editable-form, emoji-character-picker, expander, file-manager, file-upload, kanban-board, range-calendar, review-date, segment-group, signature-pad, sonner, spinner, theme-chooser, theme-picker, theme-view
+- accordion, angle-slider, avatar-circle, beach-ball, calendar-board, calendar-input, calendar-range-picker, call-to-action, carousel, clipboard-copy-button, color-picker, color-picker, color-picker-swatch-button, dial, do-dont-list, do-list, dont-list, editable, editable-form, emoji-character-picker, expander, file-manager, file-upload, kanban-board, range-calendar, review-date, segment-group, signature-pad, sonner, spinner, theme-select, theme-picker, theme-view
 
 ### 5i. Rating Components
 
-- five-face-rating-input, five-face-rating-view, five-star-rating-input, five-star-rating-view, net-promotor-score-rating-input, net-promotor-score-rating-view
+- five-face-rating-picker, five-face-rating-view, five-star-rating-picker, five-star-rating-view, net-promoter-score-picker, net-promoter-score-view
 
 ### 5j. Status/Indicator Components
 
-- red-amber-green-status-input, red-amber-green-status-view, red-amber-green-status, red-orange-yellow-green-blue-indicator-status, red-orange-yellow-green-blue-status-input, red-orange-yellow-green-blue-status-view
+- red-amber-green-picker, red-amber-green-view, red-amber-green-status, red-orange-yellow-green-blue-indicator-status, red-orange-yellow-green-blue-status-select, red-orange-yellow-green-blue-view
 
 ### 5k. Structured Data Components
 
-- email-address-input, email-address-view, measurement-instance-input, measurement-instance-view, measurement-system-input, measurement-system-view, measurement-unit-input, measurement-unit-view, phone-number-input, phone-number-view, postal-code-input, postal-code-view, united-kingdom-national-health-service-number-input, united-kingdom-national-health-service-number-view, united-states-social-security-number-input, united-states-social-security-number-view
+- email-address-input, email-link, measurement-instance-input, measurement-instance-view, measurement-system-input, measurement-system-view, measurement-unit-input, measurement-unit-view, phone-number-input, phone-number-view, postal-code-input, postal-code-view, united-kingdom-national-health-service-number-input, united-kingdom-national-health-service-number-view, united-states-social-security-number-input, united-states-social-security-number-view
 
 ### 5l. Medical/Domain-Specific Components
 
@@ -241,13 +244,13 @@ Compound components keep sub-components in the same directory:
 
 - **accordion/**: Accordion.svelte + AccordionItem.svelte
 - **breadcrumbs/**: Breadcrumbs.svelte + BreadcrumbItem.svelte
-- **tabs/tab-group/**: TabGroup.svelte + TabPanel.svelte + TabTrigger.svelte
+- **tabs/tab-bar/**: TabBar.svelte + TabPanel.svelte + TabTrigger.svelte
 - **data-table/**: DataTable.svelte + DataTableRow.svelte + DataTableCell.svelte + DataTableHeader.svelte
 - **dropdown-menu/**: DropdownMenu.svelte + DropdownMenuItem.svelte + DropdownMenuSeparator.svelte
 - **navigation-menu/**: NavigationMenu.svelte + NavigationMenuItem.svelte
 - **radio-group/**: RadioGroup.svelte + RadioGroupItem.svelte
 - **toggle-group/**: ToggleGroup.svelte + ToggleGroupItem.svelte
-- **tree-view/**: TreeView.svelte + TreeViewItem.svelte
+- **tree-view/**: TreeNavList.svelte + TreeNavListItem.svelte
 
 ### Naming Convention for Sub-components
 
@@ -283,7 +286,7 @@ Key WAI-ARIA Authoring Practices patterns used:
 | radio-group    | Radio Group Pattern            |
 | slider         | Slider Pattern                 |
 | switch         | Switch Pattern                 |
-| tab-group      | Tabs Pattern                   |
+| tab-bar        | Tabs Pattern                   |
 | tooltip        | Tooltip Pattern                |
 | tree-view      | Tree View Pattern              |
 
@@ -339,15 +342,16 @@ Many components come in paired `-input` / `-view` variants:
 
 Examples:
 
-- `email-address-input` (editable email field) / `email-address-view` (displays formatted email)
+- `email-address-input` (editable email field) / `email-link` (displays formatted email)
 - `phone-number-input` (editable phone field) / `phone-number-view` (displays formatted phone)
-- `red-amber-green-status-input` (select RAG status) / `red-amber-green-status-view` (display RAG status)
+- `red-amber-green-picker` (select RAG status) / `red-amber-green-view` (display RAG status)
 
 ### Input Pattern
 
 ```svelte
 <script lang="ts">
-    let { value = $bindable(""), label, name, ...restProps } = $props();
+    let {
+        class: className = '', value = $bindable(""), label, name, ...restProps } = $props();
 </script>
 
 <label>
@@ -360,7 +364,8 @@ Examples:
 
 ```svelte
 <script lang="ts">
-    let { value, label, ...restProps } = $props();
+    let {
+        class: className = '', value, label, ...restProps } = $props();
 </script>
 
 <dl {...restProps}>

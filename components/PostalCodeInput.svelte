@@ -9,6 +9,7 @@
     // Pairs with PostalCodeView for the Input/View pattern.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — string, default "". Current postal code value; bindable with bind:value.
     //   required — boolean, default false. Whether the field is required.
@@ -30,7 +31,7 @@
     //
     // Keyboard:
     //   None beyond native input behavior — standard text editing keys
-    //   (typing, backspace, selection, clipboard shortcuts) handled by the browser.
+    //   (typing, backspace, selection, clipboard-copy-button shortcuts) handled by the browser.
     //
     // Accessibility:
     //   - aria-label provides an accessible name since no visible <label> is included
@@ -51,6 +52,7 @@
     //   - MDN input type="text": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -69,8 +71,9 @@
     } = $props();
 </script>
 
-<!-- PostalCodeInput component: a text input with postal-code autocomplete for entering postal or ZIP codes -->
+<!-- PostalCodeInput.svelte -->
 <input
+    class={`postal-code-input ${className}`}
     type="text"
     aria-label={label}
     autocomplete="postal-code"

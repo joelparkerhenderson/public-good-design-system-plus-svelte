@@ -8,6 +8,7 @@
     // and any scenario where both date and time must be captured in a single field.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name applied via aria-label.
     //   value — string, default "". Bindable datetime string (format: YYYY-MM-DDThh:mm).
     //   min — string, default undefined. Minimum allowed datetime.
@@ -45,6 +46,7 @@
     //   - MDN datetime-local input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         min = undefined,
@@ -69,7 +71,9 @@
     } = $props();
 </script>
 
+<!-- DatetimeLocalInput.svelte -->
 <input
+    class={`datetime-local-input ${className}`}
     type="datetime-local"
     aria-label={label}
     bind:value

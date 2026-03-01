@@ -9,6 +9,7 @@
     // component in the Input/View pattern.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for screen readers via aria-label.
     //   value — string, default "". The SSN string to display (e.g., "123-45-6789").
     //   ...restProps — additional HTML attributes spread onto the <span>.
@@ -40,6 +41,7 @@
     //   - Social Security Number: https://www.ssa.gov/history/ssn/geocard.html
 
     let {
+        class: className = "",
         label,
         value = "",
         ...restProps
@@ -53,8 +55,9 @@
     } = $props();
 </script>
 
-<!-- UnitedStatesSocialSecurityNumberView component: Display a United States Social Security Number -->
+<!-- UnitedStatesSocialSecurityNumberView.svelte -->
 <span
+    class={`united-states-social-security-number-view ${className}`}
     aria-label={label}
     {...restProps}>{value}</span
 >

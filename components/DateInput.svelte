@@ -8,6 +8,7 @@
     // browser's built-in date picker.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name applied via aria-label.
     //   value — string, default "". Bindable date string in YYYY-MM-DD format.
     //   min — string, default undefined. Minimum allowed date in YYYY-MM-DD format.
@@ -45,6 +46,7 @@
     //   - MDN date input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         min = undefined,
@@ -69,7 +71,9 @@
     } = $props();
 </script>
 
+<!-- DateInput.svelte -->
 <input
+    class={`date-input ${className}`}
     type="date"
     aria-label={label}
     bind:value

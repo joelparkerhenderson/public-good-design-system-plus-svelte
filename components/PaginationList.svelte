@@ -7,6 +7,7 @@
     // results, product listings, data tables, and any interface with paginated content.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the pagination navigation via aria-label.
     //   children — Snippet, required. Pagination list items, typically <li> elements with links or buttons.
     //   ...restProps — additional HTML attributes spread onto the <nav>.
@@ -55,6 +56,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -67,12 +69,13 @@
     } = $props();
 </script>
 
-<!-- PaginationList component: a nav landmark wrapping an unordered list of pagination links -->
+<!-- PaginationList.svelte -->
 <nav
+    class={`pagination-list ${className}`}
     aria-label={label}
     {...restProps}
 >
-    <ul>
+    <ol>
         {@render children()}
-    </ul>
+    </ol>
 </nav>

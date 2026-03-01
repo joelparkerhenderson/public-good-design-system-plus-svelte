@@ -7,6 +7,7 @@
     // layout positioning and visual arrangement is the consumer's responsibility via CSS.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   children — Snippet, required. Layout content, typically header, nav, main, aside, and footer elements.
     //   ...restProps — additional HTML attributes spread onto the wrapper div.
     //
@@ -46,6 +47,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         children,
         ...restProps
     }: {
@@ -54,7 +56,10 @@
     } = $props();
 </script>
 
-<!-- HolyGrailLayout component: a div wrapper for a header-sidebar-main-sidebar-footer page layout -->
-<div {...restProps}>
+<!-- HolyGrailLayout.svelte -->
+<div
+    class={`holy-grail-layout ${className}`}
+    {...restProps}
+>
     {@render children()}
 </div>

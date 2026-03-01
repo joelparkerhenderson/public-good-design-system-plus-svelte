@@ -7,6 +7,7 @@
     // Commonly used for form submissions, dialogs, menus, and toolbar actions.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   type — "button" | "submit" | "reset", default "button". HTML button type.
     //   disabled — boolean, default false. Whether the button is disabled.
     //   pressed — boolean | undefined, default undefined. Toggle button state; when provided, aria-pressed is rendered.
@@ -54,6 +55,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         type = "button",
         disabled = false,
         pressed = undefined,
@@ -78,8 +80,9 @@
     } = $props();
 </script>
 
-<!-- Button component: a semantic button element for triggering actions -->
+<!-- Button.svelte -->
 <button
+    class={`button ${className}`}
     {type}
     {disabled}
     aria-pressed={pressed}

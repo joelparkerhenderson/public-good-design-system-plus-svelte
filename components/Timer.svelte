@@ -9,6 +9,7 @@
     // exam time limits.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for screen readers via aria-label.
     //   children — Snippet, required. Formatted timer display content.
     //   ...restProps — additional HTML attributes spread onto the <time> (e.g. datetime="PT5M30S").
@@ -49,6 +50,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -61,8 +63,9 @@
     } = $props();
 </script>
 
-<!-- Timer component: a live-announced time element for countdowns or elapsed time -->
+<!-- Timer.svelte -->
 <time
+    class={`timer ${className}`}
     role="timer"
     aria-label={label}
     aria-live="polite"

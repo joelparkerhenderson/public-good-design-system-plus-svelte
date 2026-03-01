@@ -8,6 +8,7 @@
     // navigation, and any grouped set of navigation links.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label to distinguish this nav landmark.
     //   children — Snippet, required. Navigation content (links, lists, nested menus).
     //   ...restProps — additional HTML attributes spread onto the <nav>.
@@ -56,6 +57,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -68,8 +70,9 @@
     } = $props();
 </script>
 
-<!-- NavigationMenu component: a nav landmark for site or section navigation links -->
+<!-- NavigationMenu.svelte -->
 <nav
+    class={`navigation-menu ${className}`}
     aria-label={label}
     {...restProps}
 >

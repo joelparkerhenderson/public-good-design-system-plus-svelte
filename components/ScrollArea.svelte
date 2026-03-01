@@ -7,6 +7,7 @@
     // standard scrolling keys without needing a mouse.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the scrollable region via aria-label.
     //   children — Snippet, required. Scrollable content to render inside the container.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -54,6 +55,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -66,8 +68,9 @@
     } = $props();
 </script>
 
-<!-- ScrollArea component: a focusable region for keyboard-accessible scrolling of overflowing content -->
+<!-- ScrollArea.svelte -->
 <div
+    class={`scroll-area ${className}`}
     role="region"
     aria-label={label}
     tabindex="0"

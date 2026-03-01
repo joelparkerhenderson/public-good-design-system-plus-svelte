@@ -8,6 +8,7 @@
     // informational updates without requiring user interaction.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default undefined. Optional accessible label via aria-label.
     //   urgent — boolean, default false. When true, uses role="alert" and aria-live="assertive".
     //   children — Snippet, required. The toast message content.
@@ -51,6 +52,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = undefined,
         urgent = false,
         children,
@@ -66,8 +68,9 @@
     } = $props();
 </script>
 
-<!-- Toast component: a live-region notification with status or alert role for transient messages -->
+<!-- Toast.svelte -->
 <div
+    class={`toast ${className}`}
     role={urgent ? "alert" : "status"}
     aria-label={label}
     aria-live={urgent ? "assertive" : "polite"}

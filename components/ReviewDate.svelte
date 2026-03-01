@@ -7,6 +7,7 @@
     // and scheduling interfaces where dates must be both human-readable and machine-parseable.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for screen readers via aria-label.
     //   datetime — string, required. Machine-readable date/time in ISO 8601 format.
     //   children — Snippet, required. Human-readable display text for the date.
@@ -48,6 +49,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         datetime,
         children,
@@ -63,8 +65,9 @@
     } = $props();
 </script>
 
-<!-- ReviewDate component: a time element with machine-readable datetime and human-readable content -->
+<!-- ReviewDate.svelte -->
 <time
+    class={`review-date ${className}`}
     aria-label={label}
     {datetime}
     {...restProps}

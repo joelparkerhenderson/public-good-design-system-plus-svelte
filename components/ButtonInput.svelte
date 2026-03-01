@@ -7,6 +7,7 @@
     // (plain text only). Useful in form contexts where native input semantics are preferred.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — string, required. The button label text displayed on the input.
     //   disabled — boolean, default false. Whether the input is disabled.
     //   name — string, optional. Form field name for form submission.
@@ -47,6 +48,7 @@
     //   - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/button/
 
     let {
+        class: className = "",
         value,
         disabled = false,
         name = undefined,
@@ -68,8 +70,9 @@
     } = $props();
 </script>
 
-<!-- ButtonInput component: a native input[type="button"] element -->
+<!-- ButtonInput.svelte -->
 <input
+    class={`button-input ${className}`}
     type="button"
     {value}
     {disabled}

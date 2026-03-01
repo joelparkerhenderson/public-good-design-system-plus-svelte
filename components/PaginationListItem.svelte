@@ -7,6 +7,7 @@
     // previous/next controls, or an ellipsis indicator.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   children — Snippet, required. Item content, typically a link or button.
     //   ...restProps — additional HTML attributes spread onto the <li>.
     //
@@ -42,6 +43,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         children,
         ...restProps
     }: {
@@ -51,7 +53,10 @@
     } = $props();
 </script>
 
-<!-- PaginationListItem component: a list item for a single page entry within a pagination list -->
-<li {...restProps}>
+<!-- PaginationListItem.svelte -->
+<li
+    class={`pagination-list-item ${className}`}
+    {...restProps}
+>
     {@render children()}
 </li>

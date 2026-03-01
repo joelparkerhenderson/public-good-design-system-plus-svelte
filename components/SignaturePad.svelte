@@ -8,6 +8,7 @@
     // drawing implementation (HTML canvas, SVG paths, or a third-party library).
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible description of the signature field via aria-label.
     //   children — Snippet, required. Drawing surface (canvas, SVG, or other input mechanism).
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -48,13 +49,19 @@
     //   - WAI-ARIA application role: https://www.w3.org/TR/wai-aria-1.2/#application
     import type { Snippet } from "svelte";
     let {
+        class: className = "",
         label,
         children,
         ...restProps
     }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<!-- SignaturePad component: an application-role container for capturing handwritten signatures -->
-<div role="application" aria-label={label} {...restProps}>
+<!-- SignaturePad.svelte -->
+<div
+    class={`signature-pad ${className}`}
+    role="application"
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
 </div>

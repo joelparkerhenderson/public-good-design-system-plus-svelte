@@ -37,7 +37,7 @@ This component is suitable for any form field requiring free-text entry. It supp
 
 ## Keyboard Interactions
 
-None beyond native input behavior -- standard text editing keys (typing, backspace, selection, clipboard shortcuts) are handled by the browser.
+None beyond native input behavior -- standard text editing keys (typing, backspace, selection, clipboard-copy-button shortcuts) are handled by the browser.
 
 ## ARIA
 

@@ -7,6 +7,7 @@
     // statuses, or categories (e.g., "Moderator", "Urgent", "New").
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default undefined. Accessible label; omit for decorative flair, provide for meaningful flair.
     //   children — Snippet, required. Flair content text.
     //   ...restProps — additional HTML attributes spread onto the span.
@@ -39,6 +40,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = undefined,
         children,
         ...restProps
@@ -51,8 +53,9 @@
     } = $props();
 </script>
 
-<!-- Flair component: an inline span for decorative or labeled emphasis such as tags or badges -->
+<!-- Flair.svelte -->
 <span
+    class={`flair ${className}`}
     aria-label={label}
     aria-hidden={label ? undefined : "true"}
     {...restProps}

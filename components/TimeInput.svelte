@@ -8,6 +8,7 @@
     // form requiring time-of-day entry. The value uses HH:MM format (24-hour).
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — string, default "". Bindable time value in HH:MM format; supports bind:value.
     //   required — boolean, default false. Whether the field is required.
@@ -40,6 +41,7 @@
     //   - MDN input type="time": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -58,8 +60,9 @@
     } = $props();
 </script>
 
-<!-- TimeInput component -->
+<!-- TimeInput.svelte -->
 <input
+    class={`time-input ${className}`}
     type="time"
     aria-label={label}
     bind:value

@@ -7,6 +7,7 @@
     // for product listings, user profiles, article previews, and dashboard widgets.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   heading — string, optional. Heading text for the card.
     //   headingLevel — 2 | 3 | 4 | 5 | 6, default 3. HTML heading level.
     //   href — string, optional. Makes the heading a link.
@@ -48,6 +49,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         heading = undefined,
         headingLevel = 3,
         href = undefined,
@@ -64,8 +66,9 @@
     } = $props();
 </script>
 
-<!-- Card component -->
+<!-- Card.svelte -->
 <article
+    class={`card-artciel-to-action-button ${className}`}
     aria-label={label}
     {...restProps}
 >

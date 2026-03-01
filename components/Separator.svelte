@@ -7,6 +7,7 @@
     // groups and improve visual hierarchy.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default undefined. Optional accessible label describing the separation.
     //   ...restProps — additional HTML attributes spread onto the <hr>.
     //
@@ -40,6 +41,7 @@
     //   - MDN hr element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr
 
     let {
+        class: className = "",
         label = undefined,
         ...restProps
     }: {
@@ -49,8 +51,9 @@
     } = $props();
 </script>
 
-<!-- Separator component: an hr element with separator role for dividing content sections -->
+<!-- Separator.svelte -->
 <hr
+    class={`separator ${className}`}
     role="separator"
     aria-label={label}
     {...restProps}

@@ -8,6 +8,7 @@
     // all slide content, navigation controls, and autoplay logic.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the carousel region.
     //   children — Snippet, required. Slide content to render inside the carousel container.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -51,6 +52,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -63,8 +65,9 @@
     } = $props();
 </script>
 
-<!-- Carousel component -->
+<!-- Carousel.svelte -->
 <div
+    class={`carousel ${className}`}
     role="region"
     aria-label={label}
     aria-roledescription="carousel"

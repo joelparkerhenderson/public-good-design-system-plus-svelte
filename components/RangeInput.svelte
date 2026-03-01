@@ -8,6 +8,7 @@
     // brightness settings, price filters, and continuous numeric spectrum selections.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — number, default 50. Current numeric value; bindable with bind:value.
     //   min — number, default 0. Minimum allowed value.
@@ -52,6 +53,7 @@
     //   - MDN input type="range": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
 
     let {
+        class: className = "",
         label,
         value = $bindable(50),
         min = 0,
@@ -76,8 +78,9 @@
     } = $props();
 </script>
 
-<!-- RangeInput component: a native range input slider for selecting a numeric value within a defined range -->
+<!-- RangeInput.svelte -->
 <input
+    class={`range-input ${className}`}
     type="range"
     aria-label={label}
     bind:value

@@ -8,6 +8,7 @@
     // or a charting library) as children.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name describing the figure content.
     //   children — Snippet, required. The figure visualization content.
     //   ...restProps — additional HTML attributes spread onto the <figure> element.
@@ -49,14 +50,16 @@
 
     import type { Snippet } from "svelte";
     let {
+        class: className = "",
         label,
         children,
         ...restProps
     }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<!-- Figure component: a figure element with img role for graphical content like charts or diagrams -->
+<!-- Figure.svelte -->
 <figure
+    class={`figure ${className}`}
     role="img"
     aria-label={label}
     {...restProps}

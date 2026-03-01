@@ -8,6 +8,7 @@
     // for right-click menu actions like cut, copy, paste, and delete.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   children — Snippet, required. Menu item content (text, shortcut hint, etc.).
     //   ...restProps — additional HTML attributes spread onto the <div>.
     //
@@ -45,6 +46,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         children,
         ...restProps
     }: {
@@ -57,6 +59,7 @@
 
 <!-- ContextMenuItem: a menu item for use in a context (right-click) menu -->
 <div
+    class={`context-menu-item ${className}`}
     role="menuitem"
     tabindex="-1"
     {...restProps}

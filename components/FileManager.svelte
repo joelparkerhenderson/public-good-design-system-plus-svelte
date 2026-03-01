@@ -8,6 +8,7 @@
     // The consumer provides file listings, navigation controls, and interaction behavior.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name describing the file manager.
     //   children — Snippet, required. The file browser content.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -46,14 +47,16 @@
     //   - WAI-ARIA Landmark Regions: https://www.w3.org/WAI/ARIA/apd/practices/landmark-regions/
     import type { Snippet } from "svelte";
     let {
+        class: className = "",
         label,
         children,
         ...restProps
     }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<!-- FileManager component: a labeled region for browsing and organizing files and directories -->
+<!-- FileManager.svelte -->
 <div
+    class={`file-manager ${className}`}
     role="region"
     aria-label={label}
     {...restProps}

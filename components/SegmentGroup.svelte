@@ -8,6 +8,7 @@
     // filter selections, display density controls, and similar single-select UIs.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the segment group via aria-label.
     //   children — Snippet, required. Segment button elements to render inside the group.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -49,6 +50,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -61,8 +63,9 @@
     } = $props();
 </script>
 
-<!-- SegmentGroup component: a radiogroup container for mutually exclusive segment options -->
+<!-- SegmentGroup.svelte -->
 <div
+    class={`segment-group ${className}`}
     role="radiogroup"
     aria-label={label}
     {...restProps}

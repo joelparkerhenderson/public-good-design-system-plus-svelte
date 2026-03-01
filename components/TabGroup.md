@@ -1,8 +1,8 @@
-# TabGroup
+# TabBar
 
-TabGroup is a headless tab list container that provides the ARIA `tablist` role and built-in keyboard navigation for tab interfaces. It manages arrow key navigation between tab elements, allowing users to cycle through tabs with Left/Right arrow keys, and jump to the first or last tab with Home/End keys.
+TabBar is a headless tab list container that provides the ARIA `tablist` role and built-in keyboard navigation for tab interfaces. It manages arrow key navigation between tab elements, allowing users to cycle through tabs with Left/Right arrow keys, and jump to the first or last tab with Home/End keys.
 
-Use TabGroup when building a tabbed interface where users switch between different views or content panels. The component wraps tab buttons in a `<div>` with `role="tablist"` and handles keyboard interactions automatically. Consumer provides tab buttons as children (each with `role="tab"` and `aria-selected`) and is responsible for managing selection state and associating tab panels.
+Use TabBar when building a tabbed interface where users switch between different views or content panels. The component wraps tab buttons in a `<div>` with `role="tablist"` and handles keyboard interactions automatically. Consumer provides tab buttons as children (each with `role="tab"` and `aria-selected`) and is responsible for managing selection state and associating tab panels.
 
 ## Implementation Notes
 
@@ -27,10 +27,10 @@ Use TabGroup when building a tabbed interface where users switch between differe
 ## Usage
 
 ```svelte
-<TabGroup label="Settings">
+<TabBar label="Settings">
   <button role="tab" aria-selected="true">General</button>
   <button role="tab" aria-selected="false">Advanced</button>
-</TabGroup>
+</TabBar>
 ```
 
 ## Keyboard Interactions

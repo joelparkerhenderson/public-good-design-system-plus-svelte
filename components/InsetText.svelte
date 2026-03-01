@@ -8,6 +8,7 @@
     // role="note" for semantic supplementary content indication.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   children — Snippet, required. Content to display inside the inset text block.
     //   ...restProps — additional HTML attributes spread onto the container div.
     //
@@ -46,6 +47,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         children,
         ...restProps
     }: {
@@ -54,8 +56,9 @@
     } = $props();
 </script>
 
-<!-- InsetText component: a div with note role for distinguished supplementary content -->
+<!-- InsetText.svelte -->
 <div
+    class={`inset-text ${className}`}
     role="note"
     {...restProps}
 >

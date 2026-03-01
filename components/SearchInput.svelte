@@ -7,6 +7,7 @@
     // Commonly used for site-wide search bars, filtering lists, and query entry.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — string, default "". Current search text; bindable with bind:value.
     //   required — boolean, default false. Whether the field must be filled before form submission.
@@ -45,6 +46,7 @@
     //   - WAI-ARIA Search Role: https://www.w3.org/WAI/ARIA/apd/patterns/search/
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -63,8 +65,9 @@
     } = $props();
 </script>
 
-<!-- SearchInput component: a search input for querying and filtering content -->
+<!-- SearchInput.svelte -->
 <input
+    class={`search ${className}`}
     type="search"
     aria-label={label}
     bind:value

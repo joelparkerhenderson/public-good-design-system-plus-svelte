@@ -7,6 +7,7 @@
     // actual icon content (text characters, SVG, or any markup) as children.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default undefined. Accessible name for meaningful icons via aria-label.
     //   decorative — boolean, default false. When true, hides the icon from assistive technology.
     //   children — Snippet, required. The icon content (text, SVG, or other markup).
@@ -49,6 +50,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = undefined,
         decorative = false,
         children,
@@ -61,8 +63,9 @@
     } = $props();
 </script>
 
-<!-- Icon component: a span with img role for meaningful icons or aria-hidden for decorative icons -->
+<!-- Icon.svelte -->
 <span
+    class={`icon ${className}`}
     role={decorative ? undefined : "img"}
     aria-label={label}
     aria-hidden={decorative || undefined}

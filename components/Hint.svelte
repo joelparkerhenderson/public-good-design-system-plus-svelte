@@ -7,6 +7,7 @@
     // linking to a form control via aria-describedby on the input element.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   id — string, default undefined. ID for linking via aria-describedby on the associated form control.
     //   children — Snippet, required. Hint text content.
     //   ...restProps — additional HTML attributes spread onto the p element.
@@ -44,6 +45,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         id = undefined,
         children,
         ...restProps
@@ -54,8 +56,9 @@
     } = $props();
 </script>
 
-<!-- Hint component: a paragraph element providing descriptive guidance for a form field -->
+<!-- Hint.svelte -->
 <p
+    class={`hint ${className}`}
     {id}
     {...restProps}
 >

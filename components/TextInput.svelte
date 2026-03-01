@@ -7,6 +7,7 @@
     // and two-way data binding through a bindable value prop.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — string, default "". Bindable text value; supports bind:value.
     //   required — boolean, default false. Whether the field is required.
@@ -42,6 +43,7 @@
     //   - MDN input type="text": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -60,8 +62,9 @@
     } = $props();
 </script>
 
-<!-- TextInput component: a single-line text input for short textual values -->
+<!-- TextInput.svelte -->
 <input
+    class={`text-input ${className}`}
     type="text"
     aria-label={label}
     bind:value

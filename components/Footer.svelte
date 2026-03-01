@@ -7,6 +7,7 @@
     // service, or social media profiles. Uses the native <footer> element.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default undefined. Optional accessible name via aria-label, useful when multiple footers exist.
     //   children — Snippet, required. Footer content.
     //   ...restProps — additional HTML attributes spread onto the footer element.
@@ -50,6 +51,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = undefined,
         children,
         ...restProps
@@ -62,8 +64,9 @@
     } = $props();
 </script>
 
-<!-- Footer component: a footer landmark for page or section closing content -->
+<!-- Footer.svelte -->
 <footer
+    class={`footer ${className}`}
     aria-label={label}
     {...restProps}
 >

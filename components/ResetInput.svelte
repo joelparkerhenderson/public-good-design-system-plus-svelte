@@ -7,6 +7,7 @@
     // all entered data and start over.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — string, default "Reset". The visible button text.
     //   disabled — boolean, default false. Whether the button is disabled.
     //   ...restProps — additional HTML attributes spread onto the <input>.
@@ -43,6 +44,7 @@
     //   - MDN input type="reset": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/reset
 
     let {
+        class: className = "",
         value = "Reset",
         disabled = false,
         ...restProps
@@ -55,8 +57,9 @@
     } = $props();
 </script>
 
-<!-- ResetInput component: a native reset input button that restores form fields to their defaults -->
+<!-- ResetInput.svelte -->
 <input
+    class={`reset-input ${className}`}
     type="reset"
     {value}
     {disabled}

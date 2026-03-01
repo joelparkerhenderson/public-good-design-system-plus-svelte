@@ -7,6 +7,7 @@
     // FAQ sections, collapsible panels, settings groups, and progressive disclosure.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Button text and accessible name for both the button and content region.
     //   expanded — boolean, default false. Whether the content is visible; bindable.
     //   children — Snippet, required. Expandable content rendered when expanded is true.
@@ -52,6 +53,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         expanded = $bindable(false),
         children,
@@ -69,7 +71,10 @@
     const contentId = `expander-${Math.random().toString(36).slice(2, 9)}`;
 </script>
 
-<div {...restProps}>
+<div
+    class={`expander ${className}`}
+    {...restProps}
+>
     <button
         type="button"
         aria-expanded={expanded}

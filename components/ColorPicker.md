@@ -1,44 +1,51 @@
 # ColorPicker
 
-A color picker is a component that allows users to select a color value from a visual interface. Commonly used in design tools, theme customizers, form builders, and creative applications, the color picker enables intuitive color selection without requiring users to manually enter color codes. It provides real-time feedback as users interact with it, displaying the selected color alongside its hex value.
+A 2D area selector for choosing colors by saturation (X axis) and brightness (Y axis). Users navigate the board with keyboard arrow keys, with Shift held for larger steps. The component exposes `data-x` and `data-y` attributes for CSS-based cursor positioning, enabling consumers to render a visual indicator at the selected coordinates.
 
-This headless component wraps the native `<input type="color">` element with an accessible label and two-way binding of the color value. It supports disabled state and delegates all visual presentation to the browser's built-in color picker UI.
+This component is useful for advanced color pickers where the user needs fine-grained 2D selection of color properties.
 
 ## Implementation Notes
 
-- Uses a native `<input type="color">` element for built-in browser color selection
-- Supports `$bindable()` for two-way binding of the `value` prop
-- Default value is "#000000" (black)
-- Native input provides the color picker UI (swatch, spectrum, etc.)
-- Accepts `...restProps` for forwarding additional attributes to the input element
+- Renders a `<div>` with `role="slider"` for ARIA slider semantics
+- Uses `$bindable()` for both `x` and `y` coordinates (range 0-100)
+- Implements `onkeydown` handler for arrow key navigation with step size of 1 (or 10 with Shift)
+- Home key resets `x` to 0; End key sets `x` to 100
+- Exposes `data-x` and `data-y` attributes for CSS positioning of a visual cursor
+- `tabindex` is set to 0 when enabled, -1 when disabled
+- `aria-disabled` is set only when disabled (omitted otherwise via `|| undefined`)
 
 ## Props
 
-- `label`: string (required) -- accessible name applied via `aria-label`
-- `value`: string (default: "#000000") -- current color value as a hex string; bindable
-- `disabled`: boolean (default: false) -- whether the color picker is disabled
+- `x`: number (default: `0`) -- horizontal position (0-100, saturation), bindable via `bind:x`
+- `y`: number (default: `0`) -- vertical position (0-100, brightness), bindable via `bind:y`
+- `label`: string (required) -- accessible name via `aria-label`
+- `disabled`: boolean (default: `false`) -- whether the control is disabled
+- `...restProps`: unknown -- additional attributes spread onto the `<div>`
 
 ## Usage
 
 ```svelte
-<ColorPicker label="Background color" bind:value />
-```
-
-```svelte
-<ColorPicker label="Text color" bind:value disabled />
+<ColorPicker label="Color saturation and brightness" bind:x bind:y />
 ```
 
 ## Keyboard Interactions
 
-- Tab: Move focus to/from the color input
-- Enter / Space: Open the browser's native color picker dialog
-
-(These are provided by the native `<input type="color">` element.)
+- ArrowRight: increase X by 1 (Shift: by 10)
+- ArrowLeft: decrease X by 1 (Shift: by 10)
+- ArrowUp: decrease Y by 1 (Shift: by 10)
+- ArrowDown: increase Y by 1 (Shift: by 10)
+- Home: set X to 0
+- End: set X to 100
 
 ## ARIA
 
-- `aria-label={label}` -- provides an accessible name for the color input
+- `role="slider"` -- identifies the element as a slider control
+- `aria-label="..."` -- provides an accessible name for the slider
+- `aria-valuenow` -- current X value (0-100)
+- `aria-valuemin="0"` -- minimum slider value
+- `aria-valuemax="100"` -- maximum slider value
+- `aria-disabled="true"` -- set when the control is disabled
 
 ## References
 
-- MDN input type="color": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color
+- WAI-ARIA Slider Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/slider/

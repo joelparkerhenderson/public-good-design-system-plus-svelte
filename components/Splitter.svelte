@@ -7,6 +7,7 @@
     // to provide a visual and interactive handle for resizing.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the splitter via aria-label.
     //   orientation — "horizontal" | "vertical", default "vertical". The split direction.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -48,6 +49,7 @@
     //   - WAI-ARIA Separator Role: https://www.w3.org/TR/wai-aria-1.2/#separator
 
     let {
+        class: className = "",
         label,
         orientation = "vertical",
         ...restProps
@@ -60,8 +62,9 @@
     } = $props();
 </script>
 
-<!-- Splitter component: a focusable separator with value tracking for resizing adjacent panels -->
+<!-- Splitter.svelte -->
 <div
+    class={`splitter ${className}`}
     role="separator"
     aria-label={label}
     aria-orientation={orientation}

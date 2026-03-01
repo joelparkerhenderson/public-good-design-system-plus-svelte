@@ -7,6 +7,7 @@
     // audio equipment settings in control panels and configuration interfaces.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — number, default 0. Current dial value; bindable.
     //   min — number, default 0. Minimum allowed value.
     //   max — number, default 100. Maximum allowed value.
@@ -52,6 +53,7 @@
     //   - WAI-ARIA slider role: https://www.w3.org/TR/wai-aria-1.2/#slider
 
     let {
+        class: className = "",
         value = $bindable(0),
         min = 0,
         max = 100,
@@ -105,7 +107,9 @@
     }
 </script>
 
+<!-- Dial.svelte -->
 <div
+    class={`dial ${className}`}
     role="slider"
     tabindex={disabled ? -1 : 0}
     aria-label={label}

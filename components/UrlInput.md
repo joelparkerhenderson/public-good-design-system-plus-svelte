@@ -32,7 +32,7 @@ URL inputs are commonly used in profile forms, link submission pages, and any co
 
 ## Keyboard Interactions
 
-None beyond native text input behavior. The `<input type="url">` element supports standard text editing keys (typing, selection, clipboard operations) natively.
+None beyond native text input behavior. The `<input type="url">` element supports standard text editing keys (typing, selection, clipboard-copy-button operations) natively.
 
 ## ARIA
 

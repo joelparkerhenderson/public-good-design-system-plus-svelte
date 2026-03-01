@@ -7,6 +7,7 @@
     // link previews, contextual help, or any popover-style content.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the hover card via aria-label.
     //   open — boolean, default false. Whether the hover card is visible; bindable with bind:open.
     //   children — Snippet, required. Content to display inside the hover card.
@@ -52,6 +53,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         open = $bindable(false),
         children,
@@ -64,9 +66,10 @@
     } = $props();
 </script>
 
-<!-- HoverCard component: a conditionally rendered tooltip region for supplementary hover content -->
+<!-- HoverCard.svelte -->
 {#if open}
     <div
+        class={`hover-card ${className}`}
         role="tooltip"
         aria-label={label}
         {...restProps}

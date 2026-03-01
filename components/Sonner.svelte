@@ -8,6 +8,7 @@
     // Used for success confirmations, error alerts, progress updates, and system messages.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name identifying the notification area via aria-label.
     //   children — Snippet, required. The toast notification content.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -53,13 +54,20 @@
 
     import type { Snippet } from "svelte";
     let {
+        class: className = "",
         label,
         children,
         ...restProps
     }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<!-- Sonner component: a polite live region for displaying toast notifications -->
-<div role="region" aria-label={label} aria-live="polite" {...restProps}>
+<!-- Sonner.svelte -->
+<div
+    class={`sonner ${className}`}
+    role="region"
+    aria-label={label}
+    aria-live="polite"
+    {...restProps}
+>
     {@render children()}
 </div>

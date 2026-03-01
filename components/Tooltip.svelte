@@ -8,6 +8,7 @@
     // clarify the function or meaning of elements without cluttering the interface.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. The tooltip text content.
     //   visible — boolean, default false. Bindable boolean controlling visibility.
     //   id — string, default undefined. Optional id for aria-describedby linking to trigger element.
@@ -46,6 +47,7 @@
     //   - MDN aria-describedby: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby
 
     let {
+        class: className = "",
         label,
         visible = $bindable(false),
         id = undefined,
@@ -61,9 +63,10 @@
     } = $props();
 </script>
 
-<!-- Tooltip component: a conditionally rendered tooltip-role popup for supplementary text -->
+<!-- Tooltip.svelte -->
 {#if visible}
     <div
+        class={`tooltip ${className}`}
         role="tooltip"
         {id}
         {...restProps}

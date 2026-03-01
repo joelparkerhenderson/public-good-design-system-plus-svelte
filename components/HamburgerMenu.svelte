@@ -7,6 +7,7 @@
     // toggle button to the navigation panel via aria-controls and aria-expanded.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default "Menu". Accessible name for the toggle button and navigation region.
     //   open — boolean, default false. Bindable boolean controlling whether the navigation panel is visible.
     //   children — Snippet, required. Navigation content rendered when the menu is open.
@@ -63,6 +64,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = "Menu",
         open = $bindable(false),
         children,
@@ -77,8 +79,11 @@
     const menuId = `hamburger-${Math.random().toString(36).slice(2, 9)}`;
 </script>
 
-<!-- HamburgerMenu component: a toggle button controlling a collapsible navigation region -->
-<div {...restProps}>
+<!-- HamburgerMenu.svelte -->
+<div
+    class={`hamburger-menu ${className}`}
+    {...restProps}
+>
     <button
         type="button"
         aria-label={label}

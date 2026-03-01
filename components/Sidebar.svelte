@@ -7,6 +7,7 @@
     // supplementary information alongside the primary page content.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the sidebar region via aria-label.
     //   children — Snippet, required. Content to render inside the sidebar.
     //   ...restProps — additional HTML attributes spread onto the <aside>.
@@ -53,6 +54,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -65,8 +67,9 @@
     } = $props();
 </script>
 
-<!-- Sidebar component: an aside landmark for complementary content alongside main content -->
+<!-- Sidebar.svelte -->
 <aside
+    class={`sidebar ${className}`}
     aria-label={label}
     {...restProps}
 >

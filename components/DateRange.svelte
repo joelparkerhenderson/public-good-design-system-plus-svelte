@@ -8,6 +8,7 @@
     // forms, search filters, reporting interfaces, and scheduling tools.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible group label applied to the fieldset via aria-label.
     //   startLabel — string, required. Accessible label for the start date input.
     //   endLabel — string, required. Accessible label for the end date input.
@@ -49,6 +50,7 @@
     //   - MDN fieldset element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset
 
     let {
+        class: className = "",
         label,
         startLabel,
         endLabel,
@@ -70,16 +72,20 @@
     } = $props();
 </script>
 
+<!-- DateRange.svelte -->
 <fieldset
+    class={`date-range ${className}`}
     aria-label={label}
     {...restProps}
 >
     <input
+        class="date-input"
         type="date"
         aria-label={startLabel}
         bind:value={start}
     />
     <input
+        class="date-input"
         type="date"
         aria-label={endLabel}
         bind:value={end}

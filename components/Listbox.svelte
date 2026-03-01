@@ -8,6 +8,7 @@
     // list, such as settings panels, filter selections, or multi-select interfaces.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name applied via aria-label.
     //   children — Snippet, required. Option elements (should have role="option" and tabindex="-1").
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -59,6 +60,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -106,8 +108,9 @@
     }
 </script>
 
-<!-- Listbox component: a listbox widget with keyboard-navigable selectable options -->
+<!-- Listbox.svelte -->
 <div
+    class={`listbox ${className}`}
     role="listbox"
     aria-label={label}
     bind:this={listRef}

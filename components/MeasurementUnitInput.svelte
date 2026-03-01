@@ -8,6 +8,7 @@
     // integration.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the input via aria-label.
     //   value — string, default "". Bindable measurement unit value via $bindable().
     //   required — boolean, default false. Whether the field is required.
@@ -25,7 +26,7 @@
     //   <MeasurementUnitInput label="Unit of measure" bind:value required />
     //
     // Keyboard:
-    //   - Native <input type="text"> keyboard behavior (typing, selection, clipboard).
+    //   - Native <input type="text"> keyboard behavior (typing, selection, clipboard-copy-button).
     //
     // Accessibility:
     //   - aria-label provides the accessible name from the label prop
@@ -43,6 +44,7 @@
     //   - HTML input element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -61,8 +63,9 @@
     } = $props();
 </script>
 
-<!-- MeasurementUnitInput component: a text input for entering a measurement unit abbreviation -->
+<!-- MeasurementUnitInput.svelte -->
 <input
+    class={`measurement-unit-input ${className}`}
     type="text"
     aria-label={label}
     bind:value

@@ -8,6 +8,7 @@
     // semantic HTML for accessibility and SEO.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   href — string, optional. If provided, renders as a link; otherwise renders as a button.
     //   label — string, optional. Accessible label override via aria-label.
     //   disabled — boolean, default false. Disables the button (button mode only).
@@ -51,6 +52,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         href = undefined,
         label = undefined,
         disabled = false,
@@ -72,9 +74,10 @@
     } = $props();
 </script>
 
-<!-- CallToAction component: an anchor or button element prompting a primary user action -->
+<!-- CallToAction.svelte -->
 {#if href}
     <a
+        class={`call-to-action-link ${className}`}
         {href}
         aria-label={label}
         {...restProps}
@@ -83,6 +86,7 @@
     </a>
 {:else}
     <button
+        class={`call-to-action-button ${className}`}
         type="button"
         {disabled}
         aria-label={label}

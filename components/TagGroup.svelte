@@ -8,6 +8,7 @@
     // that belong together.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the group via aria-label.
     //   children — Snippet, required. Tag elements to render inside the group.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -43,6 +44,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -55,8 +57,9 @@
     } = $props();
 </script>
 
-<!-- TagGroup component: a group-role container for a collection of related tags -->
+<!-- TagGroup.svelte -->
 <div
+    class={`tag-group ${className}`}
     role="group"
     aria-label={label}
     {...restProps}

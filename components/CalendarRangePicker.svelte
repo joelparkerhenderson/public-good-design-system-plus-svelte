@@ -7,6 +7,7 @@
     // and reporting tools where users define start and end dates.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name describing the picker purpose.
     //   children — Snippet, required. Calendar grid content including date cells and navigation controls.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -19,9 +20,9 @@
     // Examples:
     //   <!-- Travel date range picker -->
     //   <CalendarRangePicker label="Select travel dates">
-    //     <CalendarBoard label="January 2025">
+    //     <CalendarTable label="January 2025">
     //       <!-- date cells with range highlighting -->
-    //     </CalendarBoard>
+    //     </CalendarTable>
     //   </CalendarRangePicker>
     //
     // Keyboard:
@@ -48,6 +49,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -59,6 +61,7 @@
 </script>
 
 <div
+    class={`${className}`}
     role="application"
     aria-label={label}
     {...restProps}

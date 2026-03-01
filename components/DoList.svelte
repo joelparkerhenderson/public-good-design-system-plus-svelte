@@ -1,15 +1,16 @@
 <script lang="ts">
     // DoList component
     //
-    // A list of recommended actions or best practices. Renders as a <ul> with
+    // A list of recommended actions or best practices. Renders as a <ol> with
     // role="list" and an accessible label. Used in design system documentation,
     // guidelines, and instructional content to communicate what users should do.
     // Paired with DontList to create do/don't guidance patterns.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default "Do". Accessible name for the list.
     //   children — Snippet, required. List items, each should be an <li> element.
-    //   ...restProps — additional HTML attributes spread onto the <ul> element.
+    //   ...restProps — additional HTML attributes spread onto the <ol> element.
     //
     // Syntax:
     //   <DoList><li>Best practice</li></DoList>
@@ -49,6 +50,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = "Do",
         children,
         ...restProps
@@ -61,10 +63,12 @@
     } = $props();
 </script>
 
-<ul
+<!-- DoList.svelte -->
+<ol
+    class={`do-list ${className}`}
     role="list"
     aria-label={label}
     {...restProps}
 >
     {@render children()}
-</ul>
+</ol>

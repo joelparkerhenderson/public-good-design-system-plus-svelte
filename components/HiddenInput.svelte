@@ -7,6 +7,7 @@
     // submitted with a form but has no visual presence.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   name — string, required. The form field name attribute.
     //   value — string, default "". The hidden input value.
     //   ...restProps — additional HTML attributes spread onto the input element.
@@ -39,6 +40,7 @@
     //   - HTML hidden input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/hidden
 
     let {
+        class: className = "",
         name,
         value = "",
         ...restProps
@@ -49,8 +51,9 @@
     } = $props();
 </script>
 
-<!-- HiddenInput component: a hidden input for submitting non-visible form data -->
+<!-- HiddenInput.svelte -->
 <input
+    class={`hidden-input ${className}`}
     type="hidden"
     {name}
     {value}

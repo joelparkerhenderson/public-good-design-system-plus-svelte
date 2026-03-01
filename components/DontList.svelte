@@ -1,15 +1,16 @@
 <script lang="ts">
     // DontList component
     //
-    // A list of discouraged actions or practices to avoid. Renders as a <ul> with
+    // A list of discouraged actions or practices to avoid. Renders as a <ol> with
     // role="list" and an accessible label. Used in design system documentation,
     // guidelines, and instructional content to communicate what users should not do.
     // Paired with DoList to create do/don't guidance patterns.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default "Don't". Accessible name for the list.
     //   children — Snippet, required. List items, each should be an <li> element.
-    //   ...restProps — additional HTML attributes spread onto the <ul> element.
+    //   ...restProps — additional HTML attributes spread onto the <ol> element.
     //
     // Syntax:
     //   <DontList><li>Avoid this</li></DontList>
@@ -49,6 +50,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = "Don't",
         children,
         ...restProps
@@ -61,10 +63,12 @@
     } = $props();
 </script>
 
-<ul
+<!-- DontList.svelte -->
+<ol
+    class={`dont-list ${className}`}
     role="list"
     aria-label={label}
     {...restProps}
 >
     {@render children()}
-</ul>
+</ol>

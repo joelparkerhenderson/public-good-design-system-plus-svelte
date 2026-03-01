@@ -8,6 +8,7 @@
     // distinguishing these from standard inline text links.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   href     — string, required. The URL the link points to.
     //   label    — string, optional. Accessible label override via aria-label
     //              for when visible link text is insufficient for screen readers.
@@ -56,6 +57,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         href,
         label = undefined,
         children,
@@ -71,8 +73,9 @@
     } = $props();
 </script>
 
-<!-- ActionLink component: a prominent anchor element for key navigational actions -->
+<!-- ActionLink.svelte -->
 <a
+    class={`action-link ${className}`}
     {href}
     aria-label={label}
     {...restProps}

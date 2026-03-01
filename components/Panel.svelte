@@ -7,6 +7,7 @@
     // Commonly used in dashboards, settings pages, sidebars, and multi-section layouts.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the panel region via aria-label.
     //   children — Snippet, required. The panel content.
     //   ...restProps — additional HTML attributes spread onto the <section>.
@@ -54,6 +55,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -64,8 +66,9 @@
     } = $props();
 </script>
 
-<!-- Panel component -->
+<!-- Panel.svelte -->
 <section
+    class={`panel ${className}`}
     aria-label={label}
     {...restProps}
 >

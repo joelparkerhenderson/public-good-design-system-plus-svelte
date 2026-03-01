@@ -1,12 +1,12 @@
 <script lang="ts">
     // EmailInput component
     //
-    // A simple email input wrapping a native <input type="email"> with accessible
-    // labeling. A minimal variant of EmailAddressInput that omits placeholder and
-    // autocomplete support in favor of a streamlined API. Use EmailInput when you
-    // need a basic email field with required and disabled state support.
+    // A headless email input wrapping a native <input type="email"> with accessible
+    // labeling. Provides a streamlined API for basic email collection with required
+    // and disabled state support.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — string, default "". Current email value; bindable.
     //   required — boolean, default false. Whether the field is required.
@@ -35,13 +35,13 @@
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
-    //   - Unlike EmailAddressInput, does not set autocomplete or support placeholder
     //   - Uses $bindable() on value for two-way binding
     //
     // References:
     //   - MDN input type="email": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -61,6 +61,7 @@
 </script>
 
 <input
+    class={`email-input ${className}`}
     type="email"
     aria-label={label}
     bind:value

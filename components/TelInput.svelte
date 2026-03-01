@@ -7,6 +7,7 @@
     // profile editors. Supports two-way data binding through a bindable value prop.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the input via aria-label.
     //   value — string, default "". Bindable telephone number value.
     //   required — boolean, default false. Whether the field is required for form submission.
@@ -41,6 +42,7 @@
     //   - HTML tel input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -59,8 +61,9 @@
     } = $props();
 </script>
 
-<!-- TelInput component: a tel-type input for entering telephone numbers with autocomplete -->
+<!-- TelInput.svelte -->
 <input
+    class={`tel-input ${className}`}
     type="tel"
     aria-label={label}
     bind:value

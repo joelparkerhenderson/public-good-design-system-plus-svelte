@@ -8,6 +8,7 @@
     // for FAQ sections, advanced settings, and progressive disclosure patterns.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   summary — string, required. The clickable summary text shown as the toggle trigger.
     //   open — boolean, default false. Whether the content is expanded; bindable for two-way control.
     //   children — Snippet, required. The collapsible content revealed when expanded.
@@ -45,6 +46,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         summary,
         open = $bindable(false),
         children,
@@ -61,9 +63,10 @@
 </script>
 
 <details
+    class={`collapsable-details ${className}`}
     bind:open
     {...restProps}
 >
-    <summary>{summary}</summary>
+    <summary class="collapsable-summary">{summary}</summary>
     {@render children()}
 </details>

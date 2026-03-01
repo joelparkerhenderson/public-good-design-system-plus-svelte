@@ -7,6 +7,7 @@
     // "New" labels, status pills, and category tags.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   type     — "default" | "info" | "success" | "warning" | "error",
     //              default "default". Semantic variant exposed as data-type.
     //   label    — string, optional. Accessible label for screen readers
@@ -54,6 +55,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         type = "default",
         label = undefined,
         children,
@@ -69,8 +71,9 @@
     } = $props();
 </script>
 
-<!-- Badge component: an inline status indicator or label -->
+<!-- Badge.svelte -->
 <span
+    class={`badge ${className}`}
     role="status"
     aria-label={label}
     data-type={type}

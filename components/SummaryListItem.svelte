@@ -7,6 +7,7 @@
     // styling and attribute targeting without breaking list semantics.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   term — string, required. The key/label text rendered in the <dt> element.
     //   children — Snippet, required. The value/description content rendered in the <dd>.
     //   ...restProps — additional HTML attributes spread onto the wrapper <div>.
@@ -48,6 +49,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         term,
         children,
         ...restProps
@@ -61,7 +63,10 @@
 </script>
 
 <!-- SummaryListItem: a term-description pair within a description list -->
-<div {...restProps}>
+<div
+    class={`summary-list-item ${className}`}
+    {...restProps}
+>
     <dt>{term}</dt>
     <dd>{@render children()}</dd>
 </div>

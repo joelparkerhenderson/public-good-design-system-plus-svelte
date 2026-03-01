@@ -11,6 +11,7 @@
     // warning about unsaved changes, or displaying critical error messages.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   open        — boolean, default false, bindable. Whether the dialog is visible.
     //   title       — string, required. Dialog heading, referenced by aria-labelledby.
     //   description — string, optional. Dialog message, referenced by aria-describedby.
@@ -66,6 +67,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         open = $bindable(false),
         title,
         description = undefined,
@@ -88,9 +90,10 @@
     let descriptionId = "alert-dialog-description";
 </script>
 
-<!-- AlertDialog component: a modal dialog with alertdialog role for critical user acknowledgment -->
+<!-- AlertDialog.svelte -->
 {#if open}
     <dialog
+        class={`alert-dialog ${className}`}
         open
         role="alertdialog"
         aria-labelledby={titleId}

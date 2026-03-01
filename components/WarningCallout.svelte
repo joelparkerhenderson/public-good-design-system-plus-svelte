@@ -9,6 +9,7 @@
     // it appears or changes.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default undefined. Optional accessible name via aria-label.
     //   children — Snippet, required. The warning content to display.
     //   ...restProps — additional HTML attributes spread onto the <aside>.
@@ -49,6 +50,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = undefined,
         children,
         ...restProps
@@ -61,8 +63,9 @@
     } = $props();
 </script>
 
-<!-- WarningCallout component: an aside with alert role for assertive warning announcements -->
+<!-- WarningCallout.svelte -->
 <aside
+    class={`warning-callout ${className}`}
     role="alert"
     aria-label={label}
     {...restProps}

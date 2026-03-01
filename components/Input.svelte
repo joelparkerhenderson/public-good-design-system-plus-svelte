@@ -7,6 +7,7 @@
     // required and disabled attributes and spreads additional props for full consumer control.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name applied via aria-label.
     //   value — string, default "". Bindable current input value via bind:value.
     //   type — string, default "text". HTML input type attribute (e.g., "text", "email", "password", "number").
@@ -48,6 +49,7 @@
     //   - WAI Forms Tutorial: https://www.w3.org/WAI/tutorials/forms/
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         type = "text",
@@ -64,8 +66,9 @@
     } = $props();
 </script>
 
-<!-- Input component: a native input element with bindable value for text entry -->
+<!-- Input.svelte -->
 <input
+    class={`input ${className}`}
     {type}
     aria-label={label}
     bind:value

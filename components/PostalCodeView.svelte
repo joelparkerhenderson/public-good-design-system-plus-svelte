@@ -7,6 +7,7 @@
     // the value is not editable. Pairs with PostalCodeInput for the Input/View pattern.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   text — string, default "". The postal code string to display.
     //   ...restProps — additional HTML attributes spread onto the <span>.
     //
@@ -42,6 +43,7 @@
     //   - MDN span element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
 
     let {
+        class: className = "",
         text = "",
         ...restProps
     }: {
@@ -51,5 +53,8 @@
     } = $props();
 </script>
 
-<!-- PostalCodeView component: a span displaying a read-only postal or ZIP code -->
-<span {...restProps}>{text}</span>
+<!-- PostalCodeView.svelte -->
+<span
+    class={`postal-code-view ${className}`}
+    {...restProps}>{text}</span
+>

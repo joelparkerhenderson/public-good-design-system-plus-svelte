@@ -7,6 +7,7 @@
     // styled to be visually hidden until focused, then positioned prominently.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   href — string, default "#content". The anchor target that the link navigates to.
     //   label — string, default "Skip to content". The visible link text.
     //   ...restProps — additional HTML attributes spread onto the <a>.
@@ -45,6 +46,7 @@
     //   - WebAIM Skip Navigation Links: https://webaim.org/techniques/skipnav/
 
     let {
+        class: className = "",
         href = "#content",
         label = "Skip to content",
         ...restProps
@@ -57,8 +59,9 @@
     } = $props();
 </script>
 
-<!-- SkipLink component: an anchor link for keyboard users to bypass navigation and jump to content -->
+<!-- SkipLink.svelte -->
 <a
+    class={`skip-link ${className}`}
     {href}
     {...restProps}>{label}</a
 >

@@ -9,6 +9,7 @@
     // SMS fields, form fields, or bios.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   count — number, default 0. Current character count.
     //   max — number, optional. Maximum allowed characters; enables remaining/over-limit tracking.
     //   label — string, optional. Accessible label for the counter via aria-label.
@@ -46,6 +47,7 @@
     //   - WAI-ARIA Status Role: https://www.w3.org/TR/wai-aria-1.2/#status
 
     let {
+        class: className = "",
         count = 0,
         max = undefined,
         label = undefined,
@@ -67,8 +69,9 @@
     let displayText = $derived(max != null ? `${count} / ${max}` : `${count}`);
 </script>
 
-<!-- CharacterCounter component -->
+<!-- CharacterCounter.svelte -->
 <span
+    class={`character-counter ${className}`}
     role="status"
     aria-live="polite"
     aria-label={label}

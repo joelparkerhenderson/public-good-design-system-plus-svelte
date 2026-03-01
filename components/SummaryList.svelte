@@ -8,6 +8,7 @@
     // through the children snippet, typically <dt>/<dd> pairs or SummaryListItem components.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the description list via aria-label.
     //   children — Snippet, required. List content, typically <dt>/<dd> pairs.
     //   ...restProps — additional HTML attributes spread onto the <dl>.
@@ -47,6 +48,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -61,6 +63,7 @@
 
 <!-- SummaryList: a description list for key-value pair presentation -->
 <dl
+    class={`summary-list ${className}`}
     aria-label={label}
     {...restProps}
 >

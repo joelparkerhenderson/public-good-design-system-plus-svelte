@@ -9,6 +9,7 @@
     // consumer control.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   checked — boolean, default false, bindable. Whether the checkbox is checked.
     //   label — string, required. Accessible name applied via aria-label.
     //   disabled — boolean, default false. Whether the checkbox is disabled.
@@ -49,6 +50,7 @@
     //   - WAI-ARIA Checkbox Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/checkbox/
 
     let {
+        class: className = "",
         checked = $bindable(false),
         label,
         disabled = false,
@@ -69,7 +71,9 @@
     } = $props();
 </script>
 
+<!-- CheckboxInput.svelte -->
 <input
+    class={`checkbox-input ${className}`}
     type="checkbox"
     bind:checked
     aria-label={label}

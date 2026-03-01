@@ -7,6 +7,7 @@
     // that conveys meaning; decorative emoji should be hidden from assistive technology.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   emoji — string, required. The emoji character(s) to display.
     //   label — string, required. Accessible name describing the emoji for screen readers.
     //   ...restProps — additional HTML attributes spread onto the <span>.
@@ -40,6 +41,7 @@
     //   - WAI-ARIA img role: https://www.w3.org/TR/wai-aria-1.2/#img
 
     let {
+        class: className = "",
         emoji,
         label,
         ...restProps
@@ -52,7 +54,9 @@
     } = $props();
 </script>
 
+<!-- Emoji.svelte -->
 <span
+    class={`emoji ${className}`}
     role="img"
     aria-label={label}
     {...restProps}>{emoji}</span

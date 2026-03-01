@@ -1,13 +1,14 @@
 <script lang="ts">
     // TaskList component
     //
-    // A headless task list that renders a semantic unordered list (<ul>) with
+    // A headless task list that renders a semantic ordered list (<ol>) with
     // role="list" and an accessible label. Used to display a series of tasks,
     // to-dos, or action items in project management tools, to-do apps, or
     // onboarding processes. The explicit role="list" ensures screen readers
     // announce list semantics even when CSS removes default list styling.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the task list via aria-label.
     //   children — Snippet, required. Task items (should be <li> elements).
     //   ...restProps — additional HTML attributes spread onto the <ul>.
@@ -24,7 +25,7 @@
     //   </TaskList>
     //
     //   <!-- Task list with checkboxes -->
-    //   <TaskList label="Onboarding checklist">
+    //   <TaskList label="Onboarding CheckList">
     //     <li><label><input type="checkbox" /> Create account</label></li>
     //     <li><label><input type="checkbox" /> Complete tutorial</label></li>
     //   </TaskList>
@@ -53,6 +54,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -66,11 +68,12 @@
     } = $props();
 </script>
 
-<!-- TaskList: an unordered list of tasks or action items -->
-<ul
+<!-- TaskList: an ordered list of task list items -->
+<ol
+    class={`task-list ${className}`}
     role="list"
     aria-label={label}
     {...restProps}
 >
     {@render children()}
-</ul>
+</ol>

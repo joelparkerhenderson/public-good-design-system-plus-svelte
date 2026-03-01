@@ -8,6 +8,7 @@
     // choosing from large option sets.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label on both input and listbox.
     //   value — string, default "". Bindable current text input value.
     //   open — boolean, default false. Bindable dropdown visibility state.
@@ -56,6 +57,7 @@
     const listboxId = `combobox-listbox-${Math.random().toString(36).slice(2, 9)}`;
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         open = $bindable(false),
@@ -81,7 +83,11 @@
     }
 </script>
 
-<div {...restProps}>
+<!-- Combobox.svelte -->
+<div
+    class={`combobox ${className}`}
+    {...restProps}
+>
     <input
         type="text"
         role="combobox"

@@ -8,6 +8,7 @@
     // success confirmations, error alerts, and informational updates.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, optional. Accessible name for the notification region via aria-label.
     //   urgent — boolean, default false. When true, uses role="alert" and aria-live="assertive".
     //   children — Snippet, required. The notification message content.
@@ -54,6 +55,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = undefined,
         urgent = false,
         children,
@@ -66,8 +68,9 @@
     } = $props();
 </script>
 
-<!-- Notification component: a live region with status or alert role for polite or urgent announcements -->
+<!-- Notification.svelte -->
 <div
+    class={`notification ${className}`}
     role={urgent ? "alert" : "status"}
     aria-label={label}
     aria-live={urgent ? "assertive" : "polite"}

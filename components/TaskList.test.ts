@@ -12,14 +12,14 @@ function textSnippet(text: string) {
 }
 
 describe("TaskList", () => {
-    test("renders an unordered list element", () => {
+    test("renders an ordered list element", () => {
         render(Subject, { props: {
             label: "Tasks",
             children: textSnippet("items"),
         }});
 
         const list = screen.getByRole("list");
-        expect(list.tagName).toBe("UL");
+        expect(list.tagName).toBe("OL");
     });
 
     test("has role list", () => {

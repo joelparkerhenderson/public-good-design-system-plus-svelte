@@ -7,6 +7,7 @@
     // with aria-hidden="true" and signals loading state with aria-busy="true".
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   children — Snippet, optional. Placeholder content such as skeleton line shapes.
     //   ...restProps — additional HTML attributes spread onto the <div>.
     //
@@ -46,6 +47,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         children,
         ...restProps
     }: {
@@ -55,8 +57,9 @@
     } = $props();
 </script>
 
-<!-- Skeleton component: an aria-hidden loading placeholder indicating content is being fetched -->
+<!-- Skeleton.svelte -->
 <div
+    class={`skeleteon ${className}`}
     aria-hidden="true"
     aria-busy="true"
     {...restProps}

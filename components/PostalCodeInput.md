@@ -38,7 +38,7 @@ This component is useful in address forms, checkout flows, shipping calculators,
 
 ## Keyboard Interactions
 
-None beyond native input behavior -- standard text editing keys (typing, backspace, selection, clipboard shortcuts) are handled by the browser.
+None beyond native input behavior -- standard text editing keys (typing, backspace, selection, clipboard-copy-button shortcuts) are handled by the browser.
 
 ## ARIA
 

@@ -8,6 +8,7 @@
     // associated control receives focus.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   for — string, optional. The id of the associated form control (HTML for attribute).
     //   children — Snippet, required. The label text content.
     //   ...restProps — additional HTML attributes spread onto the <label>.
@@ -51,6 +52,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         for: forProp = undefined,
         children,
         ...restProps
@@ -61,8 +63,9 @@
     } = $props();
 </script>
 
-<!-- Label component: a native label element that names and links to a form control -->
+<!-- Label.svelte -->
 <label
+    class={`label ${className}`}
     for={forProp}
     {...restProps}
 >

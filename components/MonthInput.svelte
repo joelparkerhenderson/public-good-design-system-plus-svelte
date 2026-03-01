@@ -8,6 +8,7 @@
     // selection at month granularity.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the input via aria-label.
     //   value — string, default "". Current month value in YYYY-MM format; bindable via $bindable().
     //   required — boolean, default false. Whether the input is required.
@@ -43,6 +44,7 @@
     //   - HTML month input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -57,8 +59,9 @@
     } = $props();
 </script>
 
-<!-- MonthInput component: a month input for selecting a year and month -->
+<!-- MonthInput.svelte -->
 <input
+    class={`month-input ${className}`}
     type="month"
     aria-label={label}
     bind:value

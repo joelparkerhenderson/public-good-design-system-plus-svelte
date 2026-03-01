@@ -8,6 +8,7 @@
     // snippet, maintaining full control over table structure and styling.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the table via aria-label.
     //   children — Snippet, required. Table content including thead, tbody, tfoot, etc.
     //   ...restProps — additional HTML attributes spread onto the <table>.
@@ -48,6 +49,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -63,6 +65,7 @@
 
 <!-- Table: a semantic table element with accessible labeling -->
 <table
+    class={`table ${className}`}
     aria-label={label}
     {...restProps}
 >

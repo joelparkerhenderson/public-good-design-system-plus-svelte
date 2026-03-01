@@ -7,6 +7,7 @@
     // image uploads, and any form that accepts file attachments.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the upload button; also displayed as button text.
     //   accept — string, default undefined. Accepted file types (e.g., ".pdf", "image/*").
     //   multiple — boolean, default false. Whether to allow selecting multiple files.
@@ -47,6 +48,7 @@
     //   - MDN input type="file": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
 
     let {
+        class: className = "",
         label,
         accept = undefined,
         multiple = false,
@@ -81,8 +83,11 @@
     }
 </script>
 
-<!-- FileUpload component: a button-triggered hidden file input with a live-announced selection count -->
-<div {...restProps}>
+<!-- FileUpload.svelte -->
+<div
+    class={`file-upload ${className}`}
+    {...restProps}
+>
     <button
         type="button"
         aria-label={label}

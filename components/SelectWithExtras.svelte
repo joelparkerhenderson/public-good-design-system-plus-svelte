@@ -8,6 +8,7 @@
     // behavior including keyboard navigation and form submission.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the select via aria-label.
     //   value — string, default "". Currently selected value; bindable with bind:value.
     //   required — boolean, default false. Whether the select is required for form validation.
@@ -64,6 +65,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -91,8 +93,11 @@
     } = $props();
 </script>
 
-<!-- SelectWithExtras component: a native select wrapped with optional before and after content slots -->
-<div {...restProps}>
+<!-- SelectWithExtras.svelte -->
+<div
+    class={`select-with-extras ${className}`}
+    {...restProps}
+>
     {#if before}
         {@render before()}
     {/if}

@@ -8,6 +8,7 @@
     // theme options. Consumers provide the radio button markup as children.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the radio group via aria-label.
     //   children — Snippet, required. Radio button option elements.
     //   ...restProps — additional HTML attributes spread onto the <fieldset>.
@@ -46,6 +47,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -58,8 +60,9 @@
     } = $props();
 </script>
 
-<!-- ThemePicker component: a fieldset with radiogroup role for selecting a theme option -->
+<!-- ThemePicker.svelte -->
 <fieldset
+    class={`theme-picker ${className}`}
     role="radiogroup"
     aria-label={label}
     {...restProps}

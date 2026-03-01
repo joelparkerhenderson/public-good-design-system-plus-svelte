@@ -8,6 +8,7 @@
     // the banner landmark role when it is a direct child of <body>.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, default undefined. Optional accessible name via aria-label, useful for distinguishing multiple headers.
     //   children — Snippet, required. Content rendered inside the header element.
     //   ...restProps — additional HTML attributes spread onto the header element.
@@ -53,6 +54,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = undefined,
         children,
         ...restProps
@@ -63,8 +65,9 @@
     } = $props();
 </script>
 
-<!-- Header component: a header landmark for introductory or navigational content -->
+<!-- Header.svelte -->
 <header
+    class={`header ${className}`}
     aria-label={label}
     {...restProps}
 >

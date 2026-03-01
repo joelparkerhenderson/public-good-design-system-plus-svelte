@@ -8,6 +8,7 @@
     // information requiring maximum urgency.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the danger box via aria-label.
     //   children — Snippet, required. The danger box content.
     //   ...restProps — additional HTML attributes spread onto the <aside>.
@@ -46,6 +47,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -58,8 +60,9 @@
     } = $props();
 </script>
 
-<!-- MedicalRecordRedBox component: an aside with alert role for critical patient danger information -->
+<!-- MedicalRecordRedBox.svelte -->
 <aside
+    class={`medica-record-red-box ${className}`}
     role="alert"
     aria-label={label}
     {...restProps}

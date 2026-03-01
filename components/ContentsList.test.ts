@@ -11,23 +11,24 @@ function textSnippet(text: string) {
 }
 
 describe("ContentsList", () => {
-    test("renders as navigation", () => {
-        render(Subject, { props: { label: "On this page", children: textSnippet("Items") } });
-        expect(screen.getByRole("navigation", { name: "On this page" })).toBeTruthy();
-    });
-
-    test("contains ordered list", () => {
-        render(Subject, { props: { label: "Contents", "data-testid": "nav", children: textSnippet("Items") } });
-        expect(screen.getByTestId("nav").querySelector("ol")).toBeTruthy();
+    test("renders as an ordered list", () => {
+        render(Subject, { props: { children: textSnippet("Items") } });
+        expect(screen.getByRole("list")).toBeTruthy();
+        expect(screen.getByRole("list").tagName).toBe("OL");
     });
 
     test("renders children", () => {
-        render(Subject, { props: { label: "Contents", children: textSnippet("Section 1") } });
-        expect(screen.getByRole("navigation").textContent).toContain("Section 1");
+        render(Subject, { props: { children: textSnippet("Section 1") } });
+        expect(screen.getByRole("list").textContent).toContain("Section 1");
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "Contents", "data-testid": "cl", children: textSnippet("Items") } });
+        render(Subject, { props: { "data-testid": "cl", children: textSnippet("Items") } });
         expect(screen.getByTestId("cl")).toBeTruthy();
+    });
+
+    test("passes through aria-label", () => {
+        render(Subject, { props: { "aria-label": "Sections", children: textSnippet("Items") } });
+        expect(screen.getByRole("list").getAttribute("aria-label")).toBe("Sections");
     });
 });

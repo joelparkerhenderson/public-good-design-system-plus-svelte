@@ -8,6 +8,7 @@
     // description and error elements via ARIA attributes.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Visible label text.
     //   description — string, default undefined. Helper text displayed below the label.
     //   error — string, default undefined. Error message displayed below the input.
@@ -54,6 +55,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         description = undefined,
         error = undefined,
@@ -84,6 +86,7 @@
 </script>
 
 <div
+    class={`field ${className}`}
     data-required={required || undefined}
     {...restProps}
 >

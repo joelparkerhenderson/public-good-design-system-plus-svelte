@@ -9,6 +9,7 @@
     // and disables autocomplete to protect sensitive health information.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for screen readers via aria-label.
     //   value — string, default "". Bindable input value; supports bind:value.
     //   required — boolean, default false. Whether the input is required for form submission.
@@ -49,6 +50,7 @@
     //   - NHS Number format: https://www.nhs.uk/nhs-services/online-services/find-nhs-number/
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -72,8 +74,9 @@
     const nhsPattern = "[0-9]{3} [0-9]{3} [0-9]{4}";
 </script>
 
-<!-- UnitedKingdomNationalHealthServiceNumberInput component: input a United Kingdom National Health Service Number -->
+<!-- UnitedKingdomNationalHealthServiceNumberInput.svelte -->
 <input
+    class={`united-kingdom-national-health-service-number-input ${className}`}
     type="text"
     aria-label={label}
     inputmode="numeric"

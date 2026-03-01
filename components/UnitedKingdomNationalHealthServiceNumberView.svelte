@@ -9,6 +9,7 @@
     // component in the Input/View pattern.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for screen readers via aria-label.
     //   value — string, default "". The NHS number string to display.
     //   ...restProps — additional HTML attributes spread onto the <span>.
@@ -40,6 +41,7 @@
     //   - NHS Number: https://www.nhs.uk/using-the-nhs/about-the-nhs/what-is-an-nhs-number/
 
     let {
+        class: className = "",
         label,
         value = "",
         ...restProps
@@ -53,8 +55,9 @@
     } = $props();
 </script>
 
-<!-- UnitedKingdomNationalHealthServiceNumberView component: view a United Kingdom National Health Service Number -->
+<!-- UnitedKingdomNationalHealthServiceNumberView.svelte -->
 <span
+    class={`united-kingdom-national-health-service-number-view ${className}`}
     aria-label={label}
     {...restProps}>{value}</span
 >

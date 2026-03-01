@@ -9,6 +9,7 @@
     // personally identifiable information.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for screen readers via aria-label.
     //   value — string, default "". Bindable input value; supports bind:value.
     //   required — boolean, default false. Whether the input is required for form submission.
@@ -49,6 +50,7 @@
     //   - Social Security Number format: https://www.ssa.gov/employer/randomization.html
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -72,8 +74,9 @@
     const ssnPattern = "[0-9]{3}-[0-9]{2}-[0-9]{4}";
 </script>
 
-<!-- UnitedStatesSocialSecurityNumberInput component: input a United States Social Security Number -->
+<!-- UnitedStatesSocialSecurityNumberInput.svelte -->
 <input
+    class={`united-states-social-security-number-input ${className}`}
     type="text"
     aria-label={label}
     inputmode="numeric"

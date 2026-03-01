@@ -8,8 +8,9 @@
     // vice versa.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the toolbar via aria-label.
-    //   children — Snippet, required. Toolbar item elements.
+    //   children — Snippet, required. ToolBarButton elements.
     //   ...restProps — additional HTML attributes spread onto the <div>.
     //
     // Syntax:
@@ -18,9 +19,9 @@
     // Examples:
     //   <!-- Text editor toolbar -->
     //   <ToolBar label="Editor tools">
-    //     <button>Bold</button>
-    //     <button>Italic</button>
-    //     <button>Underline</button>
+    //     <ToolBarButton>Bold</ToolBarButton>
+    //     <ToolBarButton>Italic</ToolBarButton>
+    //     <ToolBarButton>Underline</ToolBarButton>
     //   </ToolBar>
     //
     // Keyboard:
@@ -40,8 +41,9 @@
     //
     // Claude rules:
     //   - Headless: no CSS, no styles -- consumer provides all styling
-    //   - Queries button, [role='button'], [tabindex] for navigable items
-    //   - Uses $state() for internal DOM reference
+    //   - Compound component: use with ToolBarButton
+    //   - Uses horizontal (ArrowLeft/ArrowRight) navigation
+    //   - Arrow keys wrap around at boundaries
     //
     // References:
     //   - WAI-ARIA Toolbar Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/toolbar/
@@ -49,13 +51,14 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
     }: {
         /** Accessible label. */
         label: string;
-        /** Toolbar item elements. */
+        /** ToolBarButton elements. */
         children: Snippet;
         [key: string]: unknown;
     } = $props();
@@ -98,8 +101,9 @@
     }
 </script>
 
-<!-- ToolBar component: a toolbar-role container with roving arrow-key focus navigation -->
+<!-- ToolBar.svelte -->
 <div
+    class={`tool-bar ${className}`}
     role="toolbar"
     aria-label={label}
     bind:this={toolbarRef}

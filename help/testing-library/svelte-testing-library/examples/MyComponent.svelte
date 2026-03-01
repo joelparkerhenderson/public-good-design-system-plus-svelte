@@ -1,5 +1,5 @@
 <script>
-    let { name } = $props();
+    let { class: className = "", name } = $props();
     let showGreeting = $state(false);
     const onclick = () => (showGreeting = true);
 </script>

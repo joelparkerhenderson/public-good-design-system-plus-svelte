@@ -7,6 +7,7 @@
     // component, part of the Input/View pattern for measurement data.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — string, required. The measurement instance value to display.
     //   label — string, optional. Accessible name via aria-label for additional context.
     //   ...restProps — additional HTML attributes spread onto the <span>.
@@ -40,6 +41,7 @@
     //   - HTML span element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
 
     let {
+        class: className = "",
         value,
         label = undefined,
         ...restProps
@@ -52,8 +54,9 @@
     } = $props();
 </script>
 
-<!-- MeasurementInstanceView component: a span displaying a read-only measurement value -->
+<!-- MeasurementInstanceView.svelte -->
 <span
+    class={`measurement-instance-view ${className}`}
     aria-label={label}
     {...restProps}>{value}</span
 >

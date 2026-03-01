@@ -8,6 +8,7 @@
     // Commonly used for confirmations, prompts, contextual actions, and inline forms.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the popup dialog via aria-label.
     //   open — boolean, default false, bindable. Controls whether the popup is visible.
     //   children — Snippet, required. Content rendered inside the dialog.
@@ -50,6 +51,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         open = $bindable(false),
         children,
@@ -65,9 +67,10 @@
     } = $props();
 </script>
 
-<!-- Popup component: a conditionally rendered dialog overlay for prompts and actions -->
+<!-- Popup.svelte -->
 {#if open}
     <div
+        class={`popup ${className}`}
         role="dialog"
         aria-label={label}
         {...restProps}

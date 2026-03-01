@@ -8,6 +8,7 @@
     // session warnings, and maintenance alerts.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   type        — "info" | "success" | "warning" | "error", default "info".
     //                 Semantic variant exposed as data-type.
     //   dismissible — boolean, default false. Whether the banner can be dismissed.
@@ -63,6 +64,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         type = "info",
         dismissible = false,
         onclose = undefined,
@@ -91,9 +93,10 @@
     }
 </script>
 
-<!-- Banner component: a prominent message region -->
+<!-- Banner.svelte -->
 {#if visible}
     <div
+        class={`banner ${className}`}
         role="region"
         aria-live="polite"
         data-type={type}

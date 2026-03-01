@@ -10,6 +10,7 @@
     // and authentication workflows.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible description of the QR code content via aria-label.
     //   children — Snippet, required. QR code rendering (SVG, canvas, or other visual output).
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -47,14 +48,22 @@
     //
     // References:
     //   - WAI-ARIA img Role: https://www.w3.org/TR/wai-aria-1.2/#img
-    
+
     import type { Snippet } from "svelte";
     let {
+        class: className = "",
         label,
         children,
         ...restProps
     }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<!-- QrCode component: a div with img role containing consumer-rendered QR code content -->
-<div role="img" aria-label={label} {...restProps}>{@render children()}</div>
+<!-- QrCode.svelte -->
+<div
+    class={`qr-code ${className}`}
+    role="img"
+    aria-label={label}
+    {...restProps}
+>
+    {@render children()}
+</div>

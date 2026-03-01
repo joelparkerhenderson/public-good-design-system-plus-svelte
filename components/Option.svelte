@@ -7,6 +7,7 @@
     // native HTML attributes. Used in dropdown menus, form selects, and list pickers.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — string, required. The option value submitted with the form.
     //   selected — boolean, default false. Whether this option is pre-selected.
     //   disabled — boolean, default false. Whether this option is disabled.
@@ -47,6 +48,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         value,
         selected = false,
         disabled = false,
@@ -65,8 +67,9 @@
     } = $props();
 </script>
 
-<!-- Option component: an option element for use within a select dropdown -->
+<!-- Option.svelte -->
 <option
+    class={`option ${className}`}
     {value}
     {selected}
     {disabled}

@@ -8,6 +8,7 @@
     // numeric measurement.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — number, required. The current measured value.
     //   min — number, default 0. The minimum bound of the range.
     //   max — number, default 100. The maximum bound of the range.
@@ -48,6 +49,7 @@
     //   - WAI-ARIA meter role: https://www.w3.org/TR/wai-aria-1.2/#meter
 
     let {
+        class: className = "",
         value,
         min = 0,
         max = 100,
@@ -68,8 +70,9 @@
     } = $props();
 </script>
 
-<!-- Meter component -->
+<!-- Meter.svelte -->
 <meter
+    class={`meter ${className}`}
     {value}
     {min}
     {max}

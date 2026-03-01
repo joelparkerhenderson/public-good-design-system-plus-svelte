@@ -8,6 +8,7 @@
     // status indicators, rating symbols, and decorative flourishes.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, optional. Accessible description of the character for screen readers.
     //   decorative — boolean, default false. When true, hides the character from assistive technology.
     //   children — Snippet, required. The character to display.
@@ -46,6 +47,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = undefined,
         decorative = false,
         children,
@@ -58,8 +60,9 @@
     } = $props();
 </script>
 
-<!-- Character component -->
+<!-- Character.svelte -->
 <span
+    class={`character ${className}`}
     role={decorative ? "presentation" : "img"}
     aria-label={decorative ? undefined : label}
     aria-hidden={decorative ? "true" : undefined}

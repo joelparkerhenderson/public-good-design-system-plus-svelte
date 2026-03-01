@@ -9,6 +9,7 @@
     // communicated visually and programmatically.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the display element via aria-label.
     //   value — string, required. The current theme name to display as text content.
     //   ...restProps — additional HTML attributes spread onto the <span>.
@@ -38,6 +39,7 @@
     //   - WAI-ARIA Accessible Name: https://www.w3.org/TR/accname-1.2/
 
     let {
+        class: className = "",
         label,
         value,
         ...restProps
@@ -50,8 +52,9 @@
     } = $props();
 </script>
 
-<!-- ThemeView component: a span displaying the current theme name as inline text -->
+<!-- ThemeView.svelte -->
 <span
+    class={`theme-view ${className}`}
     aria-label={label}
     {...restProps}>{value}</span
 >

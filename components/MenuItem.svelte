@@ -7,6 +7,7 @@
     // component manages focus between items with ArrowUp/ArrowDown keys.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   children — Snippet, required. Menu item content (text, shortcut hint, etc.).
     //   ...restProps — additional HTML attributes spread onto the <div>.
     //
@@ -57,6 +58,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         children,
         ...restProps
     }: {
@@ -69,6 +71,7 @@
 
 <!-- MenuItem: a menu item for use in a menu or dropdown -->
 <div
+    class={`menu-item ${className}`}
     role="menuitem"
     tabindex="-1"
     {...restProps}

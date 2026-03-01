@@ -8,6 +8,7 @@
     // and provide role="menuitem" children. Used with ContextMenuItem children.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the context menu via aria-label.
     //   open — boolean, default false. Whether the menu is visible; bindable for two-way control.
     //   children — Snippet, required. Menu item content (should include role="menuitem" elements).
@@ -53,6 +54,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         open = $bindable(false),
         children,
@@ -122,6 +124,7 @@
 
 {#if open}
     <div
+        class={`context-menu ${className}`}
         role="menu"
         aria-label={label}
         bind:this={menuRef}

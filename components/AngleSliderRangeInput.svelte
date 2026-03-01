@@ -7,6 +7,7 @@
     // or any circular/angular value input.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value           — number, default 0, bindable. Current angle in degrees.
     //   min             — number, default 0. Minimum angle.
     //   max             — number, default 360. Maximum angle.
@@ -64,6 +65,7 @@
     //   - WAI-ARIA Slider Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/
 
     let {
+        class: className = "",
         value = $bindable(0),
         min = 0,
         max = 360,
@@ -100,8 +102,9 @@
     let valueText = $derived(`${value}${valueTextSuffix}`);
 </script>
 
-<!-- AngleSliderRangeInput component: a range input for selecting an angle in degrees -->
+<!-- AngleSliderRangeInput.svelte -->
 <input
+    class={`angle-slider-rang-input ${className}`}
     type="range"
     bind:value
     {min}

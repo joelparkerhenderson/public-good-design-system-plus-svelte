@@ -8,6 +8,7 @@
     // Follows the GOV.UK and NHS England error summary design pattern.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   title — string, required. Heading text for the error summary (e.g., "There is a problem").
     //   children — Snippet, required. Error list content, typically a <ul> with <li> anchor links.
     //   ...restProps — additional HTML attributes spread onto the outer <div>.
@@ -59,6 +60,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         title,
         children,
         ...restProps
@@ -74,6 +76,7 @@
 </script>
 
 <div
+    class={`error-summary ${className}`}
     role="alert"
     aria-labelledby={titleId}
     tabindex="-1"

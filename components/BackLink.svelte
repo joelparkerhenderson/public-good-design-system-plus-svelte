@@ -8,6 +8,7 @@
     // or navigate up to a parent page.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   href     — string, required. The URL to navigate back to.
     //   label    — string, optional. Accessible label override via aria-label,
     //              for when visible link text is insufficient for screen readers.
@@ -52,6 +53,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         href,
         label = undefined,
         children,
@@ -67,8 +69,9 @@
     } = $props();
 </script>
 
-<!-- BackLink component: a navigation link for returning to a previous page -->
+<!-- BackLink.svelte -->
 <a
+    class={`back-link ${className}`}
     {href}
     aria-label={label}
     {...restProps}

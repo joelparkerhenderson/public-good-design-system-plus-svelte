@@ -8,6 +8,7 @@
     // that supports multiple lines.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — string, default "". Bindable text content; supports bind:value.
     //   rows — number, default undefined. Number of visible text rows.
@@ -46,6 +47,7 @@
     //   - MDN textarea element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         rows = undefined,
@@ -67,8 +69,9 @@
     } = $props();
 </script>
 
-<!-- Textarea component: a multi-line text area for extended text entry -->
+<!-- Textarea.svelte -->
 <textarea
+    class={`textarea ${className}`}
     aria-label={label}
     bind:value
     {rows}

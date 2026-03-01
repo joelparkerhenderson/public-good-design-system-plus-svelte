@@ -2,7 +2,7 @@
 
 A task list is a UI/UX component that organizes and displays a series of tasks,
 actions, or to-dos for users to complete. It is typically presented as a
-checklist, where each task can be marked as completed or remain pending. Task
+CheckList, where each task can be marked as completed or remain pending. Task
 lists are commonly used in project management tools, to-do apps, or onboarding
 processes to guide users through a sequence of actions. They help improve
 productivity by breaking down complex workflows into manageable steps, offering
@@ -10,7 +10,7 @@ clear progress tracking. Effective task list design includes features like task
 prioritization, due dates, and visual indicators (such as checkboxes or progress
 bars) to enhance user clarity and motivation.
 
-This component renders as an unordered list (`<ul>`) with `role="list"` and an
+This component renders as an ordered list (`<ol>`) with `role="list"` and an
 accessible label. The explicit `role="list"` ensures screen readers announce the
 list semantics even when CSS removes default list styling. The consumer provides
 task items as `<li>` children through the children snippet.
@@ -46,7 +46,7 @@ task items as `<li>` children through the children snippet.
 With checkboxes for completable tasks:
 
 ```svelte
-<TaskList label="Onboarding checklist">
+<TaskList label="Onboarding CheckList">
   <li>
     <label>
       <input type="checkbox" /> Create account

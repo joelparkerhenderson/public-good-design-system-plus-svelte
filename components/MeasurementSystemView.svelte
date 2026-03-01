@@ -8,6 +8,7 @@
     // measurement data.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — string, required. The measurement system name to display.
     //   label — string, optional. Accessible name via aria-label for additional context.
     //   ...restProps — additional HTML attributes spread onto the <span>.
@@ -41,6 +42,7 @@
     //   - HTML span element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
 
     let {
+        class: className = "",
         value,
         label = undefined,
         ...restProps
@@ -53,8 +55,9 @@
     } = $props();
 </script>
 
-<!-- MeasurementSystemView component: a span displaying a read-only measurement system name -->
+<!-- MeasurementSystemView.svelte -->
 <span
+    class={`measurement-system-view ${className}`}
     aria-label={label}
     {...restProps}>{value}</span
 >

@@ -7,6 +7,7 @@
     // states. Used in upload forms, profile editors, and document management interfaces.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   accept — string, default undefined. Comma-separated accepted file types (MIME types or extensions).
     //   multiple — boolean, default false. Whether multiple files can be selected.
@@ -44,6 +45,7 @@
     //   - MDN input type="file": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
 
     let {
+        class: className = "",
         label,
         accept = undefined,
         multiple = false,
@@ -65,8 +67,9 @@
     } = $props();
 </script>
 
-<!-- FileInput component: a native file input for selecting files from the user's device -->
+<!-- FileInput.svelte -->
 <input
+    class={`file-input ${className}`}
     type="file"
     aria-label={label}
     {accept}

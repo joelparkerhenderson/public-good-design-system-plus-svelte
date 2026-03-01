@@ -7,6 +7,7 @@
     // theme editors, or any interface where users need to select a color.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — string, default "#000000". Current hex color string; bindable via bind:value.
     //   label — string, required. Accessible name via aria-label.
     //   disabled — boolean, default false. Whether the input is disabled.
@@ -38,6 +39,7 @@
     //   - MDN <input type="color">: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color
 
     let {
+        class: className = "",
         value = $bindable("#000000"),
         label,
         disabled = false,
@@ -55,6 +57,7 @@
 </script>
 
 <input
+    class={`color-input ${className}`}
     type="color"
     bind:value
     aria-label={label}

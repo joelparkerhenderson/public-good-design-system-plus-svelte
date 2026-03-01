@@ -7,6 +7,7 @@
     // with role="note", and each footnote is identified by a unique id for in-page linking.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   id — string, required. Unique footnote identifier, used for element id and aria-label.
     //   children — Snippet, required. Footnote content (text, links, citations).
     //   ...restProps — additional HTML attributes spread onto the aside element.
@@ -48,6 +49,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         id,
         children,
         ...restProps
@@ -60,8 +62,9 @@
     } = $props();
 </script>
 
-<!-- Footnote component: an aside element with note role for supplementary annotations -->
+<!-- Footnote.svelte -->
 <aside
+    class={`aside ${className}`}
     {id}
     role="note"
     aria-label={id}

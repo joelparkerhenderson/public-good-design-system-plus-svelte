@@ -8,6 +8,7 @@
     // form sections.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   legend — string, required. Text for the <legend> element describing the group.
     //   disabled — boolean, default false. Whether all controls in the fieldset are disabled.
     //   children — Snippet, required. Grouped form controls.
@@ -52,6 +53,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         legend,
         disabled = false,
         children,
@@ -68,6 +70,7 @@
 </script>
 
 <fieldset
+    class={`fieldset ${className}`}
     {disabled}
     {...restProps}
 >

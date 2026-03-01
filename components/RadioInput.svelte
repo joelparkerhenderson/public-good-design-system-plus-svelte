@@ -8,6 +8,7 @@
     // button and its label need independent positioning or styling.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   name — string, optional. Radio group name for mutual exclusion.
     //   value — string, optional. The value representing this radio option.
@@ -50,6 +51,7 @@
     //   - MDN input type="radio": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
 
     let {
+        class: className = "",
         label,
         name = undefined,
         value = undefined,
@@ -71,8 +73,9 @@
     } = $props();
 </script>
 
-<!-- RadioInput component: a bare radio input for selecting one option in a group -->
+<!-- RadioInput.svelte -->
 <input
+    class={`radio-input ${className}`}
     type="radio"
     aria-label={label}
     {name}

@@ -8,6 +8,7 @@
     // option lists.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the menu button; also displayed as button text.
     //   open — boolean, default false. Whether the menu is visible; bindable.
     //   children — Snippet, required. Menu items, each should have role="menuitem" and tabindex="-1".
@@ -64,6 +65,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         open = $bindable(false),
         children,
@@ -133,7 +135,11 @@
     }
 </script>
 
-<div {...restProps}>
+<!-- DropdownMenu.svelte -->
+<div
+    class={`do-list-item ${className}`}
+    {...restProps}
+>
     <button
         type="button"
         aria-haspopup="true"

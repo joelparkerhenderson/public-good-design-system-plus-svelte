@@ -9,6 +9,7 @@
     // installation wizards.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label describing what process is tracked.
     //   value — number, default undefined. Current progress value; undefined means indeterminate.
     //   max — number, default 100. Maximum value representing 100% completion.
@@ -49,6 +50,7 @@
     //   - WAI-ARIA progressbar role: https://www.w3.org/WAI/ARIA/apd/patterns/meter/
 
     let {
+        class: className = "",
         label,
         value = undefined,
         max = 100,
@@ -64,8 +66,9 @@
     } = $props();
 </script>
 
-<!-- Progress component: a native progress element for determinate or indeterminate progress indication -->
+<!-- Progress.svelte -->
 <progress
+    class={`progress ${className}`}
     aria-label={label}
     {value}
     {max}

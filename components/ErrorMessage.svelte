@@ -7,6 +7,7 @@
     // validation feedback, system error notifications, and inline error display.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   children — Snippet, required. Error message text content.
     //   ...restProps — additional HTML attributes spread onto the <p> element.
     //
@@ -42,6 +43,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         children,
         ...restProps
     }: {
@@ -51,7 +53,9 @@
     } = $props();
 </script>
 
+<!-- ErrorMessage.svelte -->
 <p
+    class={`error-message ${className}`}
     role="alert"
     {...restProps}
 >

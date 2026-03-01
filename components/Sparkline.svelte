@@ -7,6 +7,7 @@
     // within text or tables. The consumer provides SVG, canvas, or other rendering.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name describing the sparkline data via aria-label.
     //   children — Snippet, required. The visualization content (SVG, canvas, etc.).
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -48,11 +49,19 @@
 
     import type { Snippet } from "svelte";
     let {
+        class: className = "",
         label,
         children,
         ...restProps
     }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<!-- Sparkline component: an img-role container for compact inline data visualizations -->
-<div role="img" aria-label={label} {...restProps}>{@render children()}</div>
+<!-- Sparkline.svelte -->
+<span
+    class={`sparkline ${className}`}
+    role="img"
+    aria-label={label}
+    {...restProps}
+>
+    {@render children()}
+</span>

@@ -7,6 +7,7 @@
     // loads, or any busy state where the system is working on a task.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible description of what is loading, applied via aria-label.
     //   active — boolean, default true. Whether the loading indicator is currently active.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -44,6 +45,7 @@
     //   - ARIA aria-busy: https://www.w3.org/TR/wai-aria-1.2/#aria-busy
 
     let {
+        class: className = "",
         label,
         active = true,
         ...restProps
@@ -56,8 +58,9 @@
     } = $props();
 </script>
 
-<!-- BeachBall component: a loading/waiting indicator -->
+<!-- BeachBall.svelte -->
 <div
+    class={`beach-ball ${className}`}
     role="status"
     aria-label={label}
     aria-busy={active}

@@ -8,6 +8,7 @@
     // built-in validation ensures the entered value matches URL format.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — string, default "". Bindable URL value; supports bind:value.
     //   required — boolean, default false. Whether the field is required.
@@ -40,6 +41,7 @@
     //   - MDN input type="url": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -58,8 +60,9 @@
     } = $props();
 </script>
 
-<!-- UrlInput component: a url-type input for entering and validating web addresses -->
+<!-- UrlInput.svelte -->
 <input
+    class={`url-input ${className}`}
     type="url"
     aria-label={label}
     bind:value

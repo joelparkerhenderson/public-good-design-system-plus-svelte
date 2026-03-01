@@ -7,6 +7,7 @@
     // settings, and any interaction requiring focused user attention.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   open — boolean, default false. Whether the dialog is visible; bindable.
     //   label — string, required. Accessible name for the dialog.
     //   modal — boolean, default true. Whether the dialog behaves as a modal.
@@ -55,6 +56,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         open = $bindable(false),
         label,
         modal = true,
@@ -80,8 +82,10 @@
     }
 </script>
 
+<!-- Dialog.svelte -->
 {#if open}
     <dialog
+        class={`dialog ${className}`}
         open
         tabindex="-1"
         aria-label={label}

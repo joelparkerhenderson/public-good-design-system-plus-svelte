@@ -1,28 +1,29 @@
 <script lang="ts">
-    // Checklist component
+    // CheckList component
     //
-    // A headless semantic list container for checklist items. Renders a <ul> with
+    // A headless semantic list container for CheckList items. Renders a <ul> with
     // role="list" for tracking and managing tasks, options, or steps. Consumers
     // provide <li> children with checkboxes or other interactive controls. Commonly
     // used in to-do lists, onboarding flows, forms, and progress tracking interfaces.
     //
     // Props:
-    //   label — string, optional. Accessible name for the checklist via aria-label.
+    //   className — string, optional. CSS class name.
+    //   label — string, optional. Accessible name for the CheckList via aria-label.
     //   children — Snippet, required. List items to render inside the <ul>.
     //   ...restProps — additional HTML attributes spread onto the <ul>.
     //
     // Syntax:
-    //   <Checklist label="Tasks">
-    //     <li><input type="checkbox" /> Task one</li>
-    //   </Checklist>
+    //   <CheckList label="Tasks">
+    //     <CheckListItem>Task one</CheckListItem>
+    //   </CheckList>
     //
     // Examples:
-    //   <!-- Onboarding checklist -->
-    //   <Checklist label="Onboarding tasks">
-    //     <li><input type="checkbox" /> Create account</li>
-    //     <li><input type="checkbox" /> Set up profile</li>
-    //     <li><input type="checkbox" /> Invite team members</li>
-    //   </Checklist>
+    //   <!-- Onboarding CheckList -->
+    //   <CheckList label="Onboarding tasks">
+    //     <CheckListItem checked>Create account</CheckListItem>
+    //     <CheckListItem>Set up profile</CheckListItem>
+    //     <CheckListItem>Invite team members</CheckListItem>
+    //   </CheckList>
     //
     // Keyboard:
     //   None — this is a passive container. Keyboard interactions are determined
@@ -30,7 +31,7 @@
     //
     // Accessibility:
     //   - role="list" ensures assistive technologies treat it as a list
-    //   - aria-label provides an optional accessible name for the checklist
+    //   - aria-label provides an optional accessible name for the CheckList
     //
     // Internationalization:
     //   - Label text comes through the label prop; no hardcoded strings
@@ -38,7 +39,7 @@
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
-    //   - Consumer provides <li> elements with their own interactive controls
+    //   - Compound component: parent container for CheckListItem children
     //
     // References:
     //   - WAI-ARIA Listbox Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/listbox/
@@ -46,6 +47,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label = undefined,
         children,
         ...restProps
@@ -56,6 +58,11 @@
     } = $props();
 </script>
 
-<ul role="list" aria-label={label} {...restProps}>
+<!-- CheckList.svelte -->
+<ol
+    role="list"
+    aria-label={label}
+    {...restProps}
+>
     {@render children()}
-</ul>
+</ol>

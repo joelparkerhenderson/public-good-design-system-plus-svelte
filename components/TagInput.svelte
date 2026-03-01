@@ -8,6 +8,7 @@
     // interfaces such as adding skills, keywords, or labels.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the input via aria-label.
     //   value — string, default "". Current input text; bindable with bind:value.
     //   onadd — (value: string) => void, optional. Callback fired when Enter is pressed with non-empty trimmed value.
@@ -40,6 +41,7 @@
     //   - WAI-ARIA textbox role: https://www.w3.org/TR/wai-aria-1.2/#textbox
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         onadd,
@@ -66,8 +68,9 @@
     }
 </script>
 
-<!-- TagInput component: a text input that submits a new tag on Enter -->
+<!-- TagInput.svelte -->
 <input
+    class={`tag-input ${className}`}
     type="text"
     aria-label={label}
     bind:value

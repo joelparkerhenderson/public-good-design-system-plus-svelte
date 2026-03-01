@@ -8,30 +8,22 @@
     // File, Edit, View). Each top-level item may open a submenu or trigger an action.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name applied via aria-label.
-    //   children — Snippet, required. Menu bar item elements (should have role="menuitem" and tabindex="-1").
+    //   children — Snippet, required. MenuBarButton elements.
     //   ...restProps — additional HTML attributes spread onto the <div>.
     //
     // Syntax:
     //   <MenuBar label="Main menu">
-    //     <div role="menuitem" tabindex="-1">File</div>
+    //     <MenuBarButton>File</MenuBarButton>
     //   </MenuBar>
     //
     // Examples:
     //   <!-- Basic application menu bar -->
     //   <MenuBar label="Main menu">
-    //     <div role="menuitem" tabindex="-1">File</div>
-    //     <div role="menuitem" tabindex="-1">Edit</div>
-    //     <div role="menuitem" tabindex="-1">View</div>
-    //   </MenuBar>
-    //
-    //   <!-- Dynamic menu bar -->
-    //   <MenuBar label="Application menu">
-    //     {#each menuItems as item}
-    //       <div role="menuitem" tabindex="-1" onclick={() => openSubmenu(item)}>
-    //         {item.label}
-    //       </div>
-    //     {/each}
+    //     <MenuBarButton>File</MenuBarButton>
+    //     <MenuBarButton>Edit</MenuBarButton>
+    //     <MenuBarButton>View</MenuBarButton>
     //   </MenuBar>
     //
     // Keyboard:
@@ -43,7 +35,7 @@
     // Accessibility:
     //   - role="menubar" identifies the container as a horizontal menu bar widget
     //   - aria-label provides an accessible name describing the menu bar purpose
-    //   - Child elements should use role="menuitem" with tabindex="-1"
+    //   - Child MenuBarButton elements provide role="menuitem" with tabindex="-1"
     //
     // Internationalization:
     //   - The label prop accepts any translated string
@@ -52,7 +44,7 @@
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
-    //   - Compound component: pair with MenuBarItem for individual entries
+    //   - Compound component: pair with MenuBarButton for individual entries
     //   - Uses horizontal (ArrowLeft/ArrowRight) navigation, not vertical
     //   - Arrow keys wrap around at boundaries
     //
@@ -62,13 +54,14 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
     }: {
         /** Accessible label. */
         label: string;
-        /** Menu bar item elements. */
+        /** MenuBarButton elements. */
         children: Snippet;
         [key: string]: unknown;
     } = $props();
@@ -109,8 +102,9 @@
     }
 </script>
 
-<!-- MenuBar component -->
+<!-- MenuBar.svelte -->
 <div
+    class={`menu-bar ${className}`}
     role="menubar"
     aria-label={label}
     bind:this={barRef}

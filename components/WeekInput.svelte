@@ -8,6 +8,7 @@
     // scenario where data is organized by week rather than by specific date.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — string, default "". Bindable week value in YYYY-Www format; supports bind:value.
     //   required — boolean, default false. Whether the field is required.
@@ -42,6 +43,7 @@
     //   - MDN input type="week": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         required = false,
@@ -60,8 +62,9 @@
     } = $props();
 </script>
 
-<!-- WeekInput component: a week-type input for selecting a year and week number -->
+<!-- WeekInput.svelte -->
 <input
+    class={`week-input ${className}`}
     type="week"
     aria-label={label}
     bind:value

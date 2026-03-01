@@ -10,6 +10,7 @@
     // rendered with <strong> emphasis without assuming a heading level.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   type     — "info" | "success" | "warning" | "error", default "info".
     //              Severity type exposed as data-type attribute.
     //   heading  — string, optional. Heading text rendered as <p><strong>.
@@ -66,6 +67,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         type = "info",
         heading = undefined,
         role = "alert",
@@ -92,8 +94,9 @@
     );
 </script>
 
-<!-- Alert component: a live-announced region for status and alert messages -->
+<!-- Alert.svelte -->
 <div
+    class={`alert ${className}`}
     {role}
     aria-live={ariaLive}
     aria-atomic="true"

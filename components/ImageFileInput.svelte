@@ -7,6 +7,7 @@
     // image selection, document scanning, and any form requiring image file input.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name applied via aria-label.
     //   accept — string, default "image/*". MIME type filter for the file picker dialog.
     //   required — boolean, default false. Whether the input is required for form submission.
@@ -42,6 +43,7 @@
     // References:
     //   - MDN Input type="file": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
     let {
+        class: className = "",
         label,
         accept = "image/*",
         required = false,
@@ -56,8 +58,9 @@
     } = $props();
 </script>
 
-<!-- ImageFileInput component: a file input pre-configured to accept image uploads -->
+<!-- ImageFileInput.svelte -->
 <input
+    class={`image-file-input ${className}`}
     type="file"
     aria-label={label}
     {accept}

@@ -7,6 +7,7 @@
     // the consumer's callback, which is the most common pattern in single-page applications.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the form via aria-label.
     //   onsubmit — function, default undefined. Callback receiving SubmitEvent (default already prevented).
     //   onreset — function, default undefined. Callback receiving Event on form reset.
@@ -52,6 +53,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         onsubmit = undefined,
         onreset = undefined,
@@ -75,8 +77,9 @@
     }
 </script>
 
-<!-- Form component: a labeled form element with submit and reset handling -->
+<!-- Form.svelte -->
 <form
+    class={`form ${className}`}
     aria-label={label}
     onsubmit={handleSubmit}
     {onreset}

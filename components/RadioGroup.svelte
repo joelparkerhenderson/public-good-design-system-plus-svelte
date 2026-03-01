@@ -8,6 +8,7 @@
     // selecting a size, choosing a shipping method, or picking a preference.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the radio group via aria-label.
     //   children — Snippet, required. Radio button elements to render inside the fieldset.
     //   ...restProps — additional HTML attributes spread onto the <fieldset>.
@@ -49,6 +50,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -61,8 +63,9 @@
     } = $props();
 </script>
 
-<!-- RadioGroup component: a fieldset with radiogroup role grouping mutually exclusive radio options -->
+<!-- RadioGroup.svelte -->
 <fieldset
+    class={`radio-group ${className}`}
     role="radiogroup"
     aria-label={label}
     {...restProps}

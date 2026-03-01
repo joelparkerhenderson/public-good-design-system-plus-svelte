@@ -1,72 +1,80 @@
 <script lang="ts">
     // DataTable component
     //
-    // A headless data table wrapper providing a semantic <table> element with optional
-    // visible caption or aria-label for accessibility. Consumers provide their own
-    // <thead>, <tbody>, <tr>, <th>, and <td> elements as children. When a caption prop
-    // is provided, aria-label is omitted to avoid redundant accessible names. Commonly
-    // used for displaying structured data in rows and columns.
+    // An interactive data table that displays structured information in rows and
+    // columns as a grid widget. Renders a <table> element with role="grid" and an
+    // accessible label. Supports an optional visible caption. Commonly used for
+    // sortable tables, editable spreadsheets, and interactive data grids.
     //
     // Props:
-    //   caption — string, default undefined. Visible caption text displayed above the table.
-    //   label — string, default undefined. Accessible label used when caption is not provided.
-    //   children — Snippet, required. Table content including thead, tbody, tr, th, td elements.
+    //   className — string, optional. CSS class name.
+    //   label — string, required. Accessible name describing the table content.
+    //   caption — string, optional. Visible caption text displayed above the table.
+    //   children — Snippet, required. DataTableHead, DataTableBody, DataTableFoot elements.
     //   ...restProps — additional HTML attributes spread onto the <table>.
     //
     // Syntax:
-    //   <DataTable caption="User accounts">
-    //     <thead><tr><th scope="col">Name</th></tr></thead>
-    //     <tbody><tr><td>Alice</td></tr></tbody>
+    //   <DataTable label="User accounts">
+    //     <DataTableHead><DataTableRow><th scope="col">Name</th></DataTableRow></DataTableHead>
+    //     <DataTableBody><DataTableRow><DataTableData>Alice</DataTableData></DataTableRow></DataTableBody>
     //   </DataTable>
     //
     // Examples:
-    //   <!-- Table with aria-label instead of visible caption -->
-    //   <DataTable label="Sales data">
-    //     <thead><tr><th scope="col">Month</th><th scope="col">Revenue</th></tr></thead>
-    //     <tbody><tr><td>January</td><td>$10,000</td></tr></tbody>
+    //   <!-- Table with visible caption -->
+    //   <DataTable label="Sales data" caption="Quarterly sales">
+    //     <DataTableHead>
+    //       <DataTableRow><th scope="col">Month</th><th scope="col">Revenue</th></DataTableRow>
+    //     </DataTableHead>
+    //     <DataTableBody>
+    //       <DataTableRow><DataTableData>January</DataTableData><DataTableData>$10,000</DataTableData></DataTableRow>
+    //     </DataTableBody>
     //   </DataTable>
     //
     // Keyboard:
-    //   - None — passive container; navigation follows standard browser table behavior
+    //   None built-in — consumer should implement grid keyboard navigation
+    //   (arrow keys for cell movement, Enter/Space for selection).
     //
     // Accessibility:
+    //   - role="grid" identifies the table as an interactive grid widget
+    //   - aria-label provides an accessible name describing the table content
     //   - <caption> provides a visible accessible name when the caption prop is set
-    //   - aria-label provides an accessible name when no visible caption is present
-    //   - Consumer should use scope="col" on <th> and scope="row" for row headers
     //
     // Internationalization:
-    //   - The caption and label props provide all text; no hardcoded strings
+    //   - The label and caption props provide all text; no hardcoded strings
     //   - All cell content is provided by consumers through children
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
-    //   - When caption is provided, aria-label is omitted to avoid duplicate accessible names
-    //   - Consumer is responsible for thead, tbody, scope attributes, and all row/cell structure
+    //   - Compound component: use with DataTableHead, DataTableBody, DataTableFoot,
+    //     DataTableRow, DataTableData, and DataTableCol
     //
     // References:
-    //   - WAI-ARIA Table Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/table/
-    //   - WAI Tutorial on Tables: https://www.w3.org/WAI/tutorials/tables/
+    //   - WAI-ARIA Grid Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/grid/
 
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
+        label,
         caption = undefined,
-        label = undefined,
         children,
         ...restProps
     }: {
+        /** Accessible name describing the table content. */
+        label: string;
         /** Visible caption for the table. */
         caption?: string;
-        /** Accessible label when caption is not used. */
-        label?: string;
-        /** Table content (thead, tbody, etc.). */
+        /** Table content (DataTableHead, DataTableBody, etc.). */
         children: Snippet;
         [key: string]: unknown;
     } = $props();
 </script>
 
+<!-- DataTable.svelte -->
 <table
-    aria-label={caption ? undefined : label}
+    class={`data-table ${className}`}
+    role="grid"
+    aria-label={label}
     {...restProps}
 >
     {#if caption}

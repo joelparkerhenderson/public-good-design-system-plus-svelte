@@ -8,6 +8,7 @@
     // readers via role="alert". Ideal for forms requiring date input with validation.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Visible label text for the date field.
     //   value — string, default "". Current date value in YYYY-MM-DD format; bindable via bind:value.
     //   description — string, default undefined. Helper text displayed below the input.
@@ -49,6 +50,7 @@
     //   - WAI Forms Tutorial: https://www.w3.org/WAI/tutorials/forms/
 
     let {
+        class: className = "",
         label,
         value = $bindable(""),
         description = undefined,
@@ -82,9 +84,14 @@
     let errorId = $derived(`${inputId}-error`);
 </script>
 
-<div {...restProps}>
+<!-- DateField.svelte -->
+<div
+    class={`date-field ${className}`}
+    {...restProps}
+>
     <label for={inputId}>{label}</label>
     <input
+        class="date-input"
         id={inputId}
         type="date"
         bind:value

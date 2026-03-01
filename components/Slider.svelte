@@ -7,6 +7,7 @@
     // or timelines. Provides two-way binding and configurable min/max/step values.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name via aria-label.
     //   value — number, default 50. Current slider value; bindable with bind:value.
     //   min — number, default 0. Minimum allowed value.
@@ -50,6 +51,7 @@
     //   - MDN input type="range": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
 
     let {
+        class: className = "",
         label,
         value = $bindable(50),
         min = 0,
@@ -74,8 +76,9 @@
     } = $props();
 </script>
 
-<!-- Slider component: a range input for selecting a numeric value along a track -->
+<!-- Slider.svelte -->
 <input
+    class={`slider ${className}`}
     type="range"
     aria-label={label}
     bind:value

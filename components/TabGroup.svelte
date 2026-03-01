@@ -1,5 +1,5 @@
 <script lang="ts">
-    // TabGroup component
+    // TabBar component
     //
     // A headless tab list container that provides the ARIA tablist role and
     // built-in keyboard navigation for tabbed interfaces. It manages arrow key
@@ -8,19 +8,20 @@
     // The consumer provides tab buttons as children and manages selection state.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the tab list via aria-label.
     //   children — Snippet, required. Tab button elements to render inside the tablist.
     //   ...restProps — additional HTML attributes spread onto the <div>.
     //
     // Syntax:
-    //   <TabGroup label="Settings">...</TabGroup>
+    //   <TabBar label="Settings">...</TabBar>
     //
     // Examples:
     //   <!-- Tab list with manual tab buttons -->
-    //   <TabGroup label="Settings">
+    //   <TabBar label="Settings">
     //     <button role="tab" aria-selected="true">General</button>
     //     <button role="tab" aria-selected="false">Advanced</button>
-    //   </TabGroup>
+    //   </TabBar>
     //
     // Keyboard:
     //   - ArrowRight: moves focus to the next tab (wraps to first)
@@ -51,6 +52,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -98,8 +100,9 @@
     }
 </script>
 
-<!-- TabGroup component: a tablist container with arrow key navigation for child tab elements -->
+<!-- TabBar.svelte -->
 <div
+    class={`tab-bar ${className}`}
     role="tablist"
     aria-label={label}
     bind:this={tablistRef}

@@ -9,6 +9,7 @@
     // information panels, and inline editing.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the popover dialog via aria-label.
     //   open — boolean, default false, bindable. Controls whether the popover is visible.
     //   children — Snippet, required. The popover content.
@@ -46,9 +47,10 @@
     // References:
     //   - WAI-ARIA Dialog Pattern: https://www.w3.org/WAI/ARIA/apd/patterns/dialog/
     //   - WAI-ARIA dialog role: https://www.w3.org/TR/wai-aria-1.2/#dialog
-    
+
     import type { Snippet } from "svelte";
     let {
+        class: className = "",
         label,
         open = $bindable(false),
         children,
@@ -61,9 +63,14 @@
     } = $props();
 </script>
 
-<!-- Popover component: a conditionally rendered dialog for contextual content near a trigger -->
+<!-- Popover.svelte -->
 {#if open}
-    <div role="dialog" aria-label={label} {...restProps}>
+    <div
+        class={`popover ${className}`}
+        role="dialog"
+        aria-label={label}
+        {...restProps}
+    >
         {@render children()}
     </div>
 {/if}

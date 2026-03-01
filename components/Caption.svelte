@@ -7,6 +7,7 @@
     // in galleries, product pages, data visualizations, and educational content.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   children — Snippet, required. The caption text or content to display.
     //   ...restProps — additional HTML attributes spread onto the <figcaption>.
     //
@@ -43,6 +44,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         children,
         ...restProps
     }: {
@@ -51,7 +53,10 @@
     } = $props();
 </script>
 
-<!-- Caption component: a figcaption element providing descriptive text for a figure -->
-<figcaption {...restProps}>
+<!-- Caption.svelte -->
+<figcaption
+    class={`caption ${className}`}
+    {...restProps}
+>
     {@render children()}
 </figcaption>

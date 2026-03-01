@@ -7,6 +7,7 @@
     // a caption, it renders a plain <img> element. Supports native lazy loading.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   src — string, required. The image source URL.
     //   alt — string, required. Alternative text describing the image for screen readers.
     //   caption — string, default undefined. When provided, wraps the image in a figure/figcaption.
@@ -47,6 +48,7 @@
     //   - HTML figure element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure
 
     let {
+        class: className = "",
         src,
         alt,
         caption = undefined,
@@ -61,9 +63,12 @@
     } = $props();
 </script>
 
-<!-- Image component: an img element with alt text, optionally wrapped in a figure with figcaption -->
+<!-- Image.svelte -->
 {#if caption}
-    <figure {...restProps}>
+    <figure
+        class={`image ${className}`}
+        {...restProps}
+    >
         <img
             {src}
             {alt}
@@ -73,6 +78,7 @@
     </figure>
 {:else}
     <img
+        class={`image ${className}`}
         {src}
         {alt}
         {loading}

@@ -7,6 +7,7 @@
     // quantity selectors, age inputs, price fields, and configuration values.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the input via aria-label.
     //   value — number | undefined, default undefined. Current numeric value; bindable.
     //   min — number, optional. Minimum allowed value.
@@ -49,6 +50,7 @@
     //   - WAI-ARIA spinbutton role: https://www.w3.org/TR/wai-aria-1.2/#spinbutton
 
     let {
+        class: className = "",
         label,
         value = $bindable(undefined),
         min = undefined,
@@ -69,8 +71,9 @@
     } = $props();
 </script>
 
-<!-- NumberInput component: a number input with optional min, max, and step constraints -->
+<!-- NumberInput.svelte -->
 <input
+    class={`number-input ${className}`}
     type="number"
     aria-label={label}
     bind:value

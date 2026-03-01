@@ -9,6 +9,7 @@
     // used for data fetching, form submissions, and async operations.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name describing the loading state via aria-label.
     //   children — Snippet, optional. Content rendered inside (e.g., "Loading..." text).
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -49,6 +50,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -61,8 +63,9 @@
     } = $props();
 </script>
 
-<!-- ProgressSpinner component: a status region with aria-live for indeterminate loading indication -->
+<!-- ProgressSpinner.svelte -->
 <div
+    class={`progress-spinner ${className}`}
     role="status"
     aria-label={label}
     aria-live="polite"

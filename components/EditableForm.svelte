@@ -7,6 +7,7 @@
     // such as updating profiles, renaming items, or modifying settings.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the form.
     //   editing — boolean, default false. Whether the form is in edit mode; bindable.
     //   onsubmit — (event: SubmitEvent) => void, default undefined. Callback when the form is submitted.
@@ -58,6 +59,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         editing = $bindable(false),
         onsubmit = undefined,
@@ -93,8 +95,10 @@
     }
 </script>
 
+<!-- EditableForm.svelte -->
 {#if editing}
     <form
+        class={`editable-form ${className}`}
         aria-label={label}
         tabindex="-1"
         onsubmit={handleSubmit}

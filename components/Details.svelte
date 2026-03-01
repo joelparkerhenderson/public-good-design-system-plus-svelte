@@ -7,6 +7,7 @@
     // cases include FAQs, collapsible sections, and supplementary explanations.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   summary — string, required. Text displayed in the clickable summary toggle.
     //   open — boolean, default false. Whether the details section is expanded; bindable.
     //   children — Snippet, required. Content revealed when expanded.
@@ -51,6 +52,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         summary,
         open = $bindable(false),
         children,
@@ -66,7 +68,9 @@
     } = $props();
 </script>
 
+<!-- Details.svelte -->
 <details
+    class={`details ${className}`}
     bind:open
     {...restProps}
 >

@@ -7,6 +7,7 @@
     // the value prop and can be disabled to prevent premature submission.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   value — string, default "Submit". The visible button text.
     //   disabled — boolean, default false. Whether the button is disabled.
     //   ...restProps — additional HTML attributes spread onto the <input>.
@@ -42,6 +43,7 @@
     //   - MDN input type="submit": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit
 
     let {
+        class: className = "",
         value = "Submit",
         disabled = false,
         ...restProps
@@ -54,8 +56,9 @@
     } = $props();
 </script>
 
-<!-- SubmitInput component: a submit input button for triggering form submission -->
+<!-- SubmitInput.svelte -->
 <input
+    class={`submit-input ${className}`}
     type="submit"
     {value}
     {disabled}

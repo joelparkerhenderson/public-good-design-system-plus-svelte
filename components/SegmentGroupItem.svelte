@@ -7,6 +7,7 @@
     // SegmentGroup to build custom segmented controls like view mode toggles.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   checked — boolean, default false. Whether this segment is currently selected.
     //   value — string, default "". Value associated with this segment, exposed as data-value.
     //   disabled — boolean, default false. Whether the segment is disabled.
@@ -48,6 +49,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         checked = false,
         value = "",
         disabled = false,
@@ -66,8 +68,9 @@
     } = $props();
 </script>
 
-<!-- SegmentGroupItem component: a single radio-like segment option -->
+<!-- SegmentGroupItem.svelte -->
 <button
+    class={`segment-group-item ${className}`}
     role="radio"
     aria-checked={checked}
     data-value={value}

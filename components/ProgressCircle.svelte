@@ -9,6 +9,7 @@
     // the circular visual representation using the ARIA value attributes.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the progress indicator via aria-label.
     //   value — number, default 0. Current progress value.
     //   min — number, default 0. Minimum value of the progress range.
@@ -53,6 +54,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         value = 0,
         min = 0,
@@ -74,8 +76,9 @@
     } = $props();
 </script>
 
-<!-- ProgressCircle component: a div with progressbar role for circular progress display -->
+<!-- ProgressCircle.svelte -->
 <div
+    class={`progress-circle ${className}`}
     role="Progress"
     aria-label={label}
     aria-valuenow={value}

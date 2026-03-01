@@ -1,40 +1,36 @@
 # TaskBar
 
-A task bar is a toolbar-style container for task-related action buttons, using the ARIA `toolbar` role with accessible labeling. It renders as a `<div>` with `role="toolbar"` to group related task actions together, making the container semantically meaningful to assistive technologies.
+A task bar is a toolbar container for task-related action buttons using the ARIA toolbar role. It provides ArrowLeft/ArrowRight keyboard navigation between items with Home/End keys to jump to first/last items, implementing the roving focus pattern.
 
-Task bars are commonly used to provide quick access to frequently performed actions such as "New", "Open", "Save", or other task-specific operations. The component works with TaskBarItem child components or plain buttons.
-
-## Implementation Notes
-
-- Renders as a `<div>` element with `role="toolbar"` to identify it as a toolbar widget
-- Accessible name is set via `aria-label` from the required `label` prop
-- Content is provided through the children snippet, typically TaskBarItem components or buttons
-- Does not implement arrow key navigation itself; consumers can add keyboard navigation as needed
-- Passes through all additional HTML attributes via `...restProps`
-- Uses Svelte 5 `Snippet` for children content
+Compound component: use with TaskBarButton.
 
 ## Props
 
-- `label`: string (required) -- accessible name for the toolbar via aria-label
-- `children`: Snippet (required) -- task bar item elements
+- `label`: string (required) -- accessible name for the toolbar via `aria-label`
+- `children`: Snippet (required) -- TaskBarButton elements
+- `...restProps`: unknown -- additional attributes spread onto the `<div>`
 
 ## Usage
 
 ```svelte
 <TaskBar label="Tasks">
-  <button>New</button>
-  <button>Open</button>
+  <TaskBarButton>New</TaskBarButton>
+  <TaskBarButton>Open</TaskBarButton>
+  <TaskBarButton>Save</TaskBarButton>
 </TaskBar>
 ```
 
 ## Keyboard Interactions
 
-- Tab: Focus moves to the first focusable item within the toolbar (native browser behavior)
+- ArrowRight: Move focus to next item (wraps to first)
+- ArrowLeft: Move focus to previous item (wraps to last)
+- Home: Move focus to first item
+- End: Move focus to last item
 
 ## ARIA
 
-- `role="toolbar"` -- identifies the container as a toolbar widget, grouping related controls
-- `aria-label` -- provides the accessible name for the toolbar, set from the `label` prop
+- `role="toolbar"` -- identifies the container as a toolbar widget
+- `aria-label` -- provides the accessible name for the toolbar
 
 ## References
 

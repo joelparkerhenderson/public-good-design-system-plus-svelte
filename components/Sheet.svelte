@@ -7,6 +7,7 @@
     // detail views, or filter interfaces that slide in from the top, right, bottom, or left.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the sheet dialog via aria-label.
     //   open — boolean, default false. Whether the sheet is visible; bindable via bind:open.
     //   side — "left" | "right" | "top" | "bottom", default "right". Which edge the sheet appears from.
@@ -56,6 +57,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         open = $bindable(false),
         side = "right",
@@ -81,9 +83,10 @@
     }
 </script>
 
-<!-- Sheet component: a modal dialog panel that slides in from a viewport edge -->
+<!-- Sheet.svelte -->
 {#if open}
     <div
+        class={`sheet ${className}`}
         role="dialog"
         aria-label={label}
         aria-modal="true"

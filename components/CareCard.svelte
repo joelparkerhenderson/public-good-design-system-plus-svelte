@@ -8,6 +8,7 @@
     // consumer CSS styling based on urgency level.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   type — "non-urgent" | "urgent" | "immediate", default "non-urgent". Urgency level.
     //   heading — string, required. Heading text describing the care action.
     //   label — string, optional. aria-label override; defaults to heading text.
@@ -52,6 +53,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         type = "non-urgent",
         heading,
         label = undefined,
@@ -66,8 +68,9 @@
     } = $props();
 </script>
 
-<!-- CareCard component: a section region with heading for healthcare guidance at varying urgency levels -->
+<!-- CareCard.svelte -->
 <section
+    class={`care-card ${className}`}
     role="region"
     aria-label={label ?? heading}
     data-type={type}

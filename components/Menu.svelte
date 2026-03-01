@@ -8,6 +8,7 @@
     // triggered by buttons, or dropdown menus.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name applied via aria-label.
     //   children — Snippet, required. Menu item elements (should have role="menuitem" and tabindex="-1").
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -61,6 +62,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -108,8 +110,9 @@
     }
 </script>
 
-<!-- Menu component: a menu role container with arrow key navigation among menuitems -->
+<!-- Menu.svelte -->
 <div
+    class={`menu ${className}`}
     role="menu"
     aria-label={label}
     bind:this={menuRef}

@@ -9,6 +9,7 @@
     // to indicate its toggle state.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the group via aria-label.
     //   children — Snippet, required. Toggle button elements.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -46,6 +47,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -58,8 +60,9 @@
     } = $props();
 </script>
 
-<!-- ToggleGroup component: a group-role container for related toggle buttons -->
+<!-- ToggleGroup.svelte -->
 <div
+    class={`toggle-group ${className}`}
     role="group"
     aria-label={label}
     {...restProps}

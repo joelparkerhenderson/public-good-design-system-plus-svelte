@@ -8,6 +8,7 @@
     // the consumer provides file lists, action buttons, and navigation as children.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the dialog.
     //   open — boolean, default false. Whether the dialog is visible; bindable.
     //   children — Snippet, required. Dialog content.
@@ -47,6 +48,7 @@
     //   - MDN dialog element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
     import type { Snippet } from "svelte";
     let {
+        class: className = "",
         label,
         open = $bindable(false),
         children,
@@ -65,8 +67,10 @@
     }
 </script>
 
-<!-- FileDialog component -->
-{#if open}<dialog
+<!-- FileDialog.svelte -->
+{#if open}
+    <dialog
+        class={`file-dialog ${className}`}
         open
         tabindex="-1"
         aria-label={label}
@@ -74,4 +78,5 @@
         {...restProps}
     >
         {@render children()}
-    </dialog>{/if}
+    </dialog>
+{/if}

@@ -8,6 +8,7 @@
     // should stand out from the main flow.
     //
     // Props:
+    //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the callout via aria-label (e.g., "Note", "Warning", "Tip").
     //   children — Snippet, required. Callout content to display.
     //   ...restProps — additional HTML attributes spread onto the aside element.
@@ -49,6 +50,7 @@
     import type { Snippet } from "svelte";
 
     let {
+        class: className = "",
         label,
         children,
         ...restProps
@@ -59,8 +61,9 @@
     } = $props();
 </script>
 
-<!-- InformationCallout component: an aside with note role for supplementary information -->
+<!-- InformationCallout.svelte -->
 <aside
+    class={`information-callout ${className}`}
     role="note"
     aria-label={label}
     {...restProps}
